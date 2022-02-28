@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './asset/index.css';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css'
+import WebFont from 'webfontloader';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter} from 'react-router-dom'
+
+function loadFont(){
+  WebFont.load({
+      google: {
+          families: ['Poppins','Droid Sans', 'Chilanka']
+      }
+  });
+}
+loadFont()
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
