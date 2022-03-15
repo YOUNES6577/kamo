@@ -1,18 +1,236 @@
 import * as React from 'react'
-import { Container, Row } from 'react-bootstrap';
+import * as $ from 'jquery'
+import { Container, Row, Col } from 'react-bootstrap';
+import { Divider, Paper, Grid } from '@mui/material';
+import { Fade, Flip, Slide, Bounce, Zoom,  Reveal } from 'react-reveal'
+import { Typography, Space } from 'antd'
+import styled from 'styled-components';
 import NavBar from './navbar'
 import Footer from './footer'
+
+import '../asset/css/main.css'
+
+import produitChimique from '../ProdImg/produitChimique.jpg'
+import produitslubrifiant from '../ProdImg/produitslubrifiant.jpg'
+import produitsalimentaire from '../ProdImg/produitsalimentaire.jpg'
+import about_img02 from '../ProdImg/Background/about_img02.png'
+import prod_card from '../ProdImg/Background/produit-card.jpeg'
+import Mold2_5LDrawing from '../ProdImg/Background/Mold 2-5L Drawing.png'
+const { Text, Paragraph, Title } = Typography;
+
+const Shap = styled.div`
+position:absolute;
+bottom:${props => props.bt};
+top:${props => props.top};
+left:0;
+width:100%;
+overflow:hidden;
+line-height:0;
+transform:${props => props.transform};
+`
+const ShapSvg = styled.svg`
+position:relative;
+display:block;
+width:${props => props.width};
+height:${props => props.height}
+`
+const ShapPath = styled.path`
+fill:${props => props.fill}`
+
+
+let box;
+const setBorderRadius = (Box) => {
+    $.map(Box, (item) => {
+        item.style.setProperty('--br-blobby', generateBorderRadiusValue());
+        item.style.setProperty('--br-blobby-after', generateBorderRadiusValue());
+        item.style.setProperty('--br-blobby-before', generateBorderRadiusValue());
+    })
+}
+const generateBorderRadiusValue = () => `${getRandomValue()}% ${getRandomValue()}% ${getRandomValue()}% ${getRandomValue()}% / ${getRandomValue()}% ${getRandomValue()}% ${getRandomValue()}%`;
+const getRandomValue = () => Math.floor(Math.random() * 50) + 30
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state={}
+        this.state = {
+            contentStyle: {
+                height: '160px',
+                color: '#fff',
+                lineHeight: '160px',
+                textAlign: 'center',
+                background: '#364d79',
+            },
+            index: 0
+        }
+        this.handleIndex = this.handleIndex.bind(this)
     }
-    
+    componentDidMount() {
+        box = document.querySelectorAll('.box');
+        setInterval(() => setBorderRadius(box), 1000);
+    }
+    handleIndex(selectedIndex, e) {
+        this.setState({
+            index: selectedIndex
+        })
+    }
+    shapDividerS1(props) {
+        return (
+            <Shap bt={props.bt} top={props.top} transform={props.direction === 'bottom' ? 'rotate(180deg)' : 'rotate(0deg)'}>
+                <ShapSvg width={props.width} height={props.height} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <ShapPath fill={props.fill} d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" />
+                    <ShapPath fill={props.fill} d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" />
+                    <ShapPath fill={props.fill} d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" />
+                </ShapSvg>
+            </Shap>
+        )
+    }
+    shapDividerS2(props) {
+        return (
+            <Shap bt={props.bt} top={props.top} transform={props.direction === 'bottom' ? 'rotate(180deg)' : 'rotate(0deg)'}>
+                <ShapSvg width={props.width} height={props.height} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <ShapPath fill={props.fill} d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" />
+                </ShapSvg>
+            </Shap>
+        )
+    }
+    Productcard(props) {
+        return (
+            <div className='card' >
+                <div className='card__image-container'>
+                    <img src={prod_card} alt={'Produit ' + props.title} />
+                </div>
+                <svg className="card__svg" viewBox="0 0 800 500">
+                    <path d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400 L 800 500 L 0 500" stroke="transparent" fill="#001220" />
+                    <path className="card__line" d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400" stroke="pink" strokeWidth="3" fill="transparent" />
+                </svg>
+                <div className='card__content' >
+                    <Title className='card__title'>{props.title}</Title>
+                    <Paragraph className='card__text' >{props.children}</Paragraph>
+                </div>
+                <div className='card__btn'>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <defs>
+                            <filter id="gooey">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+                                <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="highContrastGraphic" />
+                                <feComposite in="SourceGraphic" in2="highContrastGraphic" operator="atop" />
+                            </filter>
+                        </defs>
+                    </svg>
+                    <button id="gooey-button">
+                        See All
+                        <span class="bubbles">
+                            <span class="bubble"></span>
+                            <span class="bubble"></span>
+                            <span class="bubble"></span>
+                            <span class="bubble"></span>
+                            <span class="bubble"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        )
+    }
     render() {
-        return <Container fluid='true'>
-            <NavBar />
-            <Footer  />
-        </Container>
-    }   
-}
+        return (
+            <Container fluid='true' >
+                <NavBar />
+                <Container className='main' fluid='true' >
+                    <Container className='main-content' >
+                        <Fade left cascade>
+                            <Title style={{ fontFamily: 'Tangerine !important' }}>
+                                Kamoplast
+                            </Title>
+                            <Paragraph style={{ my: 3, mx: 4, maxWidth: 650 }}>
+                                Fabrication d'emballage en plastique en (PE et PP) par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 25 litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.
+                            </Paragraph>
+                        </Fade>
+                    </Container>
+                    <Container className='sub-content'>
+                        <Row className="justify-content-md-center">
+                            <Col md="auto">
+                                <Title  ><span>Notre plus grand défi</span> ... nous satisfaire avec un emballage ideal !!!  </Title>
+                            </Col>
+                        </Row>
+                    </Container>
+                    <this.shapDividerS1 direction='bottom' bt='0' width='150%' height='73px' fill='#f5f5f5' />
+                </Container>
+                <section className='Presentation-section' id='PS'>
+                    <Container className='Presentation-container' >
+                        <Container fluid='sm'  >
+                            <Bounce bottom cascade >
+                                <Paper elevation={2} sx={{ mt: 5, borderRadius: '20px' }} className='Presentation-paper'>
+                                    <Slide bottom cascade >
+                                        <Title >
+                                            <Divider sx={{ mx: 25 }}><Flip bottom cascade >Presentation</Flip></Divider>
+                                        </Title>
+                                        <Paragraph className='Presentation-prg'>
+                                            Notre société a été crée en 1996 sous l'appellation de PLASTIMED, qui deviendra par la suite en 2003 Sarl KAMOPLAST et se situe dans le chef lieu  de la wilaya de Médéa. KAMOPLAST qui dispose d'un effectif de 65 salaries, est spécialisée dans la fabrication d'emballage en plastique en (PE et PP)  par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 30   litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.<br />
+                                        </Paragraph>
+                                    </Slide>
+                                </Paper>
+                            </Bounce>
+                        </Container>
+                    </Container>
+                </section>
+                <section className='Product-section' id='PDS'>
+                    <this.shapDividerS2 direction='top' top='0' width='100%' height='55px' fill='#fff' />
+                    <Container fluid='fluid' className='Product-items'>
+                        <Title className='Product-title text-center'>Produits</Title>
+                        <Grid container spacing={2}>
+                            <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'end', }} ><this.Productcard title='Chimique' imgsrc={produitChimique}> Produits chimiques & détergents </this.Productcard></Grid>
+                            <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', }}><this.Productcard title='Lubrifiant' imgsrc={produitslubrifiant}> Produits Lubrifiant </this.Productcard></Grid>
+                            <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'start', }}><this.Productcard title='Agro-alimentaire' imgsrc={produitsalimentaire}> Produits Agro-alimentaire </this.Productcard></Grid>
+                        </Grid>
+                    </Container>
+                    {/* <this.shapDividerS2 direction='bottom' bt='0' width='100%' height='55px' fill='#fff' /> */}
+                </section>
+                <section className='About' >
+                    <Container className='About-items'>
+                        <Divider  ><Title className='Text-divider'><Zoom cascade>Activités</Zoom></Title></Divider>
+                        <Row>
+                            <Col xs={7} className='About-content'>
+                                <Title style={{ paddingBottom: '19rem' }}><Zoom cascade>Activités</Zoom></Title>
+                                <Paragraph className='About-text' style={{ maxWidth: 450, mx: 10, mt: 10 }}>Fabrication d'emballage en plastique (PE & PP) par soufflage et injection <br />(<strong>Jerrycan,Bidon,Bouteille,Bocal,Pot,Boite & Divers Article</strong>) destiné au conditionnement et au stockage des divers produits <br />(<strong>chimiques,Lubrifiants,détergents,cosmetique & argo-alimentaire</strong>) . <br />
+                                    Notre société a developpe une large gamme de produits de contenance allant de 25cl a 25 litres. <br />
+                                    Nous proposons aussi des produits personnalises pour chaque client (Moule,Logo, ..... )</Paragraph>
+                                <div className='box  box-lg' />
+                            </Col>
+                            <Col ><Fade right ><img src={about_img02} alt='about_img02' width='400px' height='450' /></Fade></Col>
+                        </Row>
+                        <Divider ><Title className='Text-divider'><Zoom cascade>Réactivités</Zoom></Title></Divider>
+                        <Row>
+                            <Col xs={2} />
+                            <Col xs={5} ><Fade left ><img src={about_img02} alt='about_img02' width='400' height='450' /></Fade></Col>
+                            <Col xs={4} className='About-content'>
+                                <Title style={{ paddingBottom: '12rem' }}><Zoom cascade>Réactivités</Zoom></Title>
+                                <Paragraph className='About-text' style={{ maxWidth: 450, mx: 10, my: 5 }}><Reveal effect="fadeInUp">Notre société possede de grands moyens matériels et humains compétents qui peuvent répondre aux exigences du marché national et aux attentes des clients en adoptant les nouvelles technologies et procedure de fabrication pour pouvoir offirir des produits de qualité.</Reveal></Paragraph>
+                                <div className='box  box-md' />
+                            </Col>
+                        </Row>
+                        <Divider ><Title className='Text-divider'><Zoom cascade>Compétitivité</Zoom></Title></Divider>
+                        <Row>
+                            <Col xs={7} className='About-content'>
+                                <Title style={{ paddingBottom: '19rem' }}><Zoom cascade>Compétitivité</Zoom></Title>
+                                <div className='About-text'>
+                                    <Paragraph style={{ maxWidth: 400, mx: 10, my: 5 }}><Reveal effect="fadeInUp"> Grace a nos liens priviliege avec tous nos fournisseurs en matiere premiere importee Nous Pouvons garantir un produit de choix rappondant aux besoins de nos clients , aux quels nous assurons : </Reveal></Paragraph>
+                                    <Zoom right  >
+                                        <Space direction="vertical">
+                                            <Text key='1'>* La qualité de nos produit en matiére et en finition.</Text>
+                                            <Text key='2'>* Une fiabilite icontestable .</Text>
+                                            <Text key='3'>* Des delais de livraison tres courts</Text>
+                                            <Text key='4'>* Le meilleur rapport qualité / prix</Text>
+                                        </Space>
+                                    </Zoom>
+                                </div>
+                                <div className='box  box-lg' />
+                            </Col>
+                            <Col ><Fade right ><img src={about_img02} alt='about_img02' width='400px' height='450' /></Fade></Col>
+                        </Row>
+                    </Container>
+                </section>
+                <Footer />
+            </Container>
+        )
+    }
+} 

@@ -1,24 +1,27 @@
-import React from 'react';
+ import React from 'react';
 import ReactDOM from 'react-dom';
-import './asset/index.css';
-import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import WebFont from 'webfontloader';
-
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 
+import 'react-bootstrap/dist/react-bootstrap.min.js'
+import './asset/css/index.css';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css'
+import 'antd/dist/antd.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 function loadFont(){
   WebFont.load({
       google: {
-          families: ['Poppins','Droid Sans', 'Chilanka']
+          families: [ 'Antic Slab','Hubballi','Rajdhani','Teko','Poppins','Droid Sans', 'Tangerine',"Segoe UI"]
       }
   });
 }
 loadFont()
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.StrictMode >
     <BrowserRouter>
       <App />
     </BrowserRouter>
