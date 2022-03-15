@@ -39,6 +39,12 @@
     "web-vitals": "^2.1.4",
     "webfontloader": "^1.6.28"
   },
+  "engines": {
+    "node": "17.x",
+    "pnpm":"6.x",
+    "npm":"8.x",
+    "yarn": "1.x"
+  },
   "scripts": {
     "predeploy": "pnpm run build",
     "deploy": "gh-pages -b master -d build",
