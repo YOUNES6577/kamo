@@ -10,7 +10,10 @@
 
 # production
 /build
-
+Photos_Produits_Kamo/*
+! Photos_Produits_Kamo/References
+! Photos_Produits_Kamo/Background
+! Photos_Produits_Kamo/kamoSvg
 # misc
 .DS_Store
 .env.local
