@@ -1,0 +1,59 @@
+.Search,
+.TypePr,
+.Volume,
+.MatierePr,
+.Forme {
+  padding: 15px;
+  background-color: #edf0f7;
+}
+
+span {
+  color: #99a7cd;
+}
+
+.Imgcard {
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(14, 21, 47, 0.25);
+  /* height:30vh; */
+  max-height: 100%;
+}
+
+.cardPr {
+  /* height: 50vh; */
+  /* background-color: red; */
+  /* width: 20%; */
+}
+.container-Pr {
+  width: 90%;
+}
+.filter {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+  
+}
+.cardBD{
+    height: 20vh;
+}
+li{
+    /* height: 30vh; */
+    /* width: 25vh; */
+}
+a {
+    font-weight: 700;
+    /* text-decoration: underline; */
+}
+
+.product-details-wrapper {
+    position: relative;
+    min-height: 200px;
+    font-size: 12px;
+    letter-spacing: inherit !important;
+}
+.product-title {
+    display: block;
+    font-size: 14px;
+}
+ .fusion-product-content {
+  padding: 20px 15px 15px 15px;
+}
