@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import JsonData from "./MOCK_DATA.json";
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 
-var data=[{title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},
-            {title:"",description:"",img:""},]
+// var data=[{title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},
+//             {title:"",description:"",img:""},]
 export default function Paginate(){
     const [users, setUsers] = useState(JsonData.slice(0, 10));
     const [pageNumber, setPageNumber] = useState(0);
@@ -37,7 +37,7 @@ export default function Paginate(){
         );
       });
   
-    const pageCount = Math.ceil(users.length / usersPerPage);
+    // const pageCount = Math.ceil(users.length / usersPerPage);
   
     const changePage = ({ selected }) => {
       setPageNumber(selected);

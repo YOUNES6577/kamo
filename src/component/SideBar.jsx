@@ -1,9 +1,8 @@
 import { Navigation } from "react-minimal-side-navigation";
 import { useNavigate, useLocation } from "react-router-dom";
-// import Icon from "awesome-react-icons";
-import { AiFillHome, AiOutlineBulb, AiOutlineUnorderedList, AiOutlinePhone, AiOutlineMail, AiOutlineHome } from "react-icons/ai";
+import { AiOutlineBulb, AiOutlineUnorderedList, AiOutlinePhone, AiOutlineMail, AiOutlineHome } from "react-icons/ai";
 import { ImMap2 } from "react-icons/im";
-import React, { useState } from "react";
+import React from "react";
 
 import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
 
@@ -34,23 +33,19 @@ const NavSidebar = () => {
               {
                 title: "Lubirifiants",
                 itemId: "/about/Lubirifiants",
-                // Optional
-                // elemBefore: () => <Icon name="cloud-snow" />
+             
               },
               {
                 title: "chimque",
                 itemId: "/about/Chimique",
-                // elemBefore: () => <Icon name="coffee" />
               },
               {
                 title: "Alimentaire",
                 itemId: "/about/Alimentaire",
-                // elemBefore: () => <Icon name="coffee" />
               },
               {
                 title: "Divers",
                 itemId: "/about/Divers",
-                // elemBefore: () => <Icon name="coffee" />
               }
             ]
           },

@@ -15,7 +15,8 @@ import produitslubrifiant from '../ProdImg/produitslubrifiant.jpg'
 import produitsalimentaire from '../ProdImg/produitsalimentaire.jpg'
 import about_img02 from '../ProdImg/Background/about_img02.png'
 import prod_card from '../ProdImg/Background/produit-card.jpeg'
-import Mold2_5LDrawing from '../ProdImg/Background/Mold 2-5L Drawing.png'
+import { Link } from '@mui/icons-material';
+// import Mold2_5LDrawing from '../ProdImg/Background/Mold 2-5L Drawing.png'
 const { Text, Paragraph, Title } = Typography;
 
 const Shap = styled.div`
