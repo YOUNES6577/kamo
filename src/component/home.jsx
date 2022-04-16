@@ -15,7 +15,7 @@ import produitslubrifiant from '../ProdImg/produitslubrifiant.jpg'
 import produitsalimentaire from '../ProdImg/produitsalimentaire.jpg'
 import about_img02 from '../ProdImg/Background/about_img02.png'
 import prod_card from '../ProdImg/Background/produit-card.jpeg'
-import { Link } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 // import Mold2_5LDrawing from '../ProdImg/Background/Mold 2-5L Drawing.png'
 const { Text, Paragraph, Title } = Typography;
 
@@ -98,7 +98,7 @@ export default class Home extends React.Component {
         return (
             <div className='card' >
                 <div className='card__image-container'>
-                    <img src={prod_card} alt={'Produit ' + props.title} />
+                   <Link to='/Type'><img src={prod_card} alt={'Produit ' + props.title} /></Link> 
                 </div>
                 <svg className="card__svg" viewBox="0 0 800 500">
                     <path d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400 L 800 500 L 0 500" stroke="transparent" fill="#001220" />
@@ -118,6 +118,7 @@ export default class Home extends React.Component {
                             </filter>
                         </defs>
                     </svg>
+                    <Link to='/Type'>
                     <button id="gooey-button">
                         See All
                         <span class="bubbles">
@@ -128,6 +129,7 @@ export default class Home extends React.Component {
                             <span class="bubble"></span>
                         </span>
                     </button>
+                    </Link>
                 </div>
             </div>
         )

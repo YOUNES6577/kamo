@@ -219,3 +219,9 @@ body > div.fade.modal.show > div > div > div > div.modal-header{
   margin-left: 20%;
   margin-top: 2%;
 }
+.Type .react-reveal a {
+  color:black!important;
+}
+.MuiTypography-root img{
+  color:black;
+}
