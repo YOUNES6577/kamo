@@ -46,15 +46,6 @@ export default class CardPr extends React.Component {
      
   }
 
-  componentDidMount() {
-  
-    
-       
-        
-  }
-  
-
-
   render() {
 
 
@@ -221,11 +212,6 @@ export default class CardPr extends React.Component {
 
 
       </li >
-
-
-
-
-
     );
   }
 }

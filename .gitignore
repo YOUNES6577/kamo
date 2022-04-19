@@ -2,25 +2,38 @@
 
 # dependencies
 /node_modules
+/server/node_modules
 /.pnp
 .pnp.js
+
 
 # testing
 /coverage
 
 # production
 /build
-Photos_Produits_Kamo/*
-! Photos_Produits_Kamo/References
-! Photos_Produits_Kamo/Background
-! Photos_Produits_Kamo/kamoSvg
+#Photos_Produits_Kamo/*
+#! Photos_Produits_Kamo/References
+#! Photos_Produits_Kamo/Background
+#! Photos_Produits_Kamo/kamoSvg
+
 # misc
 .DS_Store
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-
+.vscode
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+nm-trace.log
+src/asset/sass/.sass-cache/S
+package.json
+/server/package.json
+package-lock.json
+/server/package-lock.json
+*.yaml
+/server/*.yaml
+nm-trace.log
+*.txt
