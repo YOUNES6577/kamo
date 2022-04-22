@@ -1,8 +1,10 @@
 import * as React from 'react'
 import * as $ from 'jquery'
-import { Container, Row, Col } from 'react-bootstrap';
-import { Divider, Paper, Grid } from '@mui/material';
-import { Fade, Flip, Slide, Bounce, Zoom,  Reveal } from 'react-reveal'
+// import 'jquery-zoom'
+import *  as RRD from 'react-router-dom'
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Divider, Grid } from '@mui/material';
+import { Fade, Flip, Slide, Bounce, Zoom, Reveal } from 'react-reveal'
 import { Typography, Space } from 'antd'
 import styled from 'styled-components';
 import NavBar from './navbar'
@@ -15,7 +17,6 @@ import produitslubrifiant from '../ProdImg/produitslubrifiant.jpg'
 import produitsalimentaire from '../ProdImg/produitsalimentaire.jpg'
 import about_img02 from '../ProdImg/Background/about_img02.png'
 import prod_card from '../ProdImg/Background/produit-card.jpeg'
-import { Link } from 'react-router-dom';
 // import Mold2_5LDrawing from '../ProdImg/Background/Mold 2-5L Drawing.png'
 const { Text, Paragraph, Title } = Typography;
 
@@ -48,7 +49,7 @@ const setBorderRadius = (Box) => {
     })
 }
 const generateBorderRadiusValue = () => `${getRandomValue()}% ${getRandomValue()}% ${getRandomValue()}% ${getRandomValue()}% / ${getRandomValue()}% ${getRandomValue()}% ${getRandomValue()}%`;
-const getRandomValue = () => Math.floor(Math.random() * 50) + 30
+const getRandomValue = () => Math.floor(Math.random() * 20) + 30
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -67,12 +68,21 @@ export default class Home extends React.Component {
     }
     componentDidMount() {
         box = document.querySelectorAll('.box');
-        setInterval(() => setBorderRadius(box), 1000);
+        setInterval(() => setBorderRadius(box), 2000);
     }
     handleIndex(selectedIndex, e) {
         this.setState({
             index: selectedIndex
         })
+    }
+    shapDivider_1(props) {
+        return (
+            <Shap bt={props.bt} top={props.top} transform={props.direction === 'bottom' ? 'rotate(180deg)' : 'rotate(0deg)'}>
+                <ShapSvg width={props.width} height={props.height} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <ShapPath fill={props.fill} d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" />
+                </ShapSvg>
+            </Shap>
+        )
     }
     shapDividerS1(props) {
         return (
@@ -97,46 +107,25 @@ export default class Home extends React.Component {
     Productcard(props) {
         return (
             <div className='card' >
-                <div className='card__image-container'>
-                   <Link to='/Type'><img src={prod_card} alt={'Produit ' + props.title} /></Link> 
+                <figure className='card__image-container'>
+                    <RRD.Link to='/Type'><img className="card__image" src={prod_card} alt={'Produit ' + props.title} /></RRD.Link>
+                    <figcaption className='card__caption'><RRD.Link to='/Type' className='card__link' >View more</RRD.Link></figcaption>
+                </figure>
+                <div className="card__shape_divider">
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="shape-fill"></path>
+                    </svg>
                 </div>
-                <svg className="card__svg" viewBox="0 0 800 500">
-                    <path d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400 L 800 500 L 0 500" stroke="transparent" fill="#001220" />
-                    <path className="card__line" d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400" stroke="pink" strokeWidth="3" fill="transparent" />
-                </svg>
                 <div className='card__content' >
                     <Title className='card__title'>{props.title}</Title>
                     <Paragraph className='card__text' >{props.children}</Paragraph>
-                </div>
-                <div className='card__btn'>
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                        <defs>
-                            <filter id="gooey">
-                                <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
-                                <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="highContrastGraphic" />
-                                <feComposite in="SourceGraphic" in2="highContrastGraphic" operator="atop" />
-                            </filter>
-                        </defs>
-                    </svg>
-                    <Link to='/Type'>
-                    <button id="gooey-button">
-                        See All
-                        <span class="bubbles">
-                            <span class="bubble"></span>
-                            <span class="bubble"></span>
-                            <span class="bubble"></span>
-                            <span class="bubble"></span>
-                            <span class="bubble"></span>
-                        </span>
-                    </button>
-                    </Link>
                 </div>
             </div>
         )
     }
     render() {
         return (
-            <Container fluid='true' >
+            <Container fluid='true' className='home-page'>
                 <NavBar />
                 <Container className='main' fluid='true' >
                     <Container className='main-content' >
@@ -144,7 +133,7 @@ export default class Home extends React.Component {
                             <Title style={{ fontFamily: 'Tangerine !important' }}>
                                 Kamoplast
                             </Title>
-                            <Paragraph style={{ my: 3, mx: 4, maxWidth: 650 }}>
+                            <Paragraph style={{ my: 3, mx: 4, maxWidth: 850 }}>
                                 Fabrication d'emballage en plastique en (PE et PP) par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 25 litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.
                             </Paragraph>
                         </Fade>
@@ -152,46 +141,49 @@ export default class Home extends React.Component {
                     <Container className='sub-content'>
                         <Row className="justify-content-md-center">
                             <Col md="auto">
-                                <Title  ><span>Notre plus grand défi</span> ... nous satisfaire avec un emballage ideal !!!  </Title>
+                                <Title className='sub-title'><span>Notre plus grand défi</span> ... nous satisfaire avec un emballage ideal !!!  </Title>
                             </Col>
                         </Row>
                     </Container>
                     <this.shapDividerS1 direction='bottom' bt='0' width='150%' height='73px' fill='#f5f5f5' />
                 </Container>
-                <section className='Presentation-section' id='PS'>
+                <section className='Presentation-section' id='PSN'>
                     <Container className='Presentation-container' >
                         <Container fluid='sm'  >
                             <Bounce bottom cascade >
-                                <Paper elevation={2} sx={{ mt: 5, borderRadius: '20px' }} className='Presentation-paper'>
-                                    <Slide bottom cascade >
+                                <Slide bottom cascade >
+                                    <div className='Presentation-paper'>
                                         <Title >
-                                            <Divider sx={{ mx: 25 }}><Flip bottom cascade >Presentation</Flip></Divider>
+                                            <Divider sx={{ mx: 0 }} textAlign="left" ><Flip bottom cascade >Presentation</Flip></Divider>
                                         </Title>
                                         <Paragraph className='Presentation-prg'>
-                                            Notre société a été crée en 1996 sous l'appellation de PLASTIMED, qui deviendra par la suite en 2003 Sarl KAMOPLAST et se situe dans le chef lieu  de la wilaya de Médéa. KAMOPLAST qui dispose d'un effectif de 65 salaries, est spécialisée dans la fabrication d'emballage en plastique en (PE et PP)  par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 30   litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.<br />
+                                            <b>N</b>otre société a été crée en 1996 sous l'appellation de PLASTIMED, qui deviendra par la suite en 2003 Sarl KAMOPLAST et se situe dans le chef lieu  de la wilaya de Médéa. KAMOPLAST qui dispose d'un effectif de 65 salaries, est spécialisée dans la fabrication d'emballage en plastique en (PE et PP)  par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 30   litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.<br />
                                         </Paragraph>
-                                    </Slide>
-                                </Paper>
+                                    </div>
+                                </Slide>
+                                <div className='Presentation-footer'>
+                                    <Divider sx={{ mx: 0 }} textAlign="right" ><Flip bottom cascade >Mr .Directeur</Flip></Divider>
+                                </div>
                             </Bounce>
                         </Container>
                     </Container>
                 </section>
                 <section className='Product-section' id='PDS'>
-                    <this.shapDividerS2 direction='top' top='0' width='100%' height='55px' fill='#fff' />
+                    <this.shapDivider_1 direction='top' top='0' width='calc(300% + 1.3px)' height='125px' fill='#fff' />
                     <Container fluid='fluid' className='Product-items'>
                         <Title className='Product-title text-center'>Produits</Title>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={2} className='po'>
                             <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'end', }} ><this.Productcard title='Chimique' imgsrc={produitChimique}> Produits chimiques & détergents </this.Productcard></Grid>
                             <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', }}><this.Productcard title='Lubrifiant' imgsrc={produitslubrifiant}> Produits Lubrifiant </this.Productcard></Grid>
                             <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'start', }}><this.Productcard title='Agro-alimentaire' imgsrc={produitsalimentaire}> Produits Agro-alimentaire </this.Productcard></Grid>
                         </Grid>
                     </Container>
-                    {/* <this.shapDividerS2 direction='bottom' bt='0' width='100%' height='55px' fill='#fff' /> */}
+                    {/* <this.shapDividerS2 direction='top' top='100%' width='100%' height='55px' fill='#fff' /> */}
                 </section>
                 <section className='About' >
                     <Container className='About-items'>
-                        <Divider  ><Title className='Text-divider'><Zoom cascade>Activités</Zoom></Title></Divider>
                         <Row>
+                            <Divider  ><Title className='Text-divider'><Zoom cascade>Activités</Zoom></Title></Divider>
                             <Col xs={7} className='About-content'>
                                 <Title style={{ paddingBottom: '19rem' }}><Zoom cascade>Activités</Zoom></Title>
                                 <Paragraph className='About-text' style={{ maxWidth: 450, mx: 10, mt: 10 }}>Fabrication d'emballage en plastique (PE & PP) par soufflage et injection <br />(<strong>Jerrycan,Bidon,Bouteille,Bocal,Pot,Boite & Divers Article</strong>) destiné au conditionnement et au stockage des divers produits <br />(<strong>chimiques,Lubrifiants,détergents,cosmetique & argo-alimentaire</strong>) . <br />
@@ -201,8 +193,8 @@ export default class Home extends React.Component {
                             </Col>
                             <Col ><Fade right ><img src={about_img02} alt='about_img02' width='400px' height='450' /></Fade></Col>
                         </Row>
-                        <Divider ><Title className='Text-divider'><Zoom cascade>Réactivités</Zoom></Title></Divider>
                         <Row>
+                            <Divider ><Title className='Text-divider'><Zoom cascade>Réactivités</Zoom></Title></Divider>
                             <Col xs={2} />
                             <Col xs={5} ><Fade left ><img src={about_img02} alt='about_img02' width='400' height='450' /></Fade></Col>
                             <Col xs={4} className='About-content'>
@@ -211,8 +203,8 @@ export default class Home extends React.Component {
                                 <div className='box  box-md' />
                             </Col>
                         </Row>
-                        <Divider ><Title className='Text-divider'><Zoom cascade>Compétitivité</Zoom></Title></Divider>
                         <Row>
+                            <Divider ><Title className='Text-divider'><Zoom cascade>Compétitivité</Zoom></Title></Divider>
                             <Col xs={7} className='About-content'>
                                 <Title style={{ paddingBottom: '19rem' }}><Zoom cascade>Compétitivité</Zoom></Title>
                                 <div className='About-text'>

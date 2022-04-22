@@ -3,12 +3,13 @@ import React from 'react';
 import White_Logo from '../ProdImg/kamoSvg/logo-white-g2.svg'
 import Dark_Logo from '../ProdImg/kamoSvg/logo-black-g2.svg'
 import { Call } from '@mui/icons-material';
-import { AppBar, Toolbar, Typography, GlobalStyles, Link, CssBaseline } from '@mui/material';
+import { AppBar, Toolbar, Typography, GlobalStyles,Link, CssBaseline } from '@mui/material';
 import { Menu, Dropdown } from 'antd';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { Fade } from 'react-reveal'
-
+import *  as RRD from 'react-router-dom' 
 import '../asset/css/navbar.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function style(props) {
     return {
@@ -70,9 +71,9 @@ export default class NavBar extends React.Component {
     render() {
         const Product_Menu = (
             <Menu onClick={this.handleMenuClick} style={this.state.theme.Menu}>
-                <Menu.Item key="1">Produits Chimique</Menu.Item>
-                <Menu.Item key="2">Produits Lubrifiant</Menu.Item>
-                <Menu.Item key="3">Produits Alimentaire</Menu.Item>
+                <Menu.Item key="1"><RRD.Link to='/Type' >Produits Chimique</RRD.Link></Menu.Item>
+                <Menu.Item key="2"><RRD.Link to='/Type' >Produits Lubrifiant</RRD.Link></Menu.Item>
+                <Menu.Item key="3"><RRD.Link to='/Type' >Produits Alimentaire</RRD.Link></Menu.Item>
             </Menu>
         )
         return (
@@ -132,7 +133,7 @@ export default class NavBar extends React.Component {
                                         sx={this.state.theme.links}
                                         onClick={e => e.preventDefault()}
                                     >
-                                        Produits  <CaretDownOutlined className='dropdown' />
+                                        Produits  <CaretDownOutlined className='dropdown  arrow-top' />
                                     </Link>
                                 </Dropdown>
                                 <Link
