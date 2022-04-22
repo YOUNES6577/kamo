@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as $ from 'jquery'
 // import 'jquery-zoom'
 import *  as RRD from 'react-router-dom'
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Divider, Grid } from '@mui/material';
 import { Fade, Flip, Slide, Bounce, Zoom, Reveal } from 'react-reveal'
 import { Typography, Space } from 'antd'
@@ -108,7 +108,7 @@ export default class Home extends React.Component {
         return (
             <div className='card' >
                 <figure className='card__image-container'>
-                    <RRD.Link to='/Type'><img className="card__image" src={prod_card} alt={'Produit ' + props.title} /></RRD.Link>
+                    <RRD.Link to='/Type'><img className="card__image" src={props.imgsrc} alt={'Produit ' + props.title} /></RRD.Link>
                     <figcaption className='card__caption'><RRD.Link to='/Type' className='card__link' >View more</RRD.Link></figcaption>
                 </figure>
                 <div className="card__shape_divider">
