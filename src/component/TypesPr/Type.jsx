@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import NavBar from "../navbar";
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -135,15 +135,15 @@ export default class Type extends React.Component {
                                 <nav aria-label="...">
                                     <ul className="pagination pagination-circle">
                                         <li className="page-item disabled">
-                                            <a className="page-link">Previous</a>
+                                            <a href='/#' className="page-link">Previous</a>
                                         </li>
-                                        <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                        <li className="page-item"><a className="page-link" href="/#">1</a></li>
                                         <li className="page-item active" aria-current="page">
-                                            <a className="page-link" href="#">2 <span className="visually-hidden">(current)</span></a>
+                                            <a className="page-link" href="/#">2 <span className="visually-hidden">(current)</span></a>
                                         </li>
-                                        <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                        <li className="page-item"><a className="page-link" href="/#">3</a></li>
                                         <li className="page-item">
-                                            <a className="page-link" href="#">Next</a>
+                                            <a className="page-link" href="/#">Next</a>
                                         </li>
                                     </ul>
                                 </nav>

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800");
 :root {
   --br-blobby: 50%;
   --br-blobby-before: 50%;
@@ -102,14 +103,13 @@ h1, h2, h3, h4, h5, h6 {
       font-size: 24px; }
 .home-page .Product-section {
   position: relative;
-  height: 700px;
+  height: 775px;
   color: #fff;
+  background-color: rgba(0, 159, 148, 0.08);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-image: linear-gradient(#001220 10%, transparent), url(../../ProdImg/Background/2307735-1605164185793_TM-02.jpg);
-  background-image: url(../../ProdImg/Background/2307735-1605164185793_TM-02.jpg); }
+  background-attachment: fixed; }
   .home-page .Product-section * {
     box-sizing: border-box;
     line-height: 1.5; }
@@ -122,13 +122,16 @@ h1, h2, h3, h4, h5, h6 {
     height: auto;
     background: transparent; }
     .home-page .Product-section .Product-items .Product-title {
-      font-family: "Tangerine" !important;
-      font-weight: 600;
+      font-family: Spinnaker !important;
+      font-weight: 400;
       font-size: 55px;
+      text-transform: capitalize;
+      line-height: 62px;
       letter-spacing: 2px;
-      margin-top: 3.5rem;
-      margin-bottom: 2rem;
-      color: #fff; }
+      margin-top: 4.5rem;
+      z-index: 100;
+      margin-bottom: 3rem;
+      color: #000; }
     .home-page .Product-section .Product-items .card {
       background: #001220;
       width: 370px;
@@ -226,71 +229,52 @@ h1, h2, h3, h4, h5, h6 {
         .home-page .Product-section .Product-items .card__shape_divider .shape-fill {
           fill: #001220; }
 .home-page .About {
-  height: auto;
-  position: relative; }
-  .home-page .About-items {
-    margin: 3rem auto; }
-    .home-page .About-items .Text-divider {
-      font-family: "Tangerine" !important;
-      letter-spacing: 2px;
-      font-size: 45px; }
-  .home-page .About-content {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  background-image: linear-gradient(to right, black, rgba(0, 0, 0, 0.6)), url(../../ProdImg/f3e50a_fbd7bbbaf5054f23b14a5fc5579438a9_mv2-scaled.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  .home-page .About .SwiperContainer {
+    height: 550px;
+    color: #fff;
+    padding-top: 5rem; }
+    .home-page .About .SwiperContainer .About-Title {
+      color: #fff;
+      font-family: Spinnaker !important;
+      text-align: center;
+      padding-bottom: 2rem;
+      letter-spacing: 2px; }
+    .home-page .About .SwiperContainer p {
+      font-family: Spinnaker;
+      letter-spacing: 0px;
+      font-size: 18px;
+      line-height: 37px;
+      font-weight: 400;
+      color: #fff;
+      max-width: 70%;
+      margin: auto; }
+  .home-page .About .swiper {
+    width: 100%;
+    height: 70%; }
+  .home-page .About .swiper-slide {
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
-    height: 75vh;
-    padding: 4rem 2rem;
-    margin: 0; }
-    .home-page .About-content .About-text {
-      font-family: "Antic Slab";
-      font-size: 20px;
-      position: absolute;
-      z-index: 100;
-      line-height: 25px; }
-    .home-page .About-content h1 {
-      position: absolute;
-      z-index: 100;
-      font-family: "Tangerine" !important;
-      letter-spacing: 2px;
-      font-size: 30px; }
-    .home-page .About-content .box {
-      background-color: #f3f3f3;
-      border-radius: var(--br-blobby);
-      position: relative;
-      transition: 1.5s linear; }
-      .home-page .About-content .box.box-lg {
-        height: 350px;
-        width: 550px; }
-      .home-page .About-content .box.box-md {
-        height: 275px;
-        width: 450px; }
-      .home-page .About-content .box.box-sm {
-        height: 350px;
-        width: 550px; }
-      .home-page .About-content .box::after {
-        content: "";
-        background-color: #f4f4f4;
-        border-radius: var(--br-blobby-after);
-        position: absolute;
-        opacity: 0.5;
-        top: -2%;
-        left: -2%;
-        height: 104%;
-        width: 104%;
-        transition: 1.5s linear; }
-      .home-page .About-content .box::before {
-        content: "";
-        background-color: #545581;
-        border-radius: var(--br-blobby-before);
-        position: absolute;
-        opacity: 0.2;
-        top: -4%;
-        left: -4%;
-        height: 108%;
-        width: 108%;
-        transition: 1.5s linear; }
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center; }
+    .home-page .About .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
 
 @keyframes LineFadeIn {
   0% {

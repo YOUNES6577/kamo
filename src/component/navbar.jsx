@@ -31,7 +31,7 @@ function style(props) {
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
+        this.state = {  
             showNavSecond: false,
             visible: false,
             theme: style({ mt: 2, pt: 1, bg: 'transparent', logo: White_Logo, color: 'white' }),

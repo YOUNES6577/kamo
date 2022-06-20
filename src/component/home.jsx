@@ -1,6 +1,10 @@
 import * as React from 'react'
 import * as $ from 'jquery'
-// import 'jquery-zoom'
+import { Swiper, SwiperSlide } from "swiper/react";
+
+
+
+import { Pagination, Navigation } from "swiper";
 import *  as RRD from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap';
 import { Divider, Grid } from '@mui/material';
@@ -10,7 +14,10 @@ import styled from 'styled-components';
 import NavBar from './navbar'
 import Footer from './footer'
 
-import '../asset/css/main.css'
+import '../asset/sass/main.sass'
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import produitChimique from '../ProdImg/produitChimique.jpg'
 import produitslubrifiant from '../ProdImg/produitslubrifiant.jpg'
@@ -123,10 +130,38 @@ export default class Home extends React.Component {
             </div>
         )
     }
+    AboutSwiper() {
+        return (
+            <>
+                <Swiper
+                    pagination={{
+                        type: "fraction",
+                    }}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className="AboutSwiper"
+                >
+                    <SwiperSlide>
+                        <Title className='About-Title'><Zoom cascade>Activités</Zoom></Title>
+                        <p><Fade >Fabrication d'emballage en plastique (PE & PP) par soufflage et injection <strong>(Jerrycan,Bidon,Bouteille,Bocal,Pot,Boite & Divers Article)</strong>destiné au conditionnement et au stockage des divers produits <strong>(chimiques,Lubrifiants,détergents,cosmetique & argo-alimentaire)</strong>
+                            Notre société a developpe une large gamme de produits de contenance allant de 25cl a 25 litres. </Fade></p>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <Title className='About-Title'><Zoom cascade>Réactivités</Zoom></Title>
+                        <p><Fade >Notre société possede de grands moyens matériels et humains compétents qui peuvent répondre aux exigences du marché national et aux attentes des clients en adoptant les nouvelles technologies et procedure de fabrication pour pouvoir offirir des produits de qualité.</Fade></p>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <Title className='About-Title'><Zoom cascade>Compétitivité</Zoom></Title>
+                        <p><Fade > Grace a nos liens priviliege avec tous nos fournisseurs en matiere premiere importee Nous Pouvons garantir un produit de choix rappondant aux besoins de nos clients , aux quels nous assurons : </Fade></p>
+                    </SwiperSlide>
+                </Swiper>
+            </>
+        );
+    }
     render() {
         return (
             <Container fluid='true' className='home-page'>
-                <NavBar />
+                {/* <NavBar /> */}
                 <Container className='main' fluid='true' >
                     <Container className='main-content' >
                         <Fade left cascade>
@@ -151,7 +186,7 @@ export default class Home extends React.Component {
                     <Container className='Presentation-container' >
                         <Container fluid='sm'  >
                             <Bounce bottom cascade >
-                                <Slide bottom cascade >
+                                <Fade cascade >
                                     <div className='Presentation-paper'>
                                         <Title >
                                             <Divider sx={{ mx: 0 }} textAlign="left" ><Flip bottom cascade >Presentation</Flip></Divider>
@@ -160,7 +195,7 @@ export default class Home extends React.Component {
                                             <b>N</b>otre société a été crée en 1996 sous l'appellation de PLASTIMED, qui deviendra par la suite en 2003 Sarl KAMOPLAST et se situe dans le chef lieu  de la wilaya de Médéa. KAMOPLAST qui dispose d'un effectif de 65 salaries, est spécialisée dans la fabrication d'emballage en plastique en (PE et PP)  par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 30   litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.<br />
                                         </Paragraph>
                                     </div>
-                                </Slide>
+                                </Fade>
                                 <div className='Presentation-footer'>
                                     <Divider sx={{ mx: 0 }} textAlign="right" ><Flip bottom cascade >Mr .Directeur</Flip></Divider>
                                 </div>
@@ -180,48 +215,9 @@ export default class Home extends React.Component {
                     </Container>
                     {/* <this.shapDividerS2 direction='top' top='100%' width='100%' height='55px' fill='#fff' /> */}
                 </section>
-                <section className='About' >
-                    <Container className='About-items'>
-                        <Row>
-                            <Divider  ><Title className='Text-divider'><Zoom cascade>Activités</Zoom></Title></Divider>
-                            <Col xs={7} className='About-content'>
-                                <Title style={{ paddingBottom: '19rem' }}><Zoom cascade>Activités</Zoom></Title>
-                                <Paragraph className='About-text' style={{ maxWidth: 450, mx: 10, mt: 10 }}>Fabrication d'emballage en plastique (PE & PP) par soufflage et injection <br />(<strong>Jerrycan,Bidon,Bouteille,Bocal,Pot,Boite & Divers Article</strong>) destiné au conditionnement et au stockage des divers produits <br />(<strong>chimiques,Lubrifiants,détergents,cosmetique & argo-alimentaire</strong>) . <br />
-                                    Notre société a developpe une large gamme de produits de contenance allant de 25cl a 25 litres. <br />
-                                    Nous proposons aussi des produits personnalises pour chaque client (Moule,Logo, ..... )</Paragraph>
-                                <div className='box  box-lg' />
-                            </Col>
-                            <Col ><Fade right ><img src={about_img02} alt='about_img02' width='400px' height='450' /></Fade></Col>
-                        </Row>
-                        <Row>
-                            <Divider ><Title className='Text-divider'><Zoom cascade>Réactivités</Zoom></Title></Divider>
-                            <Col xs={2} />
-                            <Col xs={5} ><Fade left ><img src={about_img02} alt='about_img02' width='400' height='450' /></Fade></Col>
-                            <Col xs={4} className='About-content'>
-                                <Title style={{ paddingBottom: '12rem' }}><Zoom cascade>Réactivités</Zoom></Title>
-                                <Paragraph className='About-text' style={{ maxWidth: 450, mx: 10, my: 5 }}><Reveal effect="fadeInUp">Notre société possede de grands moyens matériels et humains compétents qui peuvent répondre aux exigences du marché national et aux attentes des clients en adoptant les nouvelles technologies et procedure de fabrication pour pouvoir offirir des produits de qualité.</Reveal></Paragraph>
-                                <div className='box  box-md' />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Divider ><Title className='Text-divider'><Zoom cascade>Compétitivité</Zoom></Title></Divider>
-                            <Col xs={7} className='About-content'>
-                                <Title style={{ paddingBottom: '19rem' }}><Zoom cascade>Compétitivité</Zoom></Title>
-                                <div className='About-text'>
-                                    <Paragraph style={{ maxWidth: 400, mx: 10, my: 5 }}><Reveal effect="fadeInUp"> Grace a nos liens priviliege avec tous nos fournisseurs en matiere premiere importee Nous Pouvons garantir un produit de choix rappondant aux besoins de nos clients , aux quels nous assurons : </Reveal></Paragraph>
-                                    <Zoom right  >
-                                        <Space direction="vertical">
-                                            <Text key='1'>* La qualité de nos produit en matiére et en finition.</Text>
-                                            <Text key='2'>* Une fiabilite icontestable .</Text>
-                                            <Text key='3'>* Des delais de livraison tres courts</Text>
-                                            <Text key='4'>* Le meilleur rapport qualité / prix</Text>
-                                        </Space>
-                                    </Zoom>
-                                </div>
-                                <div className='box  box-lg' />
-                            </Col>
-                            <Col ><Fade right ><img src={about_img02} alt='about_img02' width='400px' height='450' /></Fade></Col>
-                        </Row>
+                <section className='About'>
+                    <Container className='SwiperContainer'>
+                        <this.AboutSwiper />
                     </Container>
                 </section>
                 <Footer />
