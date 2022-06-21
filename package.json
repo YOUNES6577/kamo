@@ -106,5 +106,10 @@
   },
   "devDependencies": {
     "reinstall-node-modules": "^2.0.0"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "6.x",
+    "pnpm": "6.x"
   }
 }
