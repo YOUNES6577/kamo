@@ -29,11 +29,6 @@ yarn-debug.log*
 yarn-error.log*
 nm-trace.log
 src/asset/sass/.sass-cache/S
-package.json
-/server/package.json
-package-lock.json
-/server/package-lock.json
-*.yaml
-/server/*.yaml
+
 nm-trace.log
-*.txt
+old.txt
