@@ -1,6 +1,8 @@
 {
   "name": "kamoplast",
   "version": "0.1.0",
+  "home":"/",
+  "proxy":"http://localhost:3000",
   "private": true,
   "dependencies": {
     "3d-react-carousal": "^5.0.0",
@@ -77,7 +79,7 @@
   },
   "scripts": {
     "predeploy": "pnpm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d  build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
