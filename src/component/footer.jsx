@@ -7,7 +7,7 @@ import { Roll, Fade, Zoom, Slide } from 'react-reveal'
 
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import Logo from '../ProdImg/kamoSvg/logo-black-g2.svg'
-import '../asset/css/footer.css'
+import '../asset/sass/footer.sass'
 
 const { Text, Link } = Typography;
 
@@ -66,10 +66,9 @@ export default class Footer extends React.Component {
     render() {
         return (
             <Container
-                maxWidth="xxl" className='mt-2'
+                maxWidth="xxl" 
                 component="footer"
                 sx={{
-                    mt: 8,
                     py: [3, 6],
                 }}
             >

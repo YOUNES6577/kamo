@@ -1,4 +1,3 @@
-import './asset/css/App.css';
 import { Routes, Route, } from "react-router-dom";
 import Home from './component/home'
 import Type from './component/TypesPr/Type'

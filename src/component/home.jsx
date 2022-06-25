@@ -1,17 +1,13 @@
 import * as React from 'react'
-import * as $ from 'jquery'
 import { Swiper, SwiperSlide } from "swiper/react";
-
-
 
 import { Pagination, Navigation } from "swiper";
 import *  as RRD from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap';
-import { Divider, Grid } from '@mui/material';
-import { Fade, Flip, Slide, Bounce, Zoom, Reveal } from 'react-reveal'
-import { Typography, Space } from 'antd'
+import { Divider, Grid, ThemeProvider, createTheme } from '@mui/material';
+import { Fade, Flip, Bounce, Zoom } from 'react-reveal'
+import { Typography } from 'antd'
 import styled from 'styled-components';
-import NavBar from './navbar'
 import Footer from './footer'
 
 import '../asset/sass/main.sass'
@@ -19,13 +15,18 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import '../asset/js/main'
+
 import produitChimique from '../ProdImg/produitChimique.jpg'
 import produitslubrifiant from '../ProdImg/produitslubrifiant.jpg'
 import produitsalimentaire from '../ProdImg/produitsalimentaire.jpg'
-import about_img02 from '../ProdImg/Background/about_img02.png'
-import prod_card from '../ProdImg/Background/produit-card.jpeg'
+import { ArrowForward } from '@mui/icons-material';
+// import about_img02 from '../ProdImg/Background/about_img02.png'
+// import prod_card from '../ProdImg/Background/produit-card.jpeg'
 // import Mold2_5LDrawing from '../ProdImg/Background/Mold 2-5L Drawing.png'
-const { Text, Paragraph, Title } = Typography;
+const { Paragraph, Title } = Typography;
 
 const Shap = styled.div`
 position:absolute;
@@ -35,28 +36,35 @@ left:0;
 width:100%;
 overflow:hidden;
 line-height:0;
-transform:${props => props.transform};
-`
+transform:${props => props.transform};`
+
 const ShapSvg = styled.svg`
 position:relative;
 display:block;
 width:${props => props.width};
-height:${props => props.height}
-`
+height:${props => props.height}`
+
 const ShapPath = styled.path`
 fill:${props => props.fill}`
 
-
-let box;
-const setBorderRadius = (Box) => {
-    $.map(Box, (item) => {
-        item.style.setProperty('--br-blobby', generateBorderRadiusValue());
-        item.style.setProperty('--br-blobby-after', generateBorderRadiusValue());
-        item.style.setProperty('--br-blobby-before', generateBorderRadiusValue());
-    })
+const theme = createTheme({
+    palette: {
+        background: {
+            paper: '#fff',
+        },
+        margin: {
+            inputMargin: 1,
+        },
+    },
+});
+const TextField = function (props) {
+    return (
+        <div className={props.className} data-validate={props.data_validate}>
+            <span className="label-input">{props.label}</span>
+            <input className="input" type={props.type} name={props.name} placeholder={props.placeholder} />
+        </div>
+    )
 }
-const generateBorderRadiusValue = () => `${getRandomValue()}% ${getRandomValue()}% ${getRandomValue()}% ${getRandomValue()}% / ${getRandomValue()}% ${getRandomValue()}% ${getRandomValue()}%`;
-const getRandomValue = () => Math.floor(Math.random() * 20) + 30
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -73,10 +81,7 @@ export default class Home extends React.Component {
         }
         this.handleIndex = this.handleIndex.bind(this)
     }
-    componentDidMount() {
-        box = document.querySelectorAll('.box');
-        setInterval(() => setBorderRadius(box), 2000);
-    }
+    componentDidMount() { }
     handleIndex(selectedIndex, e) {
         this.setState({
             index: selectedIndex
@@ -143,85 +148,145 @@ export default class Home extends React.Component {
                 >
                     <SwiperSlide>
                         <Title className='About-Title'><Zoom cascade>Activités</Zoom></Title>
-                        <p><Fade >Fabrication d'emballage en plastique (PE & PP) par soufflage et injection <strong>(Jerrycan,Bidon,Bouteille,Bocal,Pot,Boite & Divers Article)</strong>destiné au conditionnement et au stockage des divers produits <strong>(chimiques,Lubrifiants,détergents,cosmetique & argo-alimentaire)</strong>
-                            Notre société a developpe une large gamme de produits de contenance allant de 25cl a 25 litres. </Fade></p>
+                        <Fade > <p>Fabrication d'emballage en plastique (PE & PP) par soufflage et injection <strong>(Jerrycan,Bidon,Bouteille,Bocal,Pot,Boite & Divers Article)</strong>destiné au conditionnement et au stockage des divers produits <strong>(chimiques,Lubrifiants,détergents,cosmetique & argo-alimentaire)</strong>
+                            Notre société a developpe une large gamme de produits de contenance allant de 25cl a 25 litres. </p></Fade>
                     </SwiperSlide>
                     <SwiperSlide>
                         <Title className='About-Title'><Zoom cascade>Réactivités</Zoom></Title>
-                        <p><Fade >Notre société possede de grands moyens matériels et humains compétents qui peuvent répondre aux exigences du marché national et aux attentes des clients en adoptant les nouvelles technologies et procedure de fabrication pour pouvoir offirir des produits de qualité.</Fade></p>
+                        <Fade > <p>Notre société possede de grands moyens matériels et humains compétents qui peuvent répondre aux exigences du marché national et aux attentes des clients en adoptant les nouvelles technologies et procedure de fabrication pour pouvoir offirir des produits de qualité.</p></Fade>
                     </SwiperSlide>
                     <SwiperSlide>
                         <Title className='About-Title'><Zoom cascade>Compétitivité</Zoom></Title>
-                        <p><Fade > Grace a nos liens priviliege avec tous nos fournisseurs en matiere premiere importee Nous Pouvons garantir un produit de choix rappondant aux besoins de nos clients , aux quels nous assurons : </Fade></p>
+                        <Fade > <p> Grace a nos liens priviliege avec tous nos fournisseurs en matiere premiere importee Nous Pouvons garantir un produit de choix rappondant aux besoins de nos clients , aux quels nous assurons : </p></Fade>
                     </SwiperSlide>
                 </Swiper>
             </>
         );
     }
+    ContactForm() {
+        return (
+            <Container className='container-contact' >
+                <div className='wrap-contact'>
+                <form className="contact-form validate-form">
+                    <span className='contact-form-title'>
+                        Contact Us
+                    </span>
+                    <TextField data_validate="Please Type Your Name"
+                        label="FULL NAME *"
+                        type="text"
+                        name='name'
+                        placeholder='Enter Your Name'
+                        className='wrap-input validate-input bg1'
+                    />
+                    <TextField data_validate="Enter Your Email (e@a.x)"
+                        label="Email *"
+                        type="text"
+                        name='email'
+                        placeholder='Enter Your Email'
+                        className='wrap-input validate-input bg1 rs1-wrap-input'
+                    />
+                    <TextField 
+                        label="Phone"
+                        type="text"
+                        name='phone'
+                        placeholder='Enter Number Phone'
+                        className='wrap-input bg1 rs1-wrap-input'
+                    />
+                    <div className="wrap-input validate-input bg1 rs1-alert-validate"
+                        data-validate="Please Type Your Message">
+                        <span className="label-input">Message</span>
+                        <textarea className="input" name="message" placeholder="Your message here..."></textarea>
+                    </div>
+                    <div className="container-contact-form-btn">
+                        <button className="contact-form-btn">
+                            <span>
+                                Submit
+                                <ArrowForward className='Arrow m-l-7' />
+                            </span>
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </Container>
+        );
+    }
     render() {
         return (
-            <Container fluid='true' className='home-page'>
-                {/* <NavBar /> */}
-                <Container className='main' fluid='true' >
-                    <Container className='main-content' >
-                        <Fade left cascade>
-                            <Title style={{ fontFamily: 'Tangerine !important' }}>
-                                Kamoplast
-                            </Title>
-                            <Paragraph style={{ my: 3, mx: 4, maxWidth: 850 }}>
-                                Fabrication d'emballage en plastique en (PE et PP) par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 25 litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.
-                            </Paragraph>
-                        </Fade>
-                    </Container>
-                    <Container className='sub-content'>
-                        <Row className="justify-content-md-center">
-                            <Col md="auto">
-                                <Title className='sub-title'><span>Notre plus grand défi</span> ... nous satisfaire avec un emballage ideal !!!  </Title>
-                            </Col>
-                        </Row>
-                    </Container>
-                    <this.shapDividerS1 direction='bottom' bt='0' width='150%' height='73px' fill='#f5f5f5' />
-                </Container>
-                <section className='Presentation-section' id='PSN'>
-                    <Container className='Presentation-container' >
-                        <Container fluid='sm'  >
-                            <Bounce bottom cascade >
-                                <Fade cascade >
-                                    <div className='Presentation-paper'>
-                                        <Title >
-                                            <Divider sx={{ mx: 0 }} textAlign="left" ><Flip bottom cascade >Presentation</Flip></Divider>
-                                        </Title>
-                                        <Paragraph className='Presentation-prg'>
-                                            <b>N</b>otre société a été crée en 1996 sous l'appellation de PLASTIMED, qui deviendra par la suite en 2003 Sarl KAMOPLAST et se situe dans le chef lieu  de la wilaya de Médéa. KAMOPLAST qui dispose d'un effectif de 65 salaries, est spécialisée dans la fabrication d'emballage en plastique en (PE et PP)  par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 30   litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.<br />
-                                        </Paragraph>
-                                    </div>
-                                </Fade>
-                                <div className='Presentation-footer'>
-                                    <Divider sx={{ mx: 0 }} textAlign="right" ><Flip bottom cascade >Mr .Directeur</Flip></Divider>
-                                </div>
-                            </Bounce>
+            <ThemeProvider theme={theme}>
+                <Container fluid='true' className='home-page'>
+                    <Container className='main' fluid='true' >
+                        <Container className='main-content' >
+                            <Fade left cascade>
+                                <Title style={{ fontFamily: 'Tangerine !important' }}>
+                                    Kamoplast
+                                </Title>
+                                <Paragraph style={{ my: 3, mx: 4, maxWidth: 850 }}>
+                                    Fabrication d'emballage en plastique en (PE et PP) par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 25 litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.
+                                </Paragraph>
+                            </Fade>
                         </Container>
+                        <Container className='sub-content'>
+                            <Row className="justify-content-md-center">
+                                <Col md="auto">
+                                    <Title className='sub-title'><span>Notre plus grand défi</span> ... nous satisfaire avec un emballage ideal !!!  </Title>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <this.shapDividerS1 direction='bottom' bt='0' width='150%' height='73px' fill='#f5f5f5' />
                     </Container>
-                </section>
-                <section className='Product-section' id='PDS'>
-                    <this.shapDivider_1 direction='top' top='0' width='calc(300% + 1.3px)' height='125px' fill='#fff' />
-                    <Container fluid='fluid' className='Product-items'>
-                        <Title className='Product-title text-center'>Produits</Title>
-                        <Grid container spacing={2} className='po'>
-                            <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'end', }} ><this.Productcard title='Chimique' imgsrc={produitChimique}> Produits chimiques & détergents </this.Productcard></Grid>
-                            <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', }}><this.Productcard title='Lubrifiant' imgsrc={produitslubrifiant}> Produits Lubrifiant </this.Productcard></Grid>
-                            <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'start', }}><this.Productcard title='Agro-alimentaire' imgsrc={produitsalimentaire}> Produits Agro-alimentaire </this.Productcard></Grid>
-                        </Grid>
-                    </Container>
-                    {/* <this.shapDividerS2 direction='top' top='100%' width='100%' height='55px' fill='#fff' /> */}
-                </section>
-                <section className='About'>
-                    <Container className='SwiperContainer'>
-                        <this.AboutSwiper />
-                    </Container>
-                </section>
-                <Footer />
-            </Container>
+                    <section className='Presentation-section' id='PSN'>
+                        <Container className='Presentation-container' >
+                            <Container fluid='sm'  >
+                                <Bounce bottom cascade >
+                                    <Fade cascade >
+                                        <div className='Presentation-paper'>
+                                            <Title >
+                                                <Divider sx={{ mx: 0 }} textAlign="left" ><Flip bottom cascade >Presentation</Flip></Divider>
+                                            </Title>
+                                            <Paragraph className='Presentation-prg'>
+                                                <b>N</b>otre société a été crée en 1996 sous l'appellation de PLASTIMED, qui deviendra par la suite en 2003 Sarl KAMOPLAST et se situe dans le chef lieu  de la wilaya de Médéa. KAMOPLAST qui dispose d'un effectif de 65 salaries, est spécialisée dans la fabrication d'emballage en plastique en (PE et PP)  par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 30   litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.<br />
+                                            </Paragraph>
+                                        </div>
+                                    </Fade>
+                                    <div className='Presentation-footer'>
+                                        <Divider sx={{ mx: 0 }} textAlign="right" ><Flip bottom cascade >Mr .Directeur</Flip></Divider>
+                                    </div>
+                                </Bounce>
+                            </Container>
+                        </Container>
+                    </section>
+                    <section className='Product-section' id='PDS'>
+                        <this.shapDivider_1 direction='top' top='0' width='calc(300% + 1.3px)' height='125px' fill='#fff' />
+                        <Container fluid='fluid' className='Product-items'>
+                            <Title className='Product-title text-center'>Produits</Title>
+                            <Grid container spacing={2} className='po'>
+                                <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'end', }} ><this.Productcard title='Chimique' imgsrc={produitChimique}> Produits chimiques & détergents </this.Productcard></Grid>
+                                <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', }}><this.Productcard title='Lubrifiant' imgsrc={produitslubrifiant}> Produits Lubrifiant </this.Productcard></Grid>
+                                <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'start', }}><this.Productcard title='Agro-alimentaire' imgsrc={produitsalimentaire}> Produits Agro-alimentaire </this.Productcard></Grid>
+                            </Grid>
+                        </Container>
+                        {/* <this.shapDividerS2 direction='top' top='100%' width='100%' height='55px' fill='#fff' /> */}
+                    </section>
+                    <section className='About'>
+                        <Container className='SwiperContainer'>
+                            <this.AboutSwiper />
+                        </Container>
+                    </section>
+                    <section className='Contact' id='Contact'>
+                        <Container fluid='True' className='Ct_body'>
+                            <Row >
+                                <Col className='Map'>
+                                    Map
+                                </Col>
+                                <Col className='Ct'>
+                                    <this.ContactForm />
+                                </Col>
+                            </Row>
+                        </Container>
+                    </section>
+                    <Footer />
+                </Container>
+            </ThemeProvider>
         )
     }
 } 

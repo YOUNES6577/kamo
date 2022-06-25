@@ -105,7 +105,7 @@ export default class NavBar extends React.Component {
                                 <Link
                                     variant="button"
                                     underline='none'
-                                    href="#"
+                                    href="/"
                                     sx={this.state.theme.links}
                                     className='active'
                                 >
@@ -114,7 +114,7 @@ export default class NavBar extends React.Component {
                                 <Link
                                     variant="button"
                                     underline='none'
-                                    href="#PS"
+                                    href="#PSN"
                                     sx={this.state.theme.links}
                                 >
                                     Presentation
@@ -139,7 +139,7 @@ export default class NavBar extends React.Component {
                                 <Link
                                     variant="button"
                                     underline='none'
-                                    href="#"
+                                    href="#Contact"
                                     sx={this.state.theme.links}
                                 >
                                     <Call />Contact
