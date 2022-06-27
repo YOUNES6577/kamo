@@ -169,7 +169,7 @@ export default class Home extends React.Component {
                 <div className='wrap-contact'>
                 <form className="contact-form validate-form">
                     <span className='contact-form-title'>
-                        Contact Us
+                    Contactez Nous
                     </span>
                     <TextField data_validate="Please Type Your Name"
                         label="FULL NAME *"
@@ -258,7 +258,7 @@ export default class Home extends React.Component {
                     <section className='Product-section' id='PDS'>
                         <this.shapDivider_1 direction='top' top='0' width='calc(300% + 1.3px)' height='125px' fill='#fff' />
                         <Container fluid='fluid' className='Product-items'>
-                            <Title className='Product-title text-center'>Produits</Title>
+                            <Title className='Product-title text-center'>Nos Produits</Title>
                             <Grid container spacing={2} className='po'>
                                 <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'end', }} ><this.Productcard title='Chimique' imgsrc={produitChimique}> Produits chimiques & détergents </this.Productcard></Grid>
                                 <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', }}><this.Productcard title='Lubrifiant' imgsrc={produitslubrifiant}> Produits Lubrifiant </this.Productcard></Grid>
