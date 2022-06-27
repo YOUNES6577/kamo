@@ -1,7 +1,7 @@
 {
   "name": "kamoplast",
   "version": "0.1.0",
-  "homepage": "https://YOUNES6577.github.io/kamo",
+  "homepage": "https://YOUNES6577.github.io/",
   "proxy":"http://localhost:3000",
   "private": true,
   "dependencies": {
