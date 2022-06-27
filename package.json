@@ -2,6 +2,7 @@
   "name": "kamoplast",
   "version": "0.1.0",
   "home":"/",
+  "homepage": "https://YOUNES6577.github.io",
   "proxy":"http://localhost:3000",
   "private": true,
   "dependencies": {
@@ -79,7 +80,7 @@
   },
   "scripts": {
     "predeploy": "pnpm run build",
-    "deploy": "gh-pages -d  build",
+    "deploy": "gh-pages -d  build -o kamo",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
