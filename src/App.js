@@ -3,6 +3,7 @@ import Home from './component/home'
 import Type from './component/TypesPr/Type'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './component/navbar'
+
 function App() {
   return (
     <>
