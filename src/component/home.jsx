@@ -1,14 +1,14 @@
 import * as React from 'react'
 import *  as RRD from 'react-router-dom'
 import { Fade, Flip, Bounce, Zoom } from 'react-reveal'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Image } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
-import { Divider, Grid, ThemeProvider, createTheme } from '@mui/material';
-import { ArrowForward } from '@mui/icons-material';
+import { Divider, Grid, ThemeProvider, createTheme, Paper, Link } from '@mui/material';
+import { ArrowForward, Map } from '@mui/icons-material';
 import { Typography } from 'antd'
-import {ShapDivider,ShapPath} from './Element/Shap'
-import {MapsV2} from './Maps';
+import { ShapDivider, ShapPath } from './Element/Shap'
+// import {MapsV2} from './Maps';
 import Footer from './footer'
 import '../asset/sass/main.sass'
 import "swiper/css";
@@ -20,6 +20,7 @@ import '../asset/js/main'
 import produitChimique from '../ProdImg/produitChimique.jpg'
 import produitslubrifiant from '../ProdImg/produitslubrifiant.jpg'
 import produitsalimentaire from '../ProdImg/produitsalimentaire.jpg'
+import kamoMap from '../ProdImg/kamo_map.png'
 
 const { Paragraph, Title } = Typography;
 
@@ -229,7 +230,12 @@ export default class Home extends React.Component {
                         <Container fluid='True' className='Ct_body'>
                             <Row >
                                 <Col className='Map' xs={7}>
-                                    <MapsV2 />
+                                    <Paper elevation={20} className='mappaper'>
+                                        <Image src={kamoMap} />
+                                        <div className="middle">
+                                                <Link underline='none' className='underline'>Voir dans Google Map</Link>  <Map />
+                                        </div>
+                                    </Paper>
                                 </Col>
                                 <Col className='Ct' xs={5}>
                                     <this.ContactForm />
