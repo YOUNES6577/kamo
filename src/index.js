@@ -14,7 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 function loadFont(){
   WebFont.load({
       google: {
-          families: [ 'Spinnaker','Antic Slab','Hubballi','Rajdhani','Teko','Poppins','Droid Sans', 'Tangerine',"Segoe UI"]
+          families: [ 'Spartan','Spinnaker','Antic Slab','Hubballi','Rajdhani','Teko','Poppins','Droid Sans', 'Tangerine',"Segoe UI"]
       }
   });
 }

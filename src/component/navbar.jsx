@@ -3,12 +3,12 @@ import React from 'react';
 import White_Logo from '../ProdImg/kamoSvg/logo-white-g2.svg'
 import Dark_Logo from '../ProdImg/kamoSvg/logo-black-g2.svg'
 import { Call } from '@mui/icons-material';
-import { AppBar, Toolbar, Typography, GlobalStyles,Link, CssBaseline } from '@mui/material';
+import { AppBar, Toolbar, Typography, GlobalStyles, Link, CssBaseline } from '@mui/material';
 import { Menu, Dropdown } from 'antd';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { Fade } from 'react-reveal'
-import *  as RRD from 'react-router-dom' 
-import '../asset/css/navbar.css'
+import *  as RRD from 'react-router-dom'
+import '../asset/sass/navbar.sass'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function style(props) {
@@ -31,7 +31,7 @@ function style(props) {
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {  
+        this.state = {
             showNavSecond: false,
             visible: false,
             theme: style({ mt: 2, pt: 1, bg: 'transparent', logo: White_Logo, color: 'white' }),
@@ -46,7 +46,7 @@ export default class NavBar extends React.Component {
     handleVisibleChange = flag => {
         this.setState({ visible: flag });
     }
-    listenScrollEvent = e => {
+    listenScrollEvent = e => {  
         if (window.scrollY > 50) {
             this.setState({
                 theme: style({ mt: 0, pt: 3, bg: '#f5f5f5', logo: Dark_Logo, color: 'black' }),
@@ -59,7 +59,7 @@ export default class NavBar extends React.Component {
         }
     };
     componentDidMount() {
-        if(window.scrollY>50)
+        if (window.scrollY > 50)
             this.setState({
                 theme: style({ mt: 2, pt: 1, bg: 'transparent', logo: White_Logo, color: 'white' }),
             });
@@ -70,7 +70,7 @@ export default class NavBar extends React.Component {
     }
     render() {
         const Product_Menu = (
-            <Menu onClick={this.handleMenuClick} style={this.state.theme.Menu}>
+            <Menu onClick={this.handleMenuClick} >
                 <Menu.Item key="1"><RRD.Link to='/Type' >Produits Chimique</RRD.Link></Menu.Item>
                 <Menu.Item key="2"><RRD.Link to='/Type' >Produits Lubrifiant</RRD.Link></Menu.Item>
                 <Menu.Item key="3"><RRD.Link to='/Type' >Produits Alimentaire</RRD.Link></Menu.Item>
@@ -81,7 +81,7 @@ export default class NavBar extends React.Component {
                 <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
                 <CssBaseline />
                 <AppBar
-                    position="fixed"
+                    position="sticky"
                     color="default"
                     elevation={0}
                     sx={{

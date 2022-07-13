@@ -1,36 +1,22 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800')
+@import './var.sass'
 
-@font-face
-    font-family: Montserrat-Black
-    src: url(../font/montserrat/Montserrat-Black.ttf)
-@font-face
-    font-family: Montserrat-SemiBold
-    src: url(../font/montserrat/Montserrat-SemiBold.ttf)
-@font-face
-    font-family: Montserrat-Medium
-    src: url(../font/montserrat/Montserrat-Medium.ttf)
+$black: #4c4c4c
+$white: #fff
+$gray: #808080
 
-$base-font: 'Rajdhani !important'
-$paragraph-font: 'Antic Slab'
-$paragraph-size: 22px
-$header-size: 3.5rem
-$title-font: 'Tangerine'
-$prime: #545581
-$second: #00FF80
+$text-arrow-space: 16px
+$shaft-width: 2px
+$newshaft-width: 64px
+$shaft-thickness: 1px
+$arrow-head-width: 8px
+$arrow-head-thickness: $shaft-thickness
 
-\:root
-    --br-blobby: 50%
-    --br-blobby-before: 50%
-    --br-blobby-after: 50%
+// Base
 
 *
-    box-sizing: border-box
-    margin: 0
-    padding: 0
-body
-    scroll-behavior: smooth
-h1,h2,h3,h4,h5,h6
-    font-family: 'Segoe UI'!important
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
 .home-page
     .main
         position: relative
@@ -46,18 +32,132 @@ h1,h2,h3,h4,h5,h6
         animation-iteration-count: infinite
         animation-fill-mode: backwards
         transition: background-image 2s
-
         .main-content
             padding-top: 300px
             color: white
-            font-family: 'Hubballi '
+            font-family: 'Spinnaker'
             letter-spacing: 2px
             font-style: italic
             h1
-                font-size: 51px!important
+                font-size: 3rem!important
                 color: rgba(255, 255, 255, 0.9)
                 font-family: $title-font !important
                 font-weight: 600
+            .the-arrow
+                width: $shaft-width
+                transition: all 0.2s
+                &.-left
+                    position: absolute
+                    top: 60%
+                    left: 0
+                    >.shaft
+                        width: 0
+                        background-color: rgba(225, 225, 255, .7)
+                        &:before,
+                        &:after
+                            width: 0
+                            background-color: rgba(225, 225, 255, .7)
+                        &:before
+                            transform: rotate(0)
+                        &:after
+                            transform: rotate(0)
+
+                &.-right
+                    top: 3px
+                    >.shaft
+                        width: $shaft-width
+                        transition-delay: 0.2s
+                        &:before,
+                        &:after
+                            width: $arrow-head-width
+                            transition-delay: 0.3s
+                            transition: all 0.5s
+                        &:before
+                            transform: rotate(40deg)
+                        &:after
+                            transform: rotate(-40deg)
+
+                >.shaft
+                    background-color: rgba(225, 225, 255, .7)
+                    display: block
+                    height: $shaft-thickness
+                    position: relative
+                    transition: all 0.2s
+                    transition-delay: 0
+                    will-change: transform
+                    &:before,
+                    &:after
+                        background-color: rgba(225, 225, 255, .7)
+                        content: ''
+                        display: block
+                        height: $arrow-head-thickness
+                        position: absolute
+                        top: 0
+                        right: 0
+                        transition: all 0.2s
+                        transition-delay: 0
+                    &:before
+                        transform-origin: top right
+                    &:after
+                        transform-origin: bottom right
+
+            .animated-arrow
+                display: inline-block
+                margin: 0 50%
+                width: 25%
+                font-family: $title-font !important
+                color: $black
+                font-size: 2.25em
+                font-style: italic
+                text-decoration: none
+                position: relative
+                transition: all 0.2s
+                color: rgba(255, 255, 255, 0.7)
+                &:hover
+                    color: #fff
+                    font-weight: 600
+                    >.the-arrow.-left
+                        >.shaft
+                            width: $newshaft-width
+                            transition-delay: 0.1s
+                            background-color: #fff
+                            &:before,
+                            &:after
+                                width: $arrow-head-width
+                                transition-delay: 0.1s
+                                background-color: #fff
+                            &:before
+                                transform: rotate(40deg)
+                            &:after
+                                transform: rotate(-40deg)
+                    >.main-arrow
+                        transform: translateX($shaft-width + $text-arrow-space)
+                        transform: translateX($newshaft-width + $text-arrow-space)
+                        >.the-arrow.-right
+                            >.shaft
+                                width: 0
+                                transform: translateX(200%)
+                                transition-delay: 0
+                                &:before,
+                                &:after
+                                    width: 0
+                                    transition-delay: 0
+                                    transition: all 0.1s
+                                &:before
+                                    transform: rotate(0)
+                                &:after
+                                    transform: rotate(0)
+                >.main-arrow
+                    display: flex
+                    align-items: center
+                    transition: all 0.2s
+                    >.text
+                        margin: 0 $text-arrow-space 0 0
+                        line-height: 1
+                        transition: 0.1s ease
+                    >.the-arrow
+                        position: relative
+
             div
                 font-family: $paragraph-font !important
                 color: rgba(255, 255, 255, 0.7)
@@ -68,12 +168,35 @@ h1,h2,h3,h4,h5,h6
                 color: rgba(255, 255, 255, 0.9)
                 font-family: $title-font !important
                 font-size: $header-size
+                width: 47ch
+                animation: typing 2s steps(47), blink .5s step-end infinite alternate
+                white-space: nowrap
+                overflow: hidden
+                border-right: 3px solid
                 span
                     color: #fff !important
                     font-size: $header-size
                     font-weight: 600
                     letter-spacing: 2px
-
+            .scrolldown-arrow
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%,-50%)
+                span
+                    display: block
+                    width: 16px
+                    height: 16px
+                    border-bottom: 4px solid #06A8FF
+                    border-right: 4px solid #06A8FF
+                    border-radius: 5px
+                    transform: rotate(45deg)
+                    margin: -8px
+                    animation: scrolldown_animate 3s infinite
+                    &:nth-child(2)
+                        animation-delay: -0.2s
+                    &:nth-child(3)
+                        animation-delay: -0.4s
         &:before
             content: ""
             position: absolute
@@ -83,537 +206,9 @@ h1,h2,h3,h4,h5,h6
             right: 0
             background-color: black
             opacity: 0.3
-    // ******************
 
-    .Presentation-section
-        min-height: 450px
-        // background-image: linear-gradient(#f5f5f5, #fff)
-        background-image: url(../../ProdImg/Background/testimonial_bg.png)
-        background-position: center
-        background-size: cover
+        // ******************
 
-        .Presentation-container
-            padding: 20px 25px
-            padding-top: 3rem
-            .Presentation-paper
-                h1
-                    font-family: $title-font !important
-                    font-weight: 600
-                    font-style: italic
-                    font-size: 50px
-                    letter-spacing: 2px
-                .Presentation-prg
-                    margin: 35px
-                    margin-top: 0
-                    padding: 20px
-                    padding-top: 0
-                    text-align: center
-                    line-height: 35px
-                    font-size: 24px
-                    font-family: $paragraph-font
-                    b
-                        font-size: 32px
-            .Presentation-footer
-                width: 100%
-                // margin-left: 90%
-                font-family: $title-font !important
-                font-weight: 600
-                font-size: 24px
-    //*******************
-
-    .Product-section
-        position: relative
-        height: 775px
-        color: #fff
-        background-color: #e6e6e6
-        background-position: center
-        background-size: cover
-        background-repeat: no-repeat
-        background-attachment: fixed
-        // background-image: linear-gradient(#001220 10%,transparent),url(../../ProdImg/Background/2307735-1605164185793_TM-02.jpg)
-        // background-image: url(../../ProdImg/Background/2307735-1605164185793_TM-02.jpg)
-        *
-            box-sizing: border-box
-            line-height: 1.5
-        img
-            max-width: 100%
-        .Product-items
-            display: flex
-            justify-content: space-evenly
-            flex-wrap: wrap
-            height: auto
-            background: transparent
-            .Product-title
-                font-family: $title-font !important
-                font-weight: 600
-                font-size: 55px
-                text-transform: capitalize
-                line-height: 62px
-                letter-spacing: 2px
-                margin-top: 4.5rem
-                z-index: 100
-                margin-bottom: 3rem
-                color: #000
-            .card
-                // position: absolute
-                background: #333
-                width: 370px
-                height: 60vh
-                padding: 2rem
-                padding-bottom: 0
-                color: #aaa
-                border-radius: 15px
-                transition: 0.5s
-                box-shadow: 0 .25rem .25rem rgba(0,0,0,0.2),0 0 1rem rgba(0,0,0,0.2)
-                overflow: hidden
-                &:hover
-                    transform: translateY(-50px)
-                    .card__caption
-                        top: 75%
-                        transform: translateY(-50%)
-                    .card__image
-                        transform: translateY(-10px)
-                    .card__image-container
-                        background: linear-gradient(0deg, rgba(0, 0, 0, .5) 20%, rgba(255, 255 ,255 , 0.2) 100%)
-                        &::after
-                            top: 0
-                &__image-container
-                    margin: -2rem -2rem 2rem -2rem
-                    height: 70%
-                    position: relative
-                    max-height: 400px
-                    overflow: hidden
-                    &::after
-                        position: absolute
-                        top: 0
-                        display: block
-                        content: ''
-                        width: 100%
-                        height: 100%
-                        transition: .3s
-                    img
-                        opacity: 0
-                        animation: ImageFadeIn .8s 1.4s forwards
-                        width: 100%
-                        height: 100%
-                        transition: .5s ease-in-out
-                &__caption
-                    position: absolute
-                    width: 100%
-                    z-index: 1
-                    padding: 5px 20px
-                    color: $prime
-                    transform: translateY(-10%)
-                    text-align: center
-                    transition: .3s
-                    z-index: 1
-                    .card__link
-                        display: inline-block
-                        padding: 10px 20px
-                        color: white
-                        border: 1px solid white
-                        border-radius: 7px 15px
-                        font-family: 'Roboto', sans-serif
-                        font-size: 12px
-                        text-transform: uppercase
-                        text-decoration: none
-                        transition: .3s
-                        &:hover
-                            color: $prime
-                            background-color: #fff
-                &__line
-                    opacity: 0
-                    animation: LineFadeIn .8s .8s forwards ease-in
-                &__title
-                    font-family: 'Tangerine' !important
-                    color: white
-                    font-weight: 800
-                    letter-spacing: 0.01em
-                    margin-top: 1.5rem
-                    font-size: 45px
-                &__content
-                    opacity: 0
-                    animation: ContentFadeIn .8s 1.6s forwards
-                &__text
-                    color: #f2f2f2
-                    font-family: $paragraph-font
-                &__shape_divider
-                    position: absolute
-                    top: 330px
-                    left: 0
-                    width: 100%
-                    overflow: hidden
-                    line-height: 0
-                    & svg
-                        position: relative
-                        display: block
-                        width: calc(142% + 1.3px)
-                        height: 50px
-                    & .shape-fill
-                        fill: #333
-    // *******************
-
-    .About
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif
-        font-size: 14px
-        color: #000
-        background-image: linear-gradient(to right ,rgb(0,0 ,0 ),rgba(0,0 ,0 ,0.6)),url(../../ProdImg/f3e50a_fbd7bbbaf5054f23b14a5fc5579438a9_mv2-scaled.jpg)
-        background-attachment: fixed
-        background-repeat: no-repeat
-        background-size: cover
-        .SwiperContainer
-            height: 550px
-            color: #fff
-            padding-top: 5rem
-            .About-Title
-                color: #fff
-                font-family: Spinnaker!important
-                text-align: center
-                padding-bottom: 2rem
-                letter-spacing: 2px
-            p
-                font-family: Spinnaker
-                letter-spacing: 0px
-                font-size: 18px
-                line-height: 37px
-                font-weight: 400
-                color: #fff
-                max-width: 70%
-                margin: auto
-        .swiper
-            width: 100%
-            height: 70%
-        .swiper-slide
-            text-align: center
-            color: #fff
-            font-size: 18px
-            -webkit-box-pack: center
-            -ms-flex-pack: center
-            -webkit-justify-content: center
-            justify-content: center
-            -webkit-box-align: center
-            -ms-flex-align: center
-            -webkit-align-items: center
-            align-items: center
-            img
-                display: block
-                width: 100%
-                height: 100%
-                object-fit: cover
-    // *******************
-    .Contact
-        min-height: 350px
-        background: #cfcfcf
-        background: -moz-linear-gradient(to right, #cfcfcf 0%,#ffffff 100%)
-        background: -webkit-linear-gradient(to right, #cfcfcf 0%,#ffffff 100%)
-        background: linear-gradient(to right, #cfcfcf 0%,#ffffff 100%)
-        padding: 2rem 0
-        *
-            // border: 1px dashed #000
-        .Contact-title
-            font-family: $title-font !important
-            font-weight: 600
-            font-size: 55px
-            text-transform: capitalize
-            line-height: 62px
-            letter-spacing: 2px
-            margin-top: 2.5rem
-            z-index: 100
-            margin-bottom: 1.5rem
-            color: #000
-        .Map
-            display: flex
-            justify-content: center
-            justify-items: center
-            .mappaper
-                justify-self: center
-                margin: auto
-                width: 1000
-                height: 450
-                position: relative
-                border-radius: 24px
-                background-color: #1a1a1a
-                img
-                    border-radius: 24px
-                    height: 100%
-                    transition: .5s ease
-                    opacity: 1
-                    backface-visibility: hidden
-                &:hover
-                    cursor: pointer
-                    img
-                        opacity: 0.7
-                    .middle
-                        opacity: 0.6
-                .middle
-                    transition: .5s ease
-                    opacity: 0
-                    position: absolute
-                    top: 80%
-                    left: 50%
-                    transform: translate(-50%, -50%)
-                    -ms-transform: translate(-50%, -50%)
-                    text-align: center
-                    color: #000
-                    font-weight: 600
-                    font-size: 18px
-                    font-family: Spinnaker!important
-        input
-            outline: none
-            border: none
-            &[type=number]
-                -moz-appearance: textfield
-                appearance: none
-                -webkit-appearance: none
-            &[type=number]::-webkit-outer-spin-button,
-            &[type=number]::-webkit-inner-spin-button
-                -webkit-appearance: none
-        textarea
-            outline: none
-            border: none
-        textarea:focus,
-        input:focus
-            border-color: transparent !important
-        input:focus::-webkit-input-placeholder
-            color: transparent
-        input:focus:-moz-placeholder
-            color: transparent
-        input:focus::-moz-placeholder
-            color: transparent
-        input:focus:-ms-input-placeholder
-            color: transparent
-        textarea:focus::-webkit-input-placeholder
-            color: transparent
-        textarea:focus:-moz-placeholder
-            color: transparent
-        textarea:focus::-moz-placeholder
-            color: transparent
-        textarea:focus:-ms-input-placeholder
-            color: transparent
-        input::-webkit-input-placeholder
-            color: #adadad
-        input:-moz-placeholder
-            color: #adadad
-        input::-moz-placeholder
-            color: #adadad
-        input:-ms-input-placeholder
-            color: #adadad
-        textarea::-webkit-input-placeholder
-            color: #adadad
-        textarea:-moz-placeholder
-            color: #adadad
-        textarea::-moz-placeholder
-            color: #adadad
-        textarea:-ms-input-placeholder
-            color: #adadad
-        button
-            outline: none !important
-            border: none
-            background: 0 0
-            &:hover
-                cursor: pointer
-        .bg0
-            background-color: #fff
-        .bg1
-            background-color: #f7f7f7
-        .container-contact
-            width: 95%
-            margin: auto
-            margin-left: 0
-            min-height: 60vh
-            display: flex
-            flex-wrap: wrap
-            justify-content: centre
-            align-items: center
-            padding: 15px
-            padding-left: 0
-            .wrap-contact
-                width: 820px
-                background: #fff
-                border-radius: 10px
-                overflow: hidden
-                padding: 55px
-                -webkit-box-shadow: -8px 20px 30px 11px rgba(0,0,0,0.2)
-                -moz-box-shadow: -8px 20px 30px 11px rgba(0,0,0,0.2)
-                box-shadow: -8px 20px 30px 11px rgba(0,0,0,0.2)
-                .contact-form
-                    width: 100%
-                    margin: auto
-                    display: -webkit-box
-                    display: -webkit-flex
-                    display: -moz-box
-                    display: -ms-flexbox
-                    display: flex
-                    flex-wrap: wrap
-                    justify-content: space-between
-                    .contact-form-title
-                        display: block
-                        width: 100%
-                        // font-family: Montserrat-Black
-                        font-family: $title-font !important
-                        font-weight: 600
-                        letter-spacing: 3px
-                        font-size: 39px
-                        color: #333
-                        line-height: 1.2
-                        text-align: center
-                        padding-bottom: 59px
-                    .wrap-input
-                        width: 100%
-                        position: relative
-                        border: 1px solid #e6e6e6
-                        border-radius: 13px
-                        padding: 10px 30px 9px 22px
-                        margin-bottom: 20px
-                    .rs1-wrap-input
-                        width: calc((100% - 30px)/2)
-                    .label-input
-                        font-family: Montserrat-SemiBold
-                        font-size: 10px
-                        color: #393939
-                        line-height: 1.5
-                        text-transform: uppercase
-                    .input
-                        display: block
-                        width: 100%
-                        background: 0 0
-                        font-family: Montserrat-SemiBold
-                        font-size: 18px
-                        color: #555
-                        line-height: 1.2
-                        padding-right: 15px
-                    input.input
-                        height: 40px
-                    textarea.input
-                        min-height: 120px
-                        padding-top: 9px
-                        padding-bottom: 13px
-                    .input:focus+.focus-input::before
-                        width: 100%
-                    .has-val.input+.focus-input::before
-                        width: 100%
-                    .container-contact-form-btn
-                        display: -webkit-box
-                        display: -webkit-flex
-                        display: -moz-box
-                        display: -ms-flexbox
-                        display: flex
-                        flex-wrap: wrap
-                        justify-content: center
-                        padding-top: 20px
-                        width: 100%
-                        .contact-form-btn
-                            display: -webkit-box
-                            display: -webkit-flex
-                            display: -moz-box
-                            display: -ms-flexbox
-                            display: flex
-                            justify-content: center
-                            align-items: center
-                            padding: 0 20px
-                            width: 100%
-                            height: 50px
-                            background-color: #333
-                            border-radius: 25px
-                            font-family: Montserrat-Medium
-                            font-size: 16px
-                            color: #fff
-                            line-height: 1.2
-                            -webkit-transition: all .4s
-                            -o-transition: all .4s
-                            -moz-transition: all .4s
-                            transition: all .4s
-                            .Arrow
-                                -webkit-transition: all .4s
-                                -o-transition: all .4s
-                                -moz-transition: all .4s
-                                transition: all .4s
-                            &:hover
-                                background-color: #00ad5f
-                                .Arrow
-                                    -webkit-transform: translateX(20px)
-                                    -moz-transform: translateX(20px)
-                                    -ms-transform: translateX(20px)
-                                    -o-transform: translateX(20px)
-                                    transform: translateX(20px)
-                    .validate-input
-                        position: relative
-                    .alert-validate::before
-                        content: attr(data-validate)
-                        display: -webkit-box
-                        display: -webkit-flex
-                        display: -moz-box
-                        display: -ms-flexbox
-                        display: flex
-                        align-items: center
-                        position: absolute
-                        width: 100%
-                        min-height: 40px
-                        background-color: #f7f7f7
-                        top: 35px
-                        left: 0
-                        padding: 0 45px 0 22px
-                        pointer-events: none
-                        font-family: Montserrat-SemiBold
-                        font-size: 18px
-                        color: #fa4251
-                        line-height: 1.2
-                    .btn-hide-validate
-                        font-family: Material-Design-Iconic-Font
-                        font-size: 18px
-                        color: #fa4251
-                        cursor: pointer
-                        display: -webkit-box
-                        display: -webkit-flex
-                        display: -moz-box
-                        display: -ms-flexbox
-                        display: flex
-                        align-items: center
-                        justify-content: center
-                        position: absolute
-                        width: 40px
-                        height: 40px
-                        top: 35px
-                        right: 12px
-                    .rs1-alert-validate.alert-validate::before
-                        background-color: #fff
-                    .true-validate::after
-                        content: "\f26b"
-                        font-family: Material-Design-Iconic-Font
-                        font-size: 18px
-                        color: #00ad5f
-                        display: -webkit-box
-                        display: -webkit-flex
-                        display: -moz-box
-                        display: -ms-flexbox
-                        display: flex
-                        align-items: center
-                        justify-content: center
-                        position: absolute
-                        width: 40px
-                        height: 40px
-                        top: 35px
-                        right: 10px
-
-@media(max-width:768px)
-    .rs1-wrap-input
-        width: 100%
-
-@media(max-width:576px)
-    .wrap-contact
-        padding: 62px 15px 90px
-    .wrap-input
-        padding: 10px 10px 9px
-@media(max-width:576px)
-    .alert-validate::before
-        padding: 0 10px
-
-    .true-validate::after,
-    .btn-hide-validate
-        right: 0
-        width: 30px
-
-    // ***********************
 @keyframes background
     0%
         background-image: linear-gradient(to right ,rgb(0,0 ,0 ),rgba(0,0 ,0 ,0.6),transparent),url(../../ProdImg/Background/bg1.jpg)
@@ -624,55 +219,20 @@ h1,h2,h3,h4,h5,h6
     100%
         background-image: linear-gradient(to right ,rgb(0,0 ,0 ),rgba(0,0 ,0 ,0.6),transparent),url(../../ProdImg/Background/bg1.jpg)
 
-@keyframes LineFadeIn
+@keyframes scrolldown_animate
     0%
         opacity: 0
-        d: path("M 0 300 Q 0 300 0 300 Q 0 300 0 300 C 0 300 0 300 0 300 Q 0 300 0 300 ")
-        stroke: #fff
+        transform: rotate(45deg) translate(-20px,-20px)
     50%
         opacity: 1
-        d: path("M 0 300 Q 50 300 100 300 Q 250 300 350 300 C 350 300 500 300 650 300 Q 750 300 800 300")
-        stroke: #888BFF
     100%
-        opacity: 1
-        d: path("M -2 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 802 400")
-        stroke: #545581
-
-@keyframes ContentFadeIn
-    0%
-        transform: translateY(-1rem)
         opacity: 0
-    100%
-        transform: translateY(0)
-        opacity: 1
+        transform: rotate(45deg) translate(20px,20px)
 
-@keyframes ImageFadeIn
-    0%
-        transform: translate(-.5rem, -.5rem) scale(1.05)
-        opacity: 0
-        filter: blur(2px)
-    50%
-        opacity: 1
-        filter: blur(2px)
-    100%
-        transform: translateY(0) scale(1.0)
-        opacity: 1
-        filter: blur(0)
-
-.underline
-    position: relative
-    &::before
-        content: ''
-        position: absolute
-        bottom: 0
-        right: 0
+@keyframes typing
+    from
         width: 0
-        margin-top: 1rem
-        height: 2px
-        background-color: #000  
-        transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1)
-@media (hover: hover) and (pointer: fine)
-.underline:hover::before
-    left: 0
-    right: auto
-    width: 100%
+
+@keyframes blink
+    50%
+        border-color: #06A8FF

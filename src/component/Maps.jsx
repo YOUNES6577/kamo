@@ -3,6 +3,18 @@ import { React } from 'react'
 import ReactMapGL from 'react-map-gl'
 import { useState } from 'react'
 
+function GMapFrame() {
+    return (
+        <iframe
+            title='GmapFrame'
+            src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d493.74132322566464!2d2.792584126372935!3d36.265949487247056!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sfr!2sdz!4v1656784198632!5m2!1sfr!2sdz"
+            style={{border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade">
+        </iframe>
+    )
+}
 function MapsV2() {
     const [viewport, setViewport] = useState({
         latitude: 36.26595699232395,
@@ -47,4 +59,4 @@ function Maps() {
     )
 }
 
-export { Maps, MapsV2 }
+export { Maps, MapsV2 ,GMapFrame}

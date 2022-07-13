@@ -1,29 +1,40 @@
-import * as React from 'react'
+import React, { useRef } from 'react'
+import * as $ from 'jquery'
 import *  as RRD from 'react-router-dom'
 import { Fade, Flip, Bounce, Zoom } from 'react-reveal'
+import RubberBand from 'react-reveal/RubberBand'
 import { Container, Row, Col, Image } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { Divider, Grid, ThemeProvider, createTheme, Paper, Link } from '@mui/material';
-import { ArrowForward, Map } from '@mui/icons-material';
+import { ArrowForward, Map, DoneAll, ClearAll } from '@mui/icons-material';
 import { Typography } from 'antd'
+import emailjs from '@emailjs/browser';
 import { ShapDivider, ShapPath } from './Element/Shap'
-// import {MapsV2} from './Maps';
+import InputField from './Element/InputField'
+import ErrorBoundary from './ErrorBoundary'
+import { GMapFrame } from './Maps';
 import Footer from './footer'
+import env from './env'
+import { Snackbars, openNotificationWithIcon } from './Notification'
+
 import '../asset/sass/main.sass'
+import '../asset/sass/Presentation.sass'
+import '../asset/sass/Product.sass'
+import '../asset/sass/About.sass'
+import '../asset/sass/Contact.sass'
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import '../asset/js/main'
-import produitChimique from '../ProdImg/produitChimique.jpg'
-import produitslubrifiant from '../ProdImg/produitslubrifiant.jpg'
-import produitsalimentaire from '../ProdImg/produitsalimentaire.jpg'
+import produitChimique from '../ProdImg/Product/9ML7JVTS_4x.jpg'
+import produitslubrifiant from '../ProdImg/Product/p3.png'
+import produitsalimentaire from '../ProdImg/Product/p7.png'
 import kamoMap from '../ProdImg/kamo_map.png'
+import styled from 'styled-components';
 
 const { Paragraph, Title } = Typography;
-
 const theme = createTheme({
     palette: {
         background: {
@@ -34,15 +45,209 @@ const theme = createTheme({
         },
     },
 });
-const InputField = function (props) {
-    return (
-        <div className={props.className} data-validate={props.data_validate}>
-            <span className="label-input">{props.label}</span>
-            <input className="input" type={props.type} name={props.name} placeholder={props.placeholder} />
-        </div>
+
+const Img = styled.img`
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+background-origin: border-box;
+width:  ${props => props.width};
+height:${props => props.height};
+margin: auto;
+`
+const Colors = styled.div`
+    padding-left: 1em;
+    div{
+        margin-top: 3px;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        float: left;
+        span{
+            width: 15px;
+            height: 15px;
+            display: block;
+            border-radius: 50%;
+            &:hover{
+                width: 17px;
+                height: 17px;
+                margin: -1px 0 0 -1px;
+            }
+        }
+        &.c-blue span{
+            background: #6e8cd5;
+        }
+        &.c-red span{
+            background: #f56060;
+        }
+        &.c-green span{
+            background: #44c28d;
+        }
+        &.c-white span{
+            background: #fff;
+            width: 14px;
+            height: 14px;
+            border: 1px solid #e8e9eb;
+        }
+    }
+`
+
+const Productcard = (props) => {
+    const [Classname, setClassname] = React.useState("product-card")
+    const [bttn, setBttn] = React.useState('button')
+    const handleHover = () => {
+        setClassname(Classname + ' animate')
+    }
+    const handleBlur = () => {
+        setClassname("product-card")
+    }
+    const handleMouseUp = () => {
+        setBttn(bttn + ' active')
+        setTimeout(function () {
+            setBttn('button');
+        }, 300);
+    }
+    return (<Paper elevation={5} style={{ borderRadius: '10px' }}>
+        <div className={Classname} onMouseEnter={handleHover} onMouseLeave={handleBlur} >
+            <div className="product-front">
+                <div className="shadow"></div>
+                <div className='d-flex pt-3'>{props.imgsrc}</div>
+                <div className="image_overlay"></div>
+                <div className="view_details">
+                    <RRD.Link to='/Type' className='button' onMouseUp={handleMouseUp}>
+                        <span className="button__text">Show more</span>
+                        <ArrowForward className='button__icon' />
+                    </RRD.Link>
+                </div>
+                <div className="stats">
+                    <div className="stats-container">
+                        {/* <span className="product_price"></span> */}
+                        <div className='text-center'>  <span className="product_name">{props.title}</span></div>
+                        <p>{props.subtitle}</p>
+                        <div className="product-options">
+                            <strong>SIZES</strong>
+                            <span>{props.sizes}</span>
+                            <strong>COLORS</strong>
+                            {props.colors}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div></Paper>
     )
 }
-
+const ContactForm = () => {
+    const form = useRef();
+    const [open, setOpen] = React.useState(false);
+    const [res, setRes] = React.useState(false);
+    const [message, setMessage] = React.useState({ type: '', msg: '' });
+    const [validatedInput, setValidated] = React.useState(false)
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway')
+            return;
+        setOpen(false);
+        setMessage({ type: '', msg: '' })
+    };
+    const handleSubmit = (e) => {
+        if (validatedInput) {
+            // openNotificationWithIcon({ type: 'info', title: 'info', description: 'All Required fields are exist .' })
+            sendEmail(e)
+        }
+        else
+            openNotificationWithIcon({ type: 'warning', title: 'warning', description: 'Some Required Fields are missing !' })
+    }
+    const handleValidate = (bool) => {
+        setValidated(bool)
+    }
+    const sendEmail = (e) => {
+        e.preventDefault();
+        emailjs.sendForm(
+            env.EMAIL_JS_SERVICE_ID,
+            env.EMAIL_JS_TEMPLATE_ID,
+            form.current,
+            env.EMAIL_JS_PUBLIC_KEY)
+            .then((result) => {
+                console.log(result.text);
+                if (result.status === 200) {
+                    setRes(true)
+                    openNotificationWithIcon({ type: 'success', title: 'message sent', description: 'Veuillez attendre notre réponse dans votre boîte-mail' })
+                }
+                else
+                    setRes(false)
+            }, (error) => {
+                console.error(error.text);
+                setRes(false)
+                openNotificationWithIcon({ type: 'error', title: 'message not sent', description: error.text })
+            });
+    };
+    return (
+        <ErrorBoundary>
+            <Container className='container-contact' >
+                <div className='wrap-contact'>
+                    <form className="contact-form validate-form"
+                        ref={form}>
+                        <span className='contact-form-title'>
+                            Contactez Nous
+                        </span>
+                        <InputField data_validate="Please Type Your Name"
+                            label="FULL NAME *"
+                            type="text"
+                            name='name'
+                            placeholder='Enter Your Name'
+                            parentClass='wrap-input validate-input bg1'
+                            className="input"
+                            handleValidate={handleValidate}
+                        />
+                        <InputField data_validate="Please Type Your Email "
+                            label="Email *"
+                            type="text"
+                            name='email'
+                            placeholder='Enter Your Email'
+                            parentClass='wrap-input validate-input bg1 rs1-wrap-input'
+                            className="input"
+                            handleValidate={handleValidate}
+                        />
+                        <InputField data_validate="Please Type Your Phone"
+                            label="Phone"
+                            type="text"
+                            name='phone *'
+                            placeholder='Enter Number Phone'
+                            parentClass='wrap-input validate-input bg1 rs1-wrap-input'
+                            className="input"
+                            handleValidate={handleValidate}
+                        />
+                        <InputField data_validate="Please Type Your Message"
+                            label='Message  *'
+                            type="text"
+                            handleValidate={handleValidate}
+                            parentClass=" wrap-input validate-input bg1 rs1-alert-validate"
+                            className="input"
+                            name="message"
+                            placeholder="Your message here..." />
+                        <div className="container-contact-form-btn">
+                            <Snackbars open={open}
+                                onClose={handleClose}
+                                msg={message.msg}
+                                type={message.type}
+                            >
+                                <button
+                                    className="contact-form-btn " disabled={false}
+                                    type='button'
+                                    onClick={handleSubmit}
+                                >
+                                    <span>
+                                        Submit
+                                        <ArrowForward className='Arrow m-l-7' />
+                                    </span>
+                                </button>
+                            </Snackbars>
+                        </div>
+                    </form>
+                </div>
+            </Container>
+        </ErrorBoundary>
+    );
+}
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -64,100 +269,149 @@ export default class Home extends React.Component {
             index: selectedIndex
         })
     }
-    Productcard(props) {
+    Presentation() {
+        return (<ErrorBoundary>
+            <Container className='Presentation-container' >
+                <Container fluid='sm'  >
+                    <Bounce bottom cascade >
+                        <Fade cascade >
+                            <div className='Presentation-paper'>
+                                <Title >
+                                    <Divider sx={{ mx: 0 }} textAlign="left" ><Flip bottom cascade >Presentation</Flip></Divider>
+                                </Title>
+                                <Paragraph className='Presentation-prg'>
+                                    <b>N</b>otre société a été crée en 1996 sous l'appellation de PLASTIMED, qui deviendra par la suite en 2003 Sarl KAMOPLAST et se situe dans le chef lieu  de la wilaya de Médéa. KAMOPLAST qui dispose d'un effectif de 65 salaries, est spécialisée dans la fabrication d'emballage en plastique en (PE et PP)  par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 30   litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.<br />
+                                </Paragraph>
+                            </div>
+                        </Fade>
+                        <div className='Presentation-footer'>
+                            <Divider sx={{ mx: 0 }} textAlign="right" ><Flip bottom cascade >Mr .Directeur</Flip></Divider>
+                        </div>
+                    </Bounce>
+                </Container>
+            </Container>
+        </ErrorBoundary>
+        )
+    }
+
+    Products() {
+        const SingleColor = (props) => <div className={props.className}><span></span></div>
         return (
-            <div className='card' >
-                <figure className='card__image-container'>
-                    <RRD.Link to='/Type'><img className="card__image" src={props.imgsrc} alt={'Produit ' + props.title} /></RRD.Link>
-                    <figcaption className='card__caption'><RRD.Link to='/Type' className='card__link' >View more</RRD.Link></figcaption>
-                </figure>
-                <div className="card__shape_divider">
-                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="shape-fill"></path>
-                    </svg>
-                </div>
-                <div className='card__content' >
-                    <Title className='card__title'>{props.title}</Title>
-                    <Paragraph className='card__text' >{props.children}</Paragraph>
-                </div>
-            </div>
+            <ErrorBoundary>
+                <Container fluid='fluid'>
+                    <RubberBand >
+                        <Title className='Product-title text-center mx-auto pt-3'>Nos Produits</Title>
+                    </RubberBand>
+                    <Grid className='Product-items'>
+                        <Fade left    >
+                            <Productcard
+                                title='Chimique'
+                                subtitle='Produits chimiques & détergents'
+                                sizes='10L, 20L, 25L'
+                                imgsrc={<Img width='auto' height='350px' src={produitChimique} alt="" />}
+                                colors={<Colors>
+                                    <SingleColor className='c-blue' />
+                                    <SingleColor className='c-red' />
+                                    <SingleColor className='c-white' />
+                                    <SingleColor className='c-green' />
+                                </Colors>}
+                            /></Fade>
+                        <RubberBand bottom>
+                            <Productcard
+                                title='Lubrifiant'
+                                subtitle='Produits Lubrifiant'
+                                sizes='5L, 6L, 10L'
+                                imgsrc={<Img width='auto' height='350px' src={produitslubrifiant} alt="" />}
+                                colors={<Colors>
+                                    <SingleColor className='c-blue' />
+                                    <SingleColor className='c-red' />
+                                    <SingleColor className='c-white' />
+                                    <SingleColor className='c-green' />
+                                </Colors>}
+                            /></RubberBand>
+                        <Fade right >
+                            <Productcard
+                                title='Agro-alimentaire'
+                                subtitle='Produits Agro-alimentaire'
+                                sizes='33Cl , 50Cl, 100 Cl'
+                                imgsrc={<Img width='auto' height='350px' src={produitsalimentaire} alt="" />}
+                                colors={<Colors>
+                                    <SingleColor className='c-blue' />
+                                    <SingleColor className='c-red' />
+                                    <SingleColor className='c-white' />
+                                    <SingleColor className='c-green' />
+                                </Colors>}
+                            /></Fade>
+                    </Grid>
+                </Container>
+                <ShapDivider direction='top' top='100%' width='100%' height='55px' >
+                    <ShapPath fill='#e6e6e6' d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" />
+                </ShapDivider>
+            </ErrorBoundary>
         )
     }
     AboutSwiper() {
         return (
-            <>
+            <ErrorBoundary>
                 <Swiper
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false
+                    }}
                     pagination={{
                         type: "fraction",
+                        clickable: true
                     }}
                     navigation={true}
                     modules={[Pagination, Navigation]}
                     className="AboutSwiper"
                 >
                     <SwiperSlide>
-                        <Title className='About-Title'><Zoom cascade>Activités</Zoom></Title>
+                        <Title className='About-Title'><RubberBand  cascade>Activités</RubberBand></Title>
                         <Fade > <p>Fabrication d'emballage en plastique (PE & PP) par soufflage et injection <strong>(Jerrycan,Bidon,Bouteille,Bocal,Pot,Boite & Divers Article)</strong>destiné au conditionnement et au stockage des divers produits <strong>(chimiques,Lubrifiants,détergents,cosmetique & argo-alimentaire)</strong>
                             Notre société a developpe une large gamme de produits de contenance allant de 25cl a 25 litres. </p></Fade>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Title className='About-Title'><Zoom cascade>Réactivités</Zoom></Title>
+                        <Title className='About-Title'><RubberBand  cascade>Réactivités</RubberBand></Title>
                         <Fade > <p>Notre société possede de grands moyens matériels et humains compétents qui peuvent répondre aux exigences du marché national et aux attentes des clients en adoptant les nouvelles technologies et procedure de fabrication pour pouvoir offirir des produits de qualité.</p></Fade>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Title className='About-Title'><Zoom cascade>Compétitivité</Zoom></Title>
+                        <Title className='About-Title'><RubberBand  cascade>Compétitivité</RubberBand></Title>
                         <Fade > <p> Grace a nos liens priviliege avec tous nos fournisseurs en matiere premiere importee Nous Pouvons garantir un produit de choix rappondant aux besoins de nos clients , aux quels nous assurons : </p></Fade>
                     </SwiperSlide>
                 </Swiper>
-            </>
+            </ErrorBoundary>
         );
     }
-    ContactForm() {
+    Contact() {
         return (
-            <Container className='container-contact' >
-                <div className='wrap-contact'>
-                    <form className="contact-form validate-form">
-                        <span className='contact-form-title'>
-                            Contactez Nous
-                        </span>
-                        <InputField data_validate="Please Type Your Name"
-                            label="FULL NAME *"
-                            type="text"
-                            name='name'
-                            placeholder='Enter Your Name'
-                            className='wrap-input validate-input bg1'
-                        />
-                        <InputField data_validate="Enter Your Email (e@a.x)"
-                            label="Email *"
-                            type="text"
-                            name='email'
-                            placeholder='Enter Your Email'
-                            className='wrap-input validate-input bg1 rs1-wrap-input'
-                        />
-                        <InputField
-                            label="Phone"
-                            type="text"
-                            name='phone'
-                            placeholder='Enter Number Phone'
-                            className='wrap-input bg1 rs1-wrap-input'
-                        />
-                        <div className="wrap-input validate-input bg1 rs1-alert-validate"
-                            data-validate="Please Type Your Message">
-                            <span className="label-input">Message</span>
-                            <textarea className="input" name="message" placeholder="Your message here..."></textarea>
-                        </div>
-                        <div className="container-contact-form-btn">
-                            <button className="contact-form-btn">
-                                <span>
-                                    Submit
-                                    <ArrowForward className='Arrow m-l-7' />
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </Container>
-        );
+            <ErrorBoundary>
+                <RubberBand >
+                    <Title className='Contact-title text-center'> Trouvez Nous</Title>
+                </RubberBand>
+                <Container fluid='True' className='Ct_body'>
+                    <Row >
+                        <Col className='Map' xs={7}>
+                            <Fade left>
+                                <Paper elevation={20} className='mappaper'>
+                                    {/* <Image src={kamoMap} />
+                                <div className="middle">
+                                    <Link target='_blank' href='https://goo.gl/maps/iK3HTQ61fTAudVxE7' underline='none' className='underline'>Voir dans Google Map</Link>  <Map />
+                                </div> */}
+                                    <GMapFrame />
+                                </Paper></Fade>
+                        </Col>
+                        <Col className='Ct' xs={5}>
+                            <Zoom bottom>
+                                <ContactForm />
+                            </Zoom>
+                        </Col>
+                    </Row>
+                </Container>
+            </ErrorBoundary>
+        )
     }
+
     render() {
         return (
             <ThemeProvider theme={theme}>
@@ -169,14 +423,36 @@ export default class Home extends React.Component {
                                     Kamoplast
                                 </Title>
                                 <Paragraph style={{ my: 3, mx: 4, maxWidth: 850 }}>
-                                    Fabrication d'emballage en plastique en (PE et PP) par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 25 litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.
+                                    Fabrication d'emballage en plastique en (PE et PP) par soufflage ou injection .... { /*nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 25 litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.} */}
                                 </Paragraph>
+                                <Link href='#AboutSection' className='animated-arrow'>
+                                    <span className='the-arrow -left'>
+                                        <span className='shaft'></span>
+                                    </span>
+                                    <span className='main-arrow'>
+                                        <span className='text'>
+                                            Explore plus
+                                        </span>
+                                        <span className='the-arrow -right'>
+                                            <span className='shaft'></span>
+                                        </span>
+                                    </span>
+                                </Link>
                             </Fade>
                         </Container>
                         <Container className='sub-content'>
                             <Row className="justify-content-md-center">
                                 <Col md="auto">
                                     <Title className='sub-title'><span>Notre plus grand défi</span> ... nous satisfaire avec un emballage ideal !!!  </Title>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col mx='auto'>
+                                    <div className="scrolldown-arrow">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
                                 </Col>
                             </Row>
                         </Container>
@@ -187,61 +463,18 @@ export default class Home extends React.Component {
                         </ShapDivider>
                     </Container>
                     <section className='Presentation-section' id='PSN'>
-                        <Container className='Presentation-container' >
-                            <Container fluid='sm'  >
-                                <Bounce bottom cascade >
-                                    <Fade cascade >
-                                        <div className='Presentation-paper'>
-                                            <Title >
-                                                <Divider sx={{ mx: 0 }} textAlign="left" ><Flip bottom cascade >Presentation</Flip></Divider>
-                                            </Title>
-                                            <Paragraph className='Presentation-prg'>
-                                                <b>N</b>otre société a été crée en 1996 sous l'appellation de PLASTIMED, qui deviendra par la suite en 2003 Sarl KAMOPLAST et se situe dans le chef lieu  de la wilaya de Médéa. KAMOPLAST qui dispose d'un effectif de 65 salaries, est spécialisée dans la fabrication d'emballage en plastique en (PE et PP)  par soufflage ou injection, nos produits sont : jerrycans, bidons, bouteilles, bocaux, pots et boites et divers articles, de contenance allant de 40 ml à 30   litre destinés au conditionnement de produits divers; Chimiques, Détergents,  Lubrifiants et Agro-alimentaire.<br />
-                                            </Paragraph>
-                                        </div>
-                                    </Fade>
-                                    <div className='Presentation-footer'>
-                                        <Divider sx={{ mx: 0 }} textAlign="right" ><Flip bottom cascade >Mr .Directeur</Flip></Divider>
-                                    </div>
-                                </Bounce>
-                            </Container>
-                        </Container>
+                        <this.Presentation />
                     </section>
                     <section className='Product-section' id='PDS'>
-                        <Container fluid='fluid' className='Product-items'>
-                            <Title className='Product-title text-center'>Nos Produits</Title>
-                            <Grid container spacing={2} className='po'>
-                                <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'end', }} ><this.Productcard title='Chimique' imgsrc={produitChimique}> Produits chimiques & détergents </this.Productcard></Grid>
-                                <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', }}><this.Productcard title='Lubrifiant' imgsrc={produitslubrifiant}> Produits Lubrifiant </this.Productcard></Grid>
-                                <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'start', }}><this.Productcard title='Agro-alimentaire' imgsrc={produitsalimentaire}> Produits Agro-alimentaire </this.Productcard></Grid>
-                            </Grid>
-                        </Container>
-                        <ShapDivider direction='top' top='100%' width='100%' height='55px' >
-                            <ShapPath fill='#e6e6e6' d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" />
-                        </ShapDivider>
+                        <this.Products />
                     </section>
-                    <section className='About'>
+                    <section className='About' id='AboutSection'>
                         <Container className='SwiperContainer'>
                             <this.AboutSwiper />
                         </Container>
                     </section>
                     <section className='Contact' id='Contact'>
-                        <Title className='Contact-title text-center'> Trouvez Nous</Title>
-                        <Container fluid='True' className='Ct_body'>
-                            <Row >
-                                <Col className='Map' xs={7}>
-                                    <Paper elevation={20} className='mappaper'>
-                                        <Image src={kamoMap} />
-                                        <div className="middle">
-                                                <Link underline='none' className='underline'>Voir dans Google Map</Link>  <Map />
-                                        </div>
-                                    </Paper>
-                                </Col>
-                                <Col className='Ct' xs={5}>
-                                    <this.ContactForm />
-                                </Col>
-                            </Row>
-                        </Container>
+                        <this.Contact />
                     </section>
                     <Footer />
                 </Container>
