@@ -1,51 +1,62 @@
 import React from 'react';
 import { Link } from "react-router-dom"
 import "../../asset/css/Type.css";
-
-import b2 from "../../ProdImg/Bouchon/Bouchon-60-H-Rouge.png"
+import $ from "jquery";
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
-import { Divider } from '@mui/material';
-
-
-
+import { Nav } from 'react-bootstrap';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 
-import $ from "jquery";
+import b2 from "../../ProdImg/Bouchon/Bouchon-60-H-Rouge.png"
 
 
 
 export default class CardPr extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       show: false,
-      hol:"as"
-
     };
   }
-  componentDidUpdate(){
-    if(this.state.show){
-        $(".Type").addClass("TypeafterModal");
-        
-      }else{
-        $(".Type").removeClass("TypeafterModal");
+  componentDidUpdate() {
+    if (this.state.show) {
+      $(".Type").addClass("TypeafterModal");
+
+    } else {
+      $(".Type").removeClass("TypeafterModal");
+    }
+
+    var x = true;
+    $(".image-gallery-content").click(() => {
+      $(".image-gallery-svg").click(() => { x = false; });
+      $(".image-gallery-thumbnail-image").click(() => { x = false; });
+      if (x == true) {
+        document.exitFullscreen();
+        console.log("OK");
       }
-    
-    $(".image-gallery-fullscreen-button").click(()=>{
-      console.log("ok")  
-     })
-     
-     
-     
-     
+      x = true;
+    })
+
+
   }
 
+  handleSelect(selectedKey) {
+    console.log(selectedKey);
+          $("#nav-profile").addClass("show active");
+
+    if (selectedKey === "#nav-profile") {
+      $("#nav-profile").show();
+      $("#nav-home").hide();
+    } else {
+      $("#nav-profile").hide();
+      $("#nav-home").show();
+    }
+  }
   render() {
 
 
@@ -64,12 +75,10 @@ export default class CardPr extends React.Component {
       },
     ];
 
-    
+
     return (
 
-      
-      <li className="mb-3">
-
+      <li className="Card mb-3" key={this.props.product.id}>
         <Link to="" onClick={() => this.setState({ show: true })}>
           <div className="Card_Container-image">
             <img className="imgPr" width="200" height="300" src={this.props.img} alt="img" sizes="(max-width: 500px) 100vw, 500px" />
@@ -85,11 +94,10 @@ export default class CardPr extends React.Component {
               </h3>
 
               <div className="DescriptionPr">
-                <div className="volume"><span>Volume:</span>25 L</div>
-                <div className="matierePr"><span>Matiere:</span>PEHD</div>
-
-                <div className="Poids"><span>Poids</span>90g</div>
-                <div className="SacUnites" ><span>livree par </span> 8 unite</div>
+                <div className="volume"><span>Volume:</span>{this.props.product.firstName}</div>
+                <div className="matierePr"><span>Matiere:</span>{this.props.product.lastName}</div>
+                <div className="Poids"><span>Poids</span>{this.props.product.lastName}</div>
+                <div className="SacUnites" ><span>livree par </span> {this.props.product.email}</div>
                 <div className="product-buttons">
 
                   <Link to="" onClick={() => this.setState({ show: true })}>
@@ -109,22 +117,22 @@ export default class CardPr extends React.Component {
           </div>
 
         </div>
-        
+
         <Modal
           show={this.state.show}
           onHide={() => this.setState({ show: false })}
           aria-labelledby="example-custom-modal-styling-title"
           animation={true}
           centered={true}
-          size= "xl"
-          className="Modal"
+          size="xl"
+          // className="Modal"
           dialogClassName="modal-90w"
 
         >
-          
+
           <div className="container ContainerModel " >
-        
-          <Modal.Header closeButton ><h4 className="Reference">Ref:FL-J25L-Jerrican</h4></Modal.Header >
+
+            <Modal.Header closeButton ><h4 className="Reference">Ref:FL-J25L-Jerrican</h4></Modal.Header >
 
             <Modal.Body className="ModalBody">
 
@@ -154,52 +162,41 @@ export default class CardPr extends React.Component {
                     </div>
                   </Col>
                   <Col md={{ span: 6 }} className="ColumnDetails">
+                    <Nav fill variant="tabs" defaultActiveKey="#nav-home" onSelect={key => this.handleSelect(key)}>
+                      <Nav.Item>
+                        <Nav.Link className="nav-item nav-link " eventKey="#nav-home" aria-selected="true"><h6>Jerrican</h6></Nav.Link>
+                      </Nav.Item>
+                      <Nav.Item>
+                        <Nav.Link className="nav-item nav-link" eventKey="#nav-profile" aria-selected="true"><h6>Bouchon</h6></Nav.Link>
+                      </Nav.Item>
 
-                    <Row>
-                      <Col md={{ span: 5, offset: 0 }}>
-                        <div className="description-Product">
-                          <div className="d-flex flex-row caractere-Product  " >
-                            <div className="compenant-description">
-                              <h4 className="Details">Jerrican</h4>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Matiere:</h5><span>PEHD</span></div>
-                              <div className="d-flex flex-row mr-auto"><h5 className="HeaderTitle" >Poids:</h5> <span>1100/1200 g </span></div>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Volume:</h5><span> 10L</span></div>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Tiente:</h5><span> Transparent/Blanc/Bleu/Vert/Jaune/Rouge</span></div>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Opacité:</h5><span>Opaque</span></div>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Empilable:</h5><span>oui/non</span></div>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Sac de:</h5><span> 8 Unités</span></div>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Hauteur:</h5><span>160mm</span></div>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Longeur:</h5><span>15mm</span></div>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Largeur:</h5><span>168mm</span></div>
-                              <div className="d-flex flex-row "><h5 className="HeaderTitle" >Etiquette:</h5> <span>H:180 mm / L:190 mm</span></div>
+                    </Nav>
 
-                            </div>
-                            <Divider orientation="vertical" flexItem>
-                              <br></br>
-                            </Divider>
-                          </div>
-
-                        </div>
-
-                      </Col>
-
-                      <Col md={{ offset: 2, span: 5 }}>
-                        <div className="Bouchon-Produit " style={{ marginLeft: 5 + "px" }}>
-                          <h4 className="Details">Buchon</h4>
-                          <div className="BuchonDescr d-flex flex-column">
-                            <div className="d-flex flex-row "><h5 className="HeaderTitle" ><b>Matiere:</b></h5><span>PEHD</span></div>
-                            <div className="d-flex flex-row "><h5 className="HeaderTitle" ><b>Capsule:</b></h5><span>oui/Non</span></div>
-                            <div className="d-flex flex-row "><h5 className="HeaderTitle" ><b>Joint:</b></h5><span>oui/non</span></div>
-                            <div className="d-flex flex-row "><h5 className="HeaderTitle" ><b>Degaseur:</b></h5><span>oui/Non</span></div>
-                            <div className="d-flex flex-row "><h5 className="HeaderTitle" ><b>inovliable:</b></h5><span>oui/Non</span></div>
-                            <div className="d-flex flex-row "><h5 className="HeaderTitle" ><b>Dimension:</b></h5><span>60mm</span></div>
-                            <div className="d-flex flex-row "><h5 className="HeaderTitle" ><b>Couleurs:</b></h5><span>Noir/Blanc/Bleu/Vert/Noir/Blanc/Bleu/Vert</span></div>
-
-                          </div>
-                        </div>
-                      </Col>
-                    </Row>
-
+                    <div className="tab-content" id="nav-tabContent">
+                      <div className="tab-pane fade show active" id="nav-home" role="tabpanel">
+                        <div className="sizes_box2 d-flex flex-row"><span>Matiere:</span><div>PEHD</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Poids:</span><div>1100/1200 g</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Tiente:</span><div>10L</div></div>
+                        <div className="sizes_box2 d-flex flex-row "><span>Opacité</span><div>Transparent/Blanc/Bleu/Vert/Jaune/Rouge/Gris Metalise</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Empilable:</span><div>26 cm</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Sac de:</span><div>8 unites</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span><i className="fa fa-weight-hanging" ></i>Volume</span><div>10 L</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Hauteur</span><div>160 mm</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Longeur</span><div>15 mm</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Largeur</span><div>168 mm</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Etiquette</span><div className="d-flex flex-column Etiquette"><div className="p-2">180mm</div><div className="p-2">L190mm</div></div></div>
+                      </div>
+                      <div className="tab-pane fade " id="nav-profile" role="tabpanel">
+                        <div className="sizes_box2 d-flex flex-row"><span>Matiere:</span><div>PEHD</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Capsule:</span><div>Oui/Non</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Joint:</span><div>Oui/Non</div></div>
+                        <div className="sizes_box2 d-flex flex-row "><span>Degaseurs</span><div>Oui/Non</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Inovliable:</span><div>60 mm</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Dimension</span><div>60 mm</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span><i class="fa fa-weight-hanging" ></i>Volume</span><div>10 L</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span>Couleurs</span><div>Noir/Blanc/Bleu/Vert/Noir/Blanc/Bleu/Vert</div></div>
+                      </div>
+                    </div>
                   </Col>
                 </Row>
 
@@ -215,4 +212,3 @@ export default class CardPr extends React.Component {
     );
   }
 }
-
