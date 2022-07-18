@@ -1,5 +1,5 @@
 import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
-import { React } from 'react'
+import  React  from 'react'
 import ReactMapGL from 'react-map-gl'
 import { useState } from 'react'
 
@@ -59,4 +59,4 @@ function Maps() {
     )
 }
 
-export { Maps, MapsV2 ,GMapFrame}
+export default React.memo(GMapFrame)

@@ -1,0 +1,23 @@
+{
+    "ref":[
+        {
+            "name":"HYGINDUST",
+            "imgsrc":"../ProdImg/References/hygindust.jpg"
+        },{
+            "name":"SIKA Algérie",
+            "imgsrc":"../ProdImg/References/Sika_ClaimU_pos_rgb.svg"
+        },{
+            "name":"NAFTAL-ENAD",
+            "imgsrc":"../ProdImg/References/NAFTAL.ico"
+        },{
+            "name":"GRANITEX",
+            "imgsrc":"../ProdImg/References/Granitex.svg"
+        },{
+            "name":"BASF",
+            "imgsrc":"../ProdImg/References/BSAF.svg"
+        },{
+            "name":"LAFARGE",
+            "imgsrc":"../ProdImg/References/Lafrage.png"
+        }
+    ]
+}

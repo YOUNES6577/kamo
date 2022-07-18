@@ -1,7 +1,6 @@
 import React from 'react'
-import 'bootstrap-css-only/css/bootstrap.min.css'
 
-export default class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
         this.state = { error: null, errorInfo: null };
@@ -34,3 +33,4 @@ export default class ErrorBoundary extends React.Component {
         return this.props.children;
     }
 }
+export default  React.memo(ErrorBoundary)

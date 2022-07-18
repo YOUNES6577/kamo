@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+
 import { Call } from '@mui/icons-material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Fade } from 'react-reveal'
@@ -13,7 +14,7 @@ import { styled } from '@mui/system';
 
 
 import '../asset/sass/navApp.sass'
-import logo from '../ProdImg/LOGO.jpg'
+// import logo from '../ProdImg/LOGO.png'
 // import logo from '../ProdImg/kamoSvg/logo-white-g2.svg'
 
 const blue = {
@@ -24,7 +25,6 @@ const blue = {
     600: '#0072E5',
     900: '#003A75',
 };
-
 const grey = {
     100: '#E7EBF0',
     200: '#E0E3E7',
@@ -36,7 +36,6 @@ const grey = {
     800: '#2D3843',
     900: '#1A2027',
 };
-
 const StyledListbox = styled('ul')(
     ({ theme }) => `
     font-family: Spartan, sans-serif;
@@ -54,7 +53,6 @@ const StyledListbox = styled('ul')(
     outline: 0px;
     `,
 );
-
 const StyledMenuItem = styled(MenuItemUnstyled)(
     ({ theme }) => `
     list-style: none;
@@ -79,7 +77,6 @@ const StyledMenuItem = styled(MenuItemUnstyled)(
     }
     `,
 );
-
 const TriggerButton = styled('button')(
     ({ theme }) => `
     font-family: Spartan, sans-serif;
@@ -103,30 +100,28 @@ const TriggerButton = styled('button')(
     }
     `,
 );
-
 const Popper = styled(PopperUnstyled)`
     z-index: 1;
 `;
-
 function themeStyle(props) {
     return (props.theme === 'light') ? {
         bg: '#f5f5f5',
         btnbg: grey['600'],
         fontColor: "#000",
         top: '0'
-    } : {
+    } : (props.theme === 'transparent') ?{
         bg: 'transparent',
         btnbg: grey['100'],
         fontColor: "#fff",
         top: '25px'
-    }
+    }:  undefined 
 }
-export default function AppBar() {
+function AppBar(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isOpen = Boolean(anchorEl);
     const buttonRef = React.useRef(null);
     const menuActions = React.useRef(null);
-
+    const Ptheme=themeStyle({ theme: props.theme })
     const [theme, setTheme] = React.useState(
         (window.scrollY > 50) ?
             themeStyle({ theme: 'light' }) :
@@ -172,15 +167,18 @@ export default function AppBar() {
             close();
         };
     };
+    const handleClick = (e) => {
+    }
     return (
         <header
             className="main-header"
-            style={{ backgroundColor: theme.bg, top: theme.top }}>
+            style={{ backgroundColor: Ptheme?.bg || theme.bg, top: Ptheme?.top || theme.top }}>
             <div className="container">
                 <Fade top >
                     <nav className="navbar navbar-expand-lg main-nav px-0">
                         <a className="navbar-brand" href="/">
-                            <img src={logo} alt="kamoplast.com" />
+                            {/* <img src={logo} width='200' alt="kamoplast.com" /> */}
+                            <img src='https://ik.imagekit.io/younes6577/kamoplast/tr:w-200/Logo_PWz_J7HnRx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907466273' alt="kamoplast.com" />
                         </a>
                         <button className="navbar-toggler" type="button" id='mainMenu-toggler' data-toggle="collapse" data-target="mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="icon-bar icon-bar-1"></span>
@@ -190,24 +188,29 @@ export default function AppBar() {
                         <div className="collapse navbar-collapse" id="mainMenu">
                             <ul className="navbar-nav ml-auto text-uppercase f1"  >
                                 <li >
-                                    <Link href="/"
-                                        className="active active-first"
-                                        style={{ color: theme.fontColor }}>ACCUEIL</Link>
+                                    <Link href="#home"
+                                        className=""
+                                        onClick={handleClick}
+                                        style={{ color: Ptheme?.fontColor || theme.fontColor }}>ACCUEIL</Link>
                                 </li>
                                 <li >
                                     <Link href="#PSN"
-                                        style={{ color: theme.fontColor }}>Présentation</Link>
+                                        onClick={handleClick}
+                                        style={{ color: Ptheme?.fontColor || theme.fontColor }}>Présentation</Link>
                                 </li>
                                 {/* <li >
                                     <Link href="#PDS">Produits</Link>
                                 </li> */}
                                 <li >
-                                    <Link href="#AboutSection" className=''
-                                        style={{ color: theme.fontColor }}>Services</Link>
+                                    <Link href="#AboutSection"
+                                        className=''
+                                        onClick={handleClick}
+                                        style={{ color: Ptheme?.fontColor || theme.fontColor }}>Services</Link>
                                 </li>
                                 <li >
                                     <Link href="#Contact"
-                                        style={{ color: theme.fontColor }}><Call />Contact</Link>
+                                        onClick={handleClick}
+                                        style={{ color: Ptheme?.fontColor || theme.fontColor }}><Call />Contact</Link>
                                 </li>
                                 <li >
                                     <TriggerButton
@@ -250,3 +253,5 @@ export default function AppBar() {
     )
 
 }
+
+export default React.memo(AppBar)

@@ -6,7 +6,7 @@ import { MDBIcon } from 'mdb-react-ui-kit';
 import { Roll, Fade, Zoom, Slide } from 'react-reveal'
 
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
-import Logo from '../ProdImg/kamoSvg/logo-black-g2.svg'
+// import Logo from '../ProdImg/kamoSvg/logo-black-g2.svg'
 import '../asset/sass/footer.sass'
 
 const { Text, Link } = Typography;
@@ -45,7 +45,7 @@ function Copyright(props) {
 
 
 // const Item=() 
-export default class Footer extends React.Component {
+class Footer extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = ({
@@ -66,7 +66,7 @@ export default class Footer extends React.Component {
     render() {
         return (
             <Container
-                maxWidth="xxl" 
+                maxWidth="xxl"
                 component="footer"
                 sx={{
                     py: [3, 6],
@@ -77,12 +77,9 @@ export default class Footer extends React.Component {
                     <Grid container spacing={2}>
                         <Grid item xs={4} className='d-flex flex-row  justify-content-evenly align-items-center'>
                             <Roll left>
-                                <img src={Logo}
-                                    alt='Kamoplast'
-                                    loading="lazy"
-                                    width={375}
-                                    height={75}
-                                /></Roll> 
+                                <img src='https://ik.imagekit.io/younes6577/kamoplast/tr:w-375,h-75/Logo_PWz_J7HnRx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907466273' alt="kamoplast.com" />
+                                {/* <img src={Logo} alt='Kamoplast' loading="lazy" width={375} height={75} /> */}
+                            </Roll>
                             <Divider orientation="vertical" flexItem> </Divider>
                         </Grid>
                         <Grid item xs={3} className='mt-3'>
@@ -124,3 +121,5 @@ export default class Footer extends React.Component {
         )
     }
 }
+
+export default React.memo(Footer)

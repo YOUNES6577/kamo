@@ -1,5 +1,4 @@
-import React, { useRef } from 'react'
-import * as $ from 'jquery'
+import React, { useRef, Suspense } from 'react'
 import *  as RRD from 'react-router-dom'
 import { Fade, Flip, Bounce, Zoom } from 'react-reveal'
 import RubberBand from 'react-reveal/RubberBand'
@@ -13,10 +12,11 @@ import emailjs from '@emailjs/browser';
 import { ShapDivider, ShapPath } from './Element/Shap'
 import InputField from './Element/InputField'
 import ErrorBoundary from './ErrorBoundary'
-import { GMapFrame } from './Maps';
-import Footer from './footer'
 import env from './env'
 import { Snackbars, openNotificationWithIcon } from './Notification'
+import Navigationbar from './Appbar'
+import CircleSpinner from './Element/Spinner'
+
 
 import '../asset/sass/main.sass'
 import '../asset/sass/Presentation.sass'
@@ -26,15 +26,19 @@ import '../asset/sass/Contact.sass'
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
+
 import produitChimique from '../ProdImg/Product/9ML7JVTS_4x.jpg'
-import produitslubrifiant from '../ProdImg/Product/p3.png'
-import produitsalimentaire from '../ProdImg/Product/p7.png'
-import kamoMap from '../ProdImg/kamo_map.png'
+import produitslubrifiant from '../ProdImg/Product/p3-1.png'
+import produitsalimentaire from '../ProdImg/Product/p7-1.png'
+
+// import kamoMap from '../ProdImg/kamo_map.png'
 import styled from 'styled-components';
 
+const Footer = React.lazy(() => import('./footer'))
+const GMapFrame = React.lazy(() => import('./Maps'))
+
 const { Paragraph, Title } = Typography;
+
 const theme = createTheme({
     palette: {
         background: {
@@ -45,7 +49,6 @@ const theme = createTheme({
         },
     },
 });
-
 const Img = styled.img`
 background-repeat: no-repeat;
 background-position: center;
@@ -107,7 +110,7 @@ const Productcard = (props) => {
             setBttn('button');
         }, 300);
     }
-    return (<Paper elevation={5} style={{ borderRadius: '10px' }}>
+    return (<Paper elevation={5} style={{ borderRadius: '10px' }} className='mx-5 '>
         <div className={Classname} onMouseEnter={handleHover} onMouseLeave={handleBlur} >
             <div className="product-front">
                 <div className="shadow"></div>
@@ -248,10 +251,11 @@ const ContactForm = () => {
         </ErrorBoundary>
     );
 }
-export default class Home extends React.Component {
+export default class Home extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            navTheme: props.navTheme,
             contentStyle: {
                 height: '160px',
                 color: '#fff',
@@ -308,7 +312,8 @@ export default class Home extends React.Component {
                                 title='Chimique'
                                 subtitle='Produits chimiques & détergents'
                                 sizes='10L, 20L, 25L'
-                                imgsrc={<Img width='auto' height='350px' src={produitChimique} alt="" />}
+                                imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/9ML7JVTS_4x_NK1HgNHn9.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1657907449047" alt="Chimique" />}
+                                // imgsrc={<Img src={produitChimique} width='auto' height='350' alt="Chimique" />}
                                 colors={<Colors>
                                     <SingleColor className='c-blue' />
                                     <SingleColor className='c-red' />
@@ -321,7 +326,8 @@ export default class Home extends React.Component {
                                 title='Lubrifiant'
                                 subtitle='Produits Lubrifiant'
                                 sizes='5L, 6L, 10L'
-                                imgsrc={<Img width='auto' height='350px' src={produitslubrifiant} alt="" />}
+                                imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/p7-1_jK9cnAjn6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907456792" alt="lubrifiant" />}
+                                // imgsrc={<Img src={produitslubrifiant} width='auto' height='350' alt="lubrifiant" />}
                                 colors={<Colors>
                                     <SingleColor className='c-blue' />
                                     <SingleColor className='c-red' />
@@ -334,7 +340,8 @@ export default class Home extends React.Component {
                                 title='Agro-alimentaire'
                                 subtitle='Produits Agro-alimentaire'
                                 sizes='33Cl , 50Cl, 100 Cl'
-                                imgsrc={<Img width='auto' height='350px' src={produitsalimentaire} alt="" />}
+                                imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/zyro-image_5myn1xmQD.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907463969" alt="alimentaire" />}
+                                // imgsrc={<Img src={produitsalimentaire} width='auto' height='350' alt="alimentaire" />}
                                 colors={<Colors>
                                     <SingleColor className='c-blue' />
                                     <SingleColor className='c-red' />
@@ -367,16 +374,16 @@ export default class Home extends React.Component {
                     className="AboutSwiper"
                 >
                     <SwiperSlide>
-                        <Title className='About-Title'><RubberBand  cascade>Activités</RubberBand></Title>
+                        <Title className='About-Title'><RubberBand cascade>Activités</RubberBand></Title>
                         <Fade > <p>Fabrication d'emballage en plastique (PE & PP) par soufflage et injection <strong>(Jerrycan,Bidon,Bouteille,Bocal,Pot,Boite & Divers Article)</strong>destiné au conditionnement et au stockage des divers produits <strong>(chimiques,Lubrifiants,détergents,cosmetique & argo-alimentaire)</strong>
                             Notre société a developpe une large gamme de produits de contenance allant de 25cl a 25 litres. </p></Fade>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Title className='About-Title'><RubberBand  cascade>Réactivités</RubberBand></Title>
+                        <Title className='About-Title'><RubberBand cascade>Réactivités</RubberBand></Title>
                         <Fade > <p>Notre société possede de grands moyens matériels et humains compétents qui peuvent répondre aux exigences du marché national et aux attentes des clients en adoptant les nouvelles technologies et procedure de fabrication pour pouvoir offirir des produits de qualité.</p></Fade>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Title className='About-Title'><RubberBand  cascade>Compétitivité</RubberBand></Title>
+                        <Title className='About-Title'><RubberBand cascade>Compétitivité</RubberBand></Title>
                         <Fade > <p> Grace a nos liens priviliege avec tous nos fournisseurs en matiere premiere importee Nous Pouvons garantir un produit de choix rappondant aux besoins de nos clients , aux quels nous assurons : </p></Fade>
                     </SwiperSlide>
                 </Swiper>
@@ -398,7 +405,9 @@ export default class Home extends React.Component {
                                 <div className="middle">
                                     <Link target='_blank' href='https://goo.gl/maps/iK3HTQ61fTAudVxE7' underline='none' className='underline'>Voir dans Google Map</Link>  <Map />
                                 </div> */}
-                                    <GMapFrame />
+                                    <Suspense fallback={<CircleSpinner />}>
+                                        <GMapFrame />
+                                    </Suspense>
                                 </Paper></Fade>
                         </Col>
                         <Col className='Ct' xs={5}>
@@ -411,12 +420,15 @@ export default class Home extends React.Component {
             </ErrorBoundary>
         )
     }
-
+    
     render() {
-        return (
+        return (<>
+            <ErrorBoundary >
+                <Navigationbar theme={this.state.navTheme} />
+            </ErrorBoundary>
             <ThemeProvider theme={theme}>
-                <Container fluid='true' className='home-page'>
-                    <Container className='main' fluid='true' >
+                <Container fluid='true' className='home-page' id='home'>
+                    <Container className='main' fluid>
                         <Container className='main-content' >
                             <Fade left cascade>
                                 <Title style={{ fontFamily: 'Tangerine !important' }}>
@@ -447,8 +459,8 @@ export default class Home extends React.Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col mx='auto'>
-                                    <div className="scrolldown-arrow">
+                                <Col className='d-flex'>
+                                    <div className="scrolldown-arrow mx-auto" >
                                         <span></span>
                                         <span></span>
                                         <span></span>
@@ -476,9 +488,12 @@ export default class Home extends React.Component {
                     <section className='Contact' id='Contact'>
                         <this.Contact />
                     </section>
-                    <Footer />
+                    <Suspense  fallback={<CircleSpinner />}>
+                        <Footer />
+                    </Suspense>
                 </Container>
             </ThemeProvider>
+        </>
         )
     }
 } 
