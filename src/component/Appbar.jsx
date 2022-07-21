@@ -14,7 +14,8 @@ import { styled } from '@mui/system';
 
 
 import '../asset/sass/navApp.sass'
-// import logo from '../ProdImg/LOGO.png'
+import logo from '../ProdImg/LOGO.png'
+import { borderRadius } from '@mui/system';
 // import logo from '../ProdImg/kamoSvg/logo-white-g2.svg'
 
 const blue = {
@@ -55,6 +56,7 @@ const StyledListbox = styled('ul')(
 );
 const StyledMenuItem = styled(MenuItemUnstyled)(
     ({ theme }) => `
+    z-index: 100;
     list-style: none;
     padding: 8px;
     border-radius: 0.45em;
@@ -108,20 +110,21 @@ function themeStyle(props) {
         bg: '#f5f5f5',
         btnbg: grey['600'],
         fontColor: "#000",
+        boxShadow: 'rgb(0 0 0 / 63%) 1px 1px 5px 0px',
         top: '0'
-    } : (props.theme === 'transparent') ?{
+    } : (props.theme === 'transparent') ? {
         bg: 'transparent',
         btnbg: grey['100'],
         fontColor: "#fff",
         top: '25px'
-    }:  undefined 
+    } : undefined
 }
 function AppBar(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isOpen = Boolean(anchorEl);
     const buttonRef = React.useRef(null);
     const menuActions = React.useRef(null);
-    const Ptheme=themeStyle({ theme: props.theme })
+    const Ptheme = themeStyle({ theme: props.theme })
     const [theme, setTheme] = React.useState(
         (window.scrollY > 50) ?
             themeStyle({ theme: 'light' }) :
@@ -172,15 +175,19 @@ function AppBar(props) {
     return (
         <header
             className="main-header"
-            style={{ backgroundColor: Ptheme?.bg || theme.bg, top: Ptheme?.top || theme.top }}>
+            style={{
+                backgroundColor: Ptheme?.bg || theme.bg,
+                top: Ptheme?.top || theme.top,
+                boxShadow: Ptheme?.boxShadow || theme.boxShadow
+            }}>
             <div className="container">
                 <Fade top >
                     <nav className="navbar navbar-expand-lg main-nav px-0">
                         <a className="navbar-brand" href="/">
-                            {/* <img src={logo} width='200' alt="kamoplast.com" /> */}
-                            <img src='https://ik.imagekit.io/younes6577/kamoplast/tr:w-200/Logo_PWz_J7HnRx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907466273' alt="kamoplast.com" />
+                            <img src={logo} width='200' alt="kamoplast.com" />
+                            {/* <img src='https://ik.imagekit.io/younes6577/kamoplast/tr:w-200/Logo_PWz_J7HnRx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907466273' alt="kamoplast.com" /> */}
                         </a>
-                        <button className="navbar-toggler" type="button" id='mainMenu-toggler' data-toggle="collapse" data-target="mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <button className="navbar-toggler" type="button" id='mainMenu-toggler' data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="icon-bar icon-bar-1"></span>
                             <span className="icon-bar icon-bar-2"></span>
                             <span className="icon-bar icon-bar-3"></span>
@@ -226,6 +233,7 @@ function AppBar(props) {
                                         Produits <ArrowDropDownIcon />
                                     </TriggerButton>
                                     <MenuUnstyled
+                                        style={{zIndex:'100'}}
                                         actions={menuActions}
                                         open={isOpen}
                                         onClose={close}

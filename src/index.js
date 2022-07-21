@@ -7,8 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import 'react-bootstrap/dist/react-bootstrap.min.js'
 import './asset/css/index.css';
-import 'mdb-react-ui-kit/dist/css/mdb.min.css'
-import 'antd/dist/antd.min.css'
+
 
 function loadFont() {
   WebFont.load({

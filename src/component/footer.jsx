@@ -4,8 +4,8 @@ import { Call, Mail, Phone, Map, Language } from '@mui/icons-material';
 import { Typography, Space } from 'antd'
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { Roll, Fade, Zoom, Slide } from 'react-reveal'
-
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
+import 'antd/dist/antd.min.css'
 // import Logo from '../ProdImg/kamoSvg/logo-black-g2.svg'
 import '../asset/sass/footer.sass'
 

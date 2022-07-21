@@ -253,7 +253,7 @@ const ContactForm = () => {
 }
 export default class Home extends React.PureComponent {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             navTheme: props.navTheme,
             contentStyle: {
@@ -312,8 +312,8 @@ export default class Home extends React.PureComponent {
                                 title='Chimique'
                                 subtitle='Produits chimiques & détergents'
                                 sizes='10L, 20L, 25L'
-                                imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/9ML7JVTS_4x_NK1HgNHn9.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1657907449047" alt="Chimique" />}
-                                // imgsrc={<Img src={produitChimique} width='auto' height='350' alt="Chimique" />}
+                                // imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/9ML7JVTS_4x_NK1HgNHn9.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1657907449047" alt="Chimique" />}
+                                imgsrc={<Img src={produitChimique} width='auto' height='350' alt="Chimique" />}
                                 colors={<Colors>
                                     <SingleColor className='c-blue' />
                                     <SingleColor className='c-red' />
@@ -326,8 +326,8 @@ export default class Home extends React.PureComponent {
                                 title='Lubrifiant'
                                 subtitle='Produits Lubrifiant'
                                 sizes='5L, 6L, 10L'
-                                imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/p7-1_jK9cnAjn6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907456792" alt="lubrifiant" />}
-                                // imgsrc={<Img src={produitslubrifiant} width='auto' height='350' alt="lubrifiant" />}
+                                // imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/p7-1_jK9cnAjn6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907456792" alt="lubrifiant" />}
+                                imgsrc={<Img src={produitslubrifiant} width='auto' height='350' alt="lubrifiant" />}
                                 colors={<Colors>
                                     <SingleColor className='c-blue' />
                                     <SingleColor className='c-red' />
@@ -340,8 +340,8 @@ export default class Home extends React.PureComponent {
                                 title='Agro-alimentaire'
                                 subtitle='Produits Agro-alimentaire'
                                 sizes='33Cl , 50Cl, 100 Cl'
-                                imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/zyro-image_5myn1xmQD.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907463969" alt="alimentaire" />}
-                                // imgsrc={<Img src={produitsalimentaire} width='auto' height='350' alt="alimentaire" />}
+                                // imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/zyro-image_5myn1xmQD.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907463969" alt="alimentaire" />}
+                                imgsrc={<Img src={produitsalimentaire} width='auto' height='350' alt="alimentaire" />}
                                 colors={<Colors>
                                     <SingleColor className='c-blue' />
                                     <SingleColor className='c-red' />

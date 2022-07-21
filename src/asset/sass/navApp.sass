@@ -1,3 +1,4 @@
+@import './var.sass'
 #mainMenu-toggler
     position: relative
     z-index: 999
@@ -6,7 +7,7 @@
     position: fixed
     left: 0
     z-index: 99
-    height: 75px
+    height: $nav-height
     width: 100%
     -webkit-transition: all 0.4s ease
     transition: all 0.4s ease
@@ -115,7 +116,7 @@
             border-radius: 0px
         .navbar-toggler
             .icon-bar
-                background-color: #fff
+                background-color: #000
                 margin: 0 auto 6px
                 border-radius: 0
                 width: 30px
@@ -137,7 +138,7 @@
                 top: 21px
             &:hover,&:focus
                 .icon-bar
-                    background-color: #fff
+                    background-color: #000
         .current
             .icon-bar
                 margin-bottom: 5px
