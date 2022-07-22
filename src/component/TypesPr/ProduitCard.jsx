@@ -199,7 +199,7 @@ export default class CardPr extends React.Component {
                         <div className="sizes_box2 d-flex flex-row "><span>Degaseurs</span><div>Oui/Non</div></div>
                         <div className="sizes_box2 d-flex flex-row"><span>Inovliable:</span><div>60 mm</div></div>
                         <div className="sizes_box2 d-flex flex-row"><span>Dimension</span><div>60 mm</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span><i class="fa fa-weight-hanging" ></i>Volume</span><div>10 L</div></div>
+                        <div className="sizes_box2 d-flex flex-row"><span><i className="fa fa-weight-hanging" ></i>Volume</span><div>10 L</div></div>
                         <div className="sizes_box2 d-flex flex-row"><span>Couleurs</span><div>Noir/Blanc/Bleu/Vert/Noir/Blanc/Bleu/Vert</div></div>
                       </div>
                     </div>

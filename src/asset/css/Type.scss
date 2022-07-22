@@ -6,79 +6,81 @@
 .Volume {
   padding: 15px;
   background-color: #edf0f7;
-  border-radius:15px;
-
+  border-radius: 15px;
 }
-.Type{
+.Type {
   background-image: url(../../ProdImg/Background/BackPr.jpg);
   // background-image: url(../../ProdImg/Background/bg1.jpg);
-  
-   backface-visibility: visible; 
 
+  backface-visibility: visible;
 }
-.Type div > div > div> div > div > div > div > div > div> div > svg > path{
+.Type div > div > div > div > div > div > div > div > div > div > svg > path {
   color: black;
 }
 .Type svg text {
-  font-family: Tangerine!important;
+  font-family: Tangerine !important;
   letter-spacing: 7px;
   stroke: #0f0be6d5;
   font-size: 110px;
   font-weight: 800;
   stroke-width: 3;
- 
+
   animation: textAnimate 5s infinite alternate;
-  
 }
 @keyframes textAnimate {
   0% {
     stroke-dasharray: 0 50%;
-    stroke-dashoffset:  20%;
-    fill:hsl(0, 100%, 1%)
-
+    stroke-dashoffset: 20%;
+    fill: hsl(0, 100%, 1%);
   }
-  
+
   100% {
     stroke-dasharray: 50% 0;
     stroke-dashoffstet: -20%;
-    fill: rgba(0, 0, 0, 0.199)
+    fill: rgba(0, 0, 0, 0.199);
   }
-  
 }
-.Type .RefPr{
- 
+.Type .RefPr {
   font-style: italic;
-  background: -webkit-linear-gradient(rgba(17, 53, 214, 0.555), rgb(26, 0, 155));
-  -webkit-background-clip: text;  
+  background: -webkit-linear-gradient(
+    rgba(17, 53, 214, 0.555),
+    rgb(26, 0, 155)
+  );
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.Type .volume,.matierePr,.Poids,.SacUnites{
-  margin-left:10px;
-  font-size:14px;
-
+.Type .volume,
+.matierePr,
+.Poids,
+.SacUnites {
+  margin-left: 10px;
+  font-size: 14px;
 }
-.Type .volume >span,.Type .matierePr >span,.Type  .Poids>span,.Type .SacUnites>span{
-  font-style: oblique!important;
-  font-size:15px;
-  font-weight:600;
-  color:rgb(0, 0, 0);
+.Type .volume > span,
+.Type .matierePr > span,
+.Type .Poids > span,
+.Type .SacUnites > span {
+  font-style: oblique !important;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
   /* font-style: italic; */
   margin-right: 6px;
-  width: 100px!important;
+  width: 100px !important;
 }
 .Type span {
   color: #ffff;
-  font-style: oblique!important;
-
+  font-style: oblique !important;
 }
-.TypeprSelect,.VolumeSelect{
-  border-radius:15px !important;
+.TypeprSelect,
+.VolumeSelect {
+  border-radius: 15px !important;
 }
 
-.prefix{
+.prefix {
   color: rgba(255, 255, 255, 0) !important;
 }
-.prefix.active{
+.prefix.active {
   color: #4285f4 !important;
 }
 
@@ -86,215 +88,208 @@
   position: -webkit-sticky;
   position: sticky;
   top: 20px;
-  
 }
-.Type .filter h1{
-  font-family: Tangerine!important;
+.Type .filter h1 {
+  font-family: Tangerine !important;
   font-size: 70px;
   font-weight: 700;
-
 }
-.Type .FilterGrp{
+.Type .FilterGrp {
   width: 130%;
-  
 }
-.Search,.TypePr,.Volume {
-    background-image: linear-gradient(90deg,#000,rgba(0,0,0,.6)),url(https://ik.imagekit.io/younes6577/kamoplast/testimonial_bg_DYMsCc9em.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907468617);
+.Search,
+.TypePr,
+.Volume {
+  background-image: linear-gradient(90deg, #000, rgba(0, 0, 0, 0.6)),
+    url(https://ik.imagekit.io/younes6577/kamoplast/testimonial_bg_DYMsCc9em.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907468617);
 }
-.Search p{
-  color: hsla(0,0%,100%,.7);
-  font-family: Spinnaker!important;
+.Search p {
+  color: hsla(0, 0%, 100%, 0.7);
+  font-family: Spinnaker !important;
   font-size: 1.25rem;
-  
 }
-
-
 
 .Type .product-details-wrapper {
-    position: relative;
-    min-height: 200px;
-    font-size: 12px;
-    letter-spacing: inherit !important;
+  position: relative;
+  min-height: 200px;
+  font-size: 12px;
+  letter-spacing: inherit !important;
 }
 .Type .product-title {
-    display: block;
-    font-size: 20px;
+  display: block;
+  font-size: 20px;
 }
 .Type .fusion-product-content {
   padding: 20px 15px 15px 15px;
 }
 
-.Type .images-Products > div > div > div.image-gallery-slide-wrapper.bottom > div > div > div.image-gallery-slide.center > img{
+.Type
+  .images-Products
+  > div
+  > div
+  > div.image-gallery-slide-wrapper.bottom
+  > div
+  > div
+  > div.image-gallery-slide.center
+  > img {
   position: relative !important;
-  border-radius:16px;
+  border-radius: 16px;
   background-size: cover;
   max-height: 50vh;
- 
 }
-.Type .images-Products > div > div > div.image-gallery-slide-wrapper.bottom{
+.Type .images-Products > div > div > div.image-gallery-slide-wrapper.bottom {
   box-shadow: 5px 6px 12px 5px rgba(0, 0, 0, 0.575);
-  margin-bottom:20px;
-  border-radius:16px;
-
+  margin-bottom: 20px;
+  border-radius: 16px;
 }
 
-body > div.fade.modal.show > div > div > div > div.modal-header{
-  border:none;}
+body > div.fade.modal.show > div > div > div > div.modal-header {
+  border: none;
+}
 
-.modal-content{
+.modal-content {
   /* background-image:url(../../ProdImg/Background/bg2.jpg)!important; */
   background-repeat: no-repeat;
-  background-size: cover!important;
-  border-radius: 20px!important;
+  background-size: cover !important;
+  border-radius: 20px !important;
   width: 400vh !important;
   /* height: 100%; */
   overflow: hidden;
-
 }
- .Reference{
-  position:absolute;
-  font-family:Antic Slab!important;
-    top:2%;
-  left:5%;
-  padding:7px;
-  font-weight:bold;  
-  font-size:60px;
-  color:rgb(36, 12, 12);
-  margin-bottom: 50px!important;
+.Reference {
+  position: absolute;
+  font-family: Antic Slab !important;
+  top: 2%;
+  left: 5%;
+  padding: 7px;
+  font-weight: bold;
+  font-size: 60px;
+  color: rgb(36, 12, 12);
+  margin-bottom: 50px !important;
 }
-.Details{
+.Details {
   justify-content: center;
-  font-weight:700;  
-  font-size:40px;
+  font-weight: 700;
+  font-size: 40px;
 }
-.ColumnDetails{
-  border-radius: 20px!important;
-  margin-left:60px;
+.ColumnDetails {
+  border-radius: 20px !important;
+  margin-left: 60px;
 }
-.modal-90w{
-  max-width: 80%!important;
+.modal-90w {
+  max-width: 80% !important;
   /* height:150vh !important; */
 }
-.ContainerModel{
+.ContainerModel {
   // background-image: url(../../ProdImg/Background/BackModals.jpg);
-  background-image: linear-gradient(#ffffff 60%, transparent), url(../../ProdImg/Background/bg1.jpg);
+  background-image: linear-gradient(#ffffff 60%, transparent),
+    url(../../ProdImg/Background/bg1.jpg);
 
-  background-position:cover; 
+  background-position: cover;
   background-repeat: no-repeat;
-  background-size: cover!important;
-  box-shadow:2px 5px 13px 10px rgba(59, 53, 53, 0.507) !important;
+  background-size: cover !important;
+  box-shadow: 2px 5px 13px 10px rgba(59, 53, 53, 0.507) !important;
   max-width: fit-content;
 }
 
-
-.ModalBody{
-  margin-top:5%
+.ModalBody {
+  margin-top: 5%;
 }
-.ColumnDetails > h4{ 
+.ColumnDetails > h4 {
   margin-left: 20%;
   font-weight: bold;
-  font-weight:600;
+  font-weight: 600;
 }
-.ColumnDetails >.nav{
+.ColumnDetails > .nav {
   margin-bottom: 15px;
 }
 
-.ColumnDetails >.nav a{
+.ColumnDetails > .nav a {
   border-radius: 15px;
 }
-.ColumnDetails >.nav a:hover {
+.ColumnDetails > .nav a:hover {
   background-image: linear-gradient(#ffbe00, 40%, transparent);
-
 }
-.ColumnDetails >.nav a.active{
-border-color:#ffbe00;
+.ColumnDetails > .nav a.active {
+  border-color: #ffbe00;
 }
-.fa.fa-search.prefix{
-  color:white !important;
+.fa.fa-search.prefix {
+  color: white !important;
 }
-.fa.fa-search.prefix.active{
-  color:#4285f4!important;
-}
-
-
-.image-gallery-slide> img{
- height: 450px;
- min-height: 450px;
+.fa.fa-search.prefix.active {
+  color: #4285f4 !important;
 }
 
-.ModalBody{
-<<<<<<< HEAD:src/asset/css/Type.scss
+.image-gallery-slide > img {
+  height: 450px;
+  min-height: 450px;
+}
+
+.ModalBody {
   /* position: absolute; */
   /* top: -40px; */
-=======
-
-  top: -40px;
->>>>>>> b176f4525f31e61dcd822c5c4d3435426db4f791:src/asset/css/Type.css
 }
 
-.HeaderTitle{
+.HeaderTitle {
   color: rgb(71, 63, 63);
   font-weight: 600;
   font-style: italic;
   margin-right: 5px;
   width: 95px;
   /* padding:2px; */
-  
 }
 /* .HeaderTitle>span{
   color:black;
   
 } */
-.BuchonDescr span,.compenant-description span {
-  color:rgb(85, 80, 80);
-  font-weight:400;
-  max-width:150px;
-  margin-bottom:10px;
+.BuchonDescr span,
+.compenant-description span {
+  color: rgb(85, 80, 80);
+  font-weight: 400;
+  max-width: 150px;
+  margin-bottom: 10px;
 }
-.TypeafterModal{
-    filter: blur(8px);
-
-}
-
-.fullscreen{  
-
-   background-image: url("../../../Photos_Produits_Kamo/Background/Fullscreen2.jpg")!important;
-   background-size: cover;
-   background-repeat: no-repeat;
+.TypeafterModal {
+  filter: blur(8px);
 }
 
-.fullscreen .image-gallery-image{
+.fullscreen {
+  background-image: url("../../../Photos_Produits_Kamo/Background/Fullscreen2.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.fullscreen .image-gallery-image {
   height: 100% !important;
 }
-.images-buchon >img{
+.images-buchon > img {
   width: 100%;
-  height:100%;
+  height: 100%;
 }
-.images-buchon{
-  height:50%;
+.images-buchon {
+  height: 50%;
   width: 25%;
   margin-left: 20%;
   margin-top: 2%;
 }
 .Type .react-reveal a {
-  color:black!important;
+  color: black !important;
 }
-.MuiTypography-root img{
-  color:black;
+.MuiTypography-root img {
+  color: black;
 }
-<<<<<<< HEAD:src/asset/css/Type.scss
-.image-gallery-slide-wrapper  svg{
-  width: 50px!important;
-  height: 50px!important;
+.image-gallery-slide-wrapper svg {
+  width: 50px !important;
+  height: 50px !important;
   /* color:red!important; */
-  color:rgb(255, 239, 239);
+  color: rgb(255, 239, 239);
 }
-.image-gallery-fullscreen-button svg{
+.image-gallery-fullscreen-button svg {
   width: 30px !important;
-  height: 30px!important;
+  height: 30px !important;
 }
 
-.Details_Img{
+.Details_Img {
   /* border: solid ; */
   margin-left: 10px;
   max-width: 100%;
@@ -311,38 +306,28 @@ border-color:#ffbe00;
 .sizes_box2 span {
   width: 30% !important;
   text-align: center;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   font-weight: bold;
   margin: 0px;
   margin-right: 15px;
-  color:black;
-
-  
-} 
-.sizes_box2 div{
+  color: black;
+}
+.sizes_box2 div {
   max-width: 65% !important;
-  word-break:break-word;
-  color:black;
-
+  word-break: break-word;
+  color: black;
 }
-div .Etiquette{
+div .Etiquette {
   width: 100% !important;
-
 }
-.Box_Title > h2{
-  text-align: center; 
-  font-family: Tangerine!important;
+.Box_Title > h2 {
+  text-align: center;
+  font-family: Tangerine !important;
   font-size: 55px;
   font-weight: bold;
 }
-.nav-item >a >h6{
-  font-family: Tangerine!important;
+.nav-item > a > h6 {
+  font-family: Tangerine !important;
   font-weight: bold;
   font-size: 25px;
 }
-
-
-
-
-=======
->>>>>>> b176f4525f31e61dcd822c5c4d3435426db4f791:src/asset/css/Type.css
