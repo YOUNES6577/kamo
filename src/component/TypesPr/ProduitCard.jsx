@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom"
-import "../../asset/css/Type.css";
+import "../../asset/css/Type.scss";
 import $ from "jquery";
 
 import Container from 'react-bootstrap/Container'
@@ -13,6 +13,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 import b2 from "../../ProdImg/Bouchon/Bouchon-60-H-Rouge.png"
 
+import {motion } from "framer-motion";
 
 
 export default class CardPr extends React.Component {
@@ -21,6 +22,13 @@ export default class CardPr extends React.Component {
 
     this.state = {
       show: false,
+      item : {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+          y: 0,
+          opacity: 1
+        }
+      },
     };
   }
   componentDidUpdate() {
@@ -77,8 +85,7 @@ export default class CardPr extends React.Component {
 
 
     return (
-
-      <li className="Card mb-3" key={this.props.product.id}>
+      <motion.li className="Card item mb-3" key={this.props.product.id}  variants={this.state.item}>
         <Link to="" onClick={() => this.setState({ show: true })}>
           <div className="Card_Container-image">
             <img className="imgPr" width="200" height="300" src={this.props.img} alt="img" sizes="(max-width: 500px) 100vw, 500px" />
@@ -164,12 +171,11 @@ export default class CardPr extends React.Component {
                   <Col md={{ span: 6 }} className="ColumnDetails">
                     <Nav fill variant="tabs" defaultActiveKey="#nav-home" onSelect={key => this.handleSelect(key)}>
                       <Nav.Item>
-                        <Nav.Link className="nav-item nav-link " eventKey="#nav-home" aria-selected="true"><h6>Jerrican</h6></Nav.Link>
+                        <Nav.Link className="nav-item nav-link a" eventKey="#nav-home" aria-selected="true"><h6>Jerrican</h6></Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link className="nav-item nav-link" eventKey="#nav-profile" aria-selected="true"><h6>Bouchon</h6></Nav.Link>
+                        <Nav.Link className="nav-item nav-link a" eventKey="#nav-profile" aria-selected="true"><h6>Bouchon</h6></Nav.Link>
                       </Nav.Item>
-
                     </Nav>
 
                     <div className="tab-content" id="nav-tabContent">
@@ -208,7 +214,7 @@ export default class CardPr extends React.Component {
 
 
 
-      </li >
+      </motion.li >
     );
   }
 }
