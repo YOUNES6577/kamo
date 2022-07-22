@@ -1,21 +1,20 @@
- import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import 'react-bootstrap/dist/react-bootstrap.min.js'
 import './asset/css/index.css';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import 'antd/dist/antd.min.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
-function loadFont(){
+function loadFont() {
   WebFont.load({
-      google: {
-          families: [ 'Antic Slab','Hubballi','Rajdhani','Teko','Poppins','Droid Sans', 'Tangerine',"Segoe UI"]
-      }
+    google: {
+      families: ['Spartan', 'Spinnaker',  'Droid Sans', 'Tangerine', 'Segoe UI']
+    }
   });
 }
 loadFont()

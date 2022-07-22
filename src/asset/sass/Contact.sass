@@ -1,0 +1,344 @@
+@import './var.sass'
+
+.home-page
+    .Contact
+        min-height: 350px
+        background: #cfcfcf
+        background: -moz-linear-gradient(to right, #cfcfcf 0%,#ffffff 100%)
+        background: -webkit-linear-gradient(to right, #cfcfcf 0%,#ffffff 100%)
+        background: linear-gradient(to right, #cfcfcf 0%,#ffffff 100%)
+        padding: 2rem 0
+        *
+            // border: 1px dashed #000
+        .Contact-title
+            font-family: $title-font !important
+            font-weight: 600
+            font-size: 55px
+            text-transform: capitalize
+            line-height: 62px
+            letter-spacing: 2px
+            margin-top: 2.5rem
+            z-index: 100
+            margin-bottom: 1.5rem
+            color: #000
+        .Map
+            display: flex
+            justify-content: center
+            justify-items: center
+            .mappaper
+                justify-self: center
+                margin: auto
+                width: 1000px
+                height: 550px
+                position: relative
+                border-radius: 24px
+                iframe
+                    width: 100%
+                    height: 100%
+                    border-radius: 24px
+                img
+                    border-radius: 24px
+                    width: 100%
+                    height: 100%
+                    transition: .5s ease
+                    opacity: 1
+                    backface-visibility: hidden
+                &:hover
+                    cursor: pointer
+                    img
+                        opacity: 0.7
+                        filter:  brightness(0.60)
+                    .middle
+                        opacity: 0.6
+                        .underline
+                            color: #000
+                .middle
+                    transition: .5s ease
+                    opacity: 0
+                    position: absolute
+                    top: 80%
+                    left: 50%
+                    transform: translate(-50%, -50%)
+                    -ms-transform: translate(-50%, -50%)
+                    text-align: center
+                    font-weight: 600
+                    font-size: 18px
+                    font-family: Spinnaker!important
+                    .underline
+                        color: #000
+        input
+            outline: none
+            border: none
+            &[type=number]
+                -moz-appearance: textfield
+                appearance: none
+                -webkit-appearance: none
+            &[type=number]::-webkit-outer-spin-button,
+            &[type=number]::-webkit-inner-spin-button
+                -webkit-appearance: none
+        textarea
+            outline: none
+            border: none
+        textarea:focus,
+        input:focus
+            border-color: transparent !important
+        input:focus::-webkit-input-placeholder
+            color: transparent
+        input:focus:-moz-placeholder
+            color: transparent
+        input:focus::-moz-placeholder
+            color: transparent
+        input:focus:-ms-input-placeholder
+            color: transparent
+        textarea:focus::-webkit-input-placeholder
+            color: transparent
+        textarea:focus:-moz-placeholder
+            color: transparent
+        textarea:focus::-moz-placeholder
+            color: transparent
+        textarea:focus:-ms-input-placeholder
+            color: transparent
+        input::-webkit-input-placeholder
+            color: #adadad
+        input:-moz-placeholder
+            color: #adadad
+        input::-moz-placeholder
+            color: #adadad
+        input:-ms-input-placeholder
+            color: #adadad
+        textarea::-webkit-input-placeholder
+            color: #adadad
+        textarea:-moz-placeholder
+            color: #adadad
+        textarea::-moz-placeholder
+            color: #adadad
+        textarea:-ms-input-placeholder
+            color: #adadad
+        button
+            outline: none !important
+            border: none
+            background: 0 0
+            &:hover
+                cursor: pointer
+        .bg0
+            background-color: #fff
+        .bg1
+            background-color: #f7f7f7
+        .container-contact
+            width: 95%
+            margin: auto
+            margin-left: 0
+            min-height: 60vh
+            display: flex
+            flex-wrap: wrap
+            justify-content: centre
+            align-items: center
+            padding: 15px
+            padding-left: 0
+            .wrap-contact
+                width: 820px
+                background: #fff
+                border-radius: 10px
+                overflow: hidden
+                padding: 55px
+                -webkit-box-shadow: -8px 20px 30px 11px rgba(0,0,0,0.2)
+                -moz-box-shadow: -8px 20px 30px 11px rgba(0,0,0,0.2)
+                box-shadow: -8px 20px 30px 11px rgba(0,0,0,0.2)
+                .contact-form
+                    width: 100%
+                    margin: auto
+                    display: -webkit-box
+                    display: -webkit-flex
+                    display: -moz-box
+                    display: -ms-flexbox
+                    display: flex
+                    flex-wrap: wrap
+                    justify-content: space-between
+                    .contact-form-title
+                        display: block
+                        width: 100%
+                        // font-family: Montserrat-Black
+                        font-family: $title-font !important
+                        font-weight: 600
+                        letter-spacing: 3px
+                        font-size: 39px
+                        color: #333
+                        line-height: 1.2
+                        text-align: center
+                        padding-bottom: 59px
+                    .wrap-input
+                        width: 100%
+                        position: relative
+                        border: 1px solid #e6e6e6
+                        border-radius: 13px
+                        padding: 10px 30px 9px 22px
+                        margin-bottom: 20px
+                    .rs1-wrap-input
+                        width: calc((100% - 30px)/2)
+                    .label-input
+                        font-family: Montserrat-SemiBold
+                        font-size: 10px
+                        color: #393939
+                        line-height: 1.5
+                        text-transform: uppercase
+                    .input
+                        display: block
+                        width: 100%
+                        background: 0 0
+                        font-family: Montserrat-SemiBold
+                        font-size: 18px
+                        color: #555
+                        line-height: 1.2
+                        padding-right: 15px
+                    input.input
+                        height: 40px
+                    input.textarea
+                        min-height: 120px
+                        // padding-top: 9px
+                        padding-bottom: 13px
+                    textarea.input  
+                        min-height: 120px
+                        padding-top: 9px
+                        padding-bottom: 13px
+                    .input:focus+.focus-input::before
+                        width: 100%
+                    .has-val.input+.focus-input::before
+                        width: 100%
+                    .container-contact-form-btn
+                        display: -webkit-box
+                        display: -webkit-flex
+                        display: -moz-box
+                        display: -ms-flexbox
+                        display: flex
+                        flex-wrap: wrap
+                        justify-content: center
+                        padding-top: 20px
+                        width: 100%
+                        .contact-form-btn
+                            display: -webkit-box
+                            display: -webkit-flex
+                            display: -moz-box
+                            display: -ms-flexbox
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            padding: 0 20px
+                            width: 100%
+                            height: 50px
+                            background-color: #333
+                            border-radius: 25px
+                            font-family: Montserrat-Medium
+                            font-size: 16px
+                            color: #fff
+                            line-height: 1.2
+                            -webkit-transition: all .4s
+                            -o-transition: all .4s
+                            -moz-transition: all .4s
+                            transition: all .4s
+                            .Arrow
+                                -webkit-transition: all .4s
+                                -o-transition: all .4s
+                                -moz-transition: all .4s
+                                transition: all .4s
+                            &:hover
+                                background-color: #00ad5f
+                                .Arrow
+                                    -webkit-transform: translateX(20px)
+                                    -moz-transform: translateX(20px)
+                                    -ms-transform: translateX(20px)
+                                    -o-transform: translateX(20px)
+                                    transform: translateX(20px)
+                    .validate-input
+                        position: relative
+                    .alert-validate::before
+                        content: attr(data-validate)
+                        display: -webkit-box
+                        display: -webkit-flex
+                        display: -moz-box
+                        display: -ms-flexbox
+                        display: flex
+                        align-items: center
+                        position: absolute
+                        width: 100%
+                        min-height: 40px
+                        background-color: #f7f7f7
+                        top: 35px
+                        left: 0
+                        padding: 0 45px 0 22px
+                        pointer-events: none
+                        font-family: Montserrat-SemiBold
+                        font-size: 18px
+                        color: #fa4251
+                        line-height: 1.2
+                    .btn-hide-validate
+                        font-family: Material-Design-Iconic-Font
+                        font-size: 18px
+                        color: #fa4251
+                        cursor: pointer
+                        display: -webkit-box
+                        display: -webkit-flex
+                        display: -moz-box
+                        display: -ms-flexbox
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        position: absolute
+                        width: 40px
+                        height: 40px
+                        top: 35px
+                        right: 12px
+                    .rs1-alert-validate.alert-validate::before
+                        background-color: #f7f7f7
+                    .true-validate::after
+                        content: "\f26b"
+                        font-family: Material-Design-Iconic-Font
+                        font-size: 18px
+                        color: #00ad5f
+                        display: -webkit-box
+                        display: -webkit-flex
+                        display: -moz-box
+                        display: -ms-flexbox
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        position: absolute
+                        width: 40px
+                        height: 40px
+                        top: 35px
+                        right: 10px
+
+@media(max-width:768px)
+    .rs1-wrap-input
+        width: 100%
+
+@media(max-width:576px)
+    .wrap-contact
+        padding: 62px 15px 90px
+    .wrap-input
+        padding: 10px 10px 9px
+@media(max-width:576px)
+    .alert-validate::before
+        padding: 0 10px
+
+    .true-validate::after,
+    .btn-hide-validate
+        right: 0
+        width: 30px
+
+.underline
+    position: relative
+    &::before
+        content: ''
+        position: absolute
+        bottom: 0
+        right: 0
+        width: 0
+        margin-top: 1rem
+        height: 2px
+        background-color: #000
+        transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1)
+@media (hover: hover) and (pointer: fine)
+.underline:hover::before
+    left: 0
+    right: auto
+    width: 100%

@@ -5,7 +5,7 @@
 /server/node_modules
 /.pnp
 .pnp.js
-
+src/component/env.jsx
 
 # testing
 /coverage
@@ -29,11 +29,11 @@ yarn-debug.log*
 yarn-error.log*
 nm-trace.log
 src/asset/sass/.sass-cache/S
-package.json
-/server/package.json
-package-lock.json
-/server/package-lock.json
-*.yaml
-/server/*.yaml
+
 nm-trace.log
+<<<<<<< HEAD
 *.txt
+=======
+old.txt
+package.json
+>>>>>>> b176f4525f31e61dcd822c5c4d3435426db4f791

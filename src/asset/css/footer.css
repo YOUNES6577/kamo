@@ -8,7 +8,7 @@ footer {
   background-color: #f5f5f5;
   font-family: "Droid Sans", sans-serif;
   min-height: 250px;
-  padding: 10px 0px 25px 0px;
+  padding: 10px 0px 25px 0px;  
   position: relative; }
   footer .shape-divider-top {
     position: absolute;
@@ -25,6 +25,6 @@ footer {
   height: 53px; }
 
 .shape-divider-top .shape-fill {
-  fill: #fff; }
+  fill: #e6e6e6; }
 
 /*# sourceMappingURL=footer.css.map */
