@@ -9,26 +9,27 @@
         height: 100%
         width: 17%
         padding: 25px 20px
+        padding-top: 2rem
         display: flex
         position: fixed
         justify-content: center
         justify-items: center
-        align-items: center
+        align-items: flex-start
         .Filter
             width: 95%
-            height: 80%
+            height: auto
             background-color: #fff
             border-radius: 20px
             // border: 1px solid #f2f2f2
             display: flex
-            align-items: center 
-            padding: 15px
             font-family: $paragraph-font
             aside
                 align-content: center
+                width: 100%
             .card-title
                 font-weight: 600
-                margin-bottom: 1.25rem
+                margin-bottom: .25rem
+            font-family: $paragraph-font
             .checkbox-btn
                 position: relative
                 margin: 0 .5rem .5rem 0
@@ -41,5 +42,7 @@
                     position: absolute
                     opacity: 0
                     z-index: -1
+                .btn
+                    color: #51585e
                 .btn:hover
                     color: #0d6efd

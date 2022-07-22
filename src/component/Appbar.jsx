@@ -15,7 +15,6 @@ import { styled } from '@mui/system';
 
 import '../asset/sass/navApp.sass'
 import logo from '../ProdImg/LOGO.png'
-import { borderRadius } from '@mui/system';
 // import logo from '../ProdImg/kamoSvg/logo-white-g2.svg'
 
 const blue = {
@@ -110,7 +109,7 @@ function themeStyle(props) {
         bg: '#f5f5f5',
         btnbg: grey['600'],
         fontColor: "#000",
-        boxShadow: 'rgb(0 0 0 / 63%) 1px 1px 5px 0px',
+        boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
         top: '0'
     } : (props.theme === 'transparent') ? {
         bg: 'transparent',
