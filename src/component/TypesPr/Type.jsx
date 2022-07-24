@@ -5,13 +5,29 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import makeAnimated from 'react-select/animated';
-import { MDBInput } from "mdbreact";
 import Select from 'react-select'
 import Cards from "./PaginateCards"
 import "../../asset/css/Type.scss";
+import "../../asset/css/Type.sass";
 import JsonData from "./MOCK_DATA.json";
+import { TextField, InputAdornment, Paper } from '@mui/material';
+import Search from '@mui/icons-material/Search';
+import { Divider } from "antd";
+import styled from "styled-components";
 
 
+const SelectTheme = (theme) => ({
+    ...theme,
+    borderRadius: 15,
+    colors: {
+        ...theme.colors,
+        primary: 'black',
+    },
+})
+const SelectFiltre = styled.div`
+select
+    background: red;
+`
 export default class Type extends React.Component {
 
     constructor(props) {
@@ -48,9 +64,10 @@ export default class Type extends React.Component {
     Manupilate_Filter(id) {
         switch (id) {
             case 0: return this.state.cards;
-            case 1: return (this.generalfilter());
-            case 2: return (this.Filter_Produit());
-            case 3: return (this.Filter_Volume());
+            case 1: return (this.generalfilter())
+            case 2: return (this.Filter_Produit())
+            case 3: return (this.Filter_Volume())
+            default: return undefined
         }
     }
 
@@ -59,9 +76,8 @@ export default class Type extends React.Component {
         let itemss = this.state.cards;
         console.log(this.state.name);
         if (this.state.name != null) {
-            if (this.state.name != "")
+            if (this.state.name !== "")
                 return itemss.filter(Item => { return ((Item.id.toString()).toLowerCase().includes(this.state.name) || Item.firstName.toLowerCase().includes(this.state.name) || Item.lastName.toLowerCase().includes(this.state.name)) });
-
         }
         return itemss;
     }
@@ -69,7 +85,7 @@ export default class Type extends React.Component {
     Filter_Produit() {
         let itemss = this.state.cards;
         console.log(this.state.S_Option1)
-        if (this.state.S_Option1 != "") {
+        if (this.state.S_Option1 !== "") {
             if (!(((this.state.S_Option1).toLowerCase()).includes("all")))
                 return itemss.filter(Item => { return ((Item.id.toString()).toLowerCase().includes((this.state.S_Option1).toLowerCase())) });
         }
@@ -79,7 +95,7 @@ export default class Type extends React.Component {
     Filter_Volume() {
         let items = [];
         if (this.state.S_Option2 != null) {
-            if (this.state.S_Option2.length == 0) { items = this.state.cards }
+            if (this.state.S_Option2.length === 0) { items = this.state.cards }
             else {
                 let i = 0;
                 for (const element of this.state.S_Option2) {
@@ -93,11 +109,6 @@ export default class Type extends React.Component {
             return (items)
         } else { return (this.state.cards) }
     }
-    // Filter_PrVo(){
-    //     if (this.state.S_Option1 != null && this.state.S_Option2!="") { 
-
-    //     }
-    // }
 
     //After Any click in general filter 
     changeText(event) {
@@ -138,43 +149,58 @@ export default class Type extends React.Component {
                         <Col xs={2}>
                             <Container className="filter">
                                 <ErrorBoundary>
-                                    {/* Title of Side Bar */}
-                                    <Row className="d-flex flex-row mt-5 mb-3">
-                                        <Col className="d-flex justify-content-center ">
-                                            <h1>Filtre</h1>
-                                        </Col>
-                                    </Row>
                                     {/* Filter Groups of Side Bar */}
-                                    <Row className="FilterGrp">
-                                        {/* General Filter */}
-                                        <div className="mb-3">
-                                            <div className="Search" >
-                                                <p>Utilisez le champ ci-dessous pour rechercher un numéro d'article ou un mot clé.</p>
-                                                <MDBInput label="Search" icon="search"
-                                                    onIconClick={() => alert("Wait! This is an alert!")} outline size="md" onChange={this.changeText}
+                                    <Row className="">
+                                        <Paper elevation={10} className='FilterGrp bg-light'>
+                                            <div className="d-flex justify-content-center mt-2">
+                                                <h1>Filtre</h1>
+                                            </div>
+                                            <Divider style={{ margin: "5px 0" }} />
+                                            {/* General Filter */}
+                                            <div className="Search p-3  bg-light" >
+                                                <p>Rechercher un produit</p>
+                                                <TextField
+                                                    size="md"
+                                                    onChange={this.changeText}
+                                                    label="Search"
+                                                    variant="outlined"
+                                                    InputProps={{
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                <Search />
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
                                                 />
                                             </div>
-                                        </div>
-                                        {/* Filter By TypeProduit */}
-                                        <div className="mb-3">
-                                            <div className="TypePr">
-                                                <h4 className="widget-title"><span className="prdctfltr_widget_title">Type Produit:<i className="prdctfltr-up"></i>
-                                                </span>
-                                                </h4>
-                                                <Select className="TypeprSelect" options={this.state.TypePr} onChange={this.selectoptionTProduit} />
-
+                                            <Divider style={{ margin: "5px 0" }} />
+                                            {/* Filter By TypeProduit */}
+                                            <div className="TypePr p-3 bg-light">
+                                                <p >Category</p>
+                                                <Select
+                                                    className="TypeprSelect"
+                                                    options={this.state.TypePr}
+                                                    onChange={this.selectoptionTProduit}
+                                                    isLoading
+                                                    theme={SelectTheme} />
                                             </div>
-                                        </div>
-                                        {/* Filter By Volume */}
-                                        <div className="mb-3">
-                                            <div className="Volume">
-                                                <h4 className="widget-title"><span className="prdctfltr_widget_title">Volume:<i className="prdctfltr-up"></i>
-                                                </span>
-                                                </h4>
-
-                                                <Select className="VolumeSelect" size="sm" options={this.state.volume} onChange={this.selectoptionVolume} closeMenuOnSelect={false} isMulti isClearable components={this.state.animatedComponents} />
+                                            <Divider style={{ margin: "5px 0" }} />
+                                            {/* Filter By Volume */}
+                                            <div className="Volume p-3 bg-light">
+                                                <p >Volume</p>
+                                                <Select
+                                                    className="VolumeSelect"
+                                                    size="sm"
+                                                    options={this.state.volume}
+                                                    onChange={this.selectoptionVolume}
+                                                    closeMenuOnSelect={false}
+                                                    isMulti
+                                                    isClearable
+                                                    isLoading
+                                                    components={this.state.animatedComponents}
+                                                    theme={SelectTheme} />
                                             </div>
-                                        </div>
+                                        </Paper>
                                     </Row>
                                 </ErrorBoundary>
                             </Container>
@@ -182,18 +208,11 @@ export default class Type extends React.Component {
                         {/* Display of items in cards */}
                         <Col xs={8} md={{ offset: 1 }}>
                             <ErrorBoundary >
-                                {/* Title_Nos produits */}
-                                <section className='text-center my-5'>
-                                    <div className="patterns">
-                                        <svg width="100%" height="100%">
-                                            <text x="50%" y="60%" textAnchor="middle"  >
-                                                Nos Produits
-                                            </text>
-                                        </svg>
-                                    </div>
-                                </section>
                                 {/* items */}
                                 <section id="content">
+                                    <header className="mb-3">
+                                        <h1> Nos Produits</h1>
+                                    </header>
                                     <Cards items={this.Manupilate_Filter(this.state.id)} />
                                 </section>
                             </ErrorBoundary>

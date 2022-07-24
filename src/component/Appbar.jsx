@@ -188,13 +188,13 @@ function AppBar(props) {
                         <div className="collapse navbar-collapse" id="mainMenu">
                             <ul className="navbar-nav ml-auto text-uppercase f1"  >
                                 <li >
-                                    <Link href="#home"
+                                    <Link href="/#home"
                                         className=""
                                         onClick={handleClick}
                                         style={{ color: Ptheme?.fontColor || theme.fontColor }}>ACCUEIL</Link>
                                 </li>
                                 <li >
-                                    <Link href="#PSN"
+                                    <Link href="/#PSN"
                                         onClick={handleClick}
                                         style={{ color: Ptheme?.fontColor || theme.fontColor }}>Présentation</Link>
                                 </li>
@@ -202,13 +202,13 @@ function AppBar(props) {
                                     <Link href="#PDS">Produits</Link>
                                 </li> */}
                                 <li >
-                                    <Link href="#AboutSection"
+                                    <Link href="/#AboutSection"
                                         className=''
                                         onClick={handleClick}
                                         style={{ color: Ptheme?.fontColor || theme.fontColor }}>Services</Link>
                                 </li>
                                 <li >
-                                    <Link href="#Contact"
+                                    <Link href="/#Contact"
                                         onClick={handleClick}
                                         style={{ color: Ptheme?.fontColor || theme.fontColor }}><Call />Contact</Link>
                                 </li>

@@ -13,7 +13,7 @@ import 'antd/dist/antd.min.css'
 function loadFont() {
   WebFont.load({
     google: {
-      families: ['Spartan', 'Spinnaker',  'Droid Sans', 'Tangerine', 'Segoe UI']
+      families: ['Antic Slab','Spartan', 'Spinnaker',  'Droid Sans', 'Tangerine', 'Segoe UI']
     }
   });
 }

@@ -1,22 +1,11 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700|Raleway:400,300,700);
 
-.Search,
-.TypePr,
-.Volume {
-  padding: 15px;
-  background-color: #edf0f7;
-  border-radius: 15px;
-}
 .Type {
   background-image: url(../../ProdImg/Background/BackPr.jpg);
   // background-image: url(../../ProdImg/Background/bg1.jpg);
 
   backface-visibility: visible;
 }
-.Type div > div > div > div > div > div > div > div > div > div > svg > path {
-  color: black;
-}
+
 .Type svg text {
   font-family: Tangerine !important;
   letter-spacing: 7px;
@@ -24,7 +13,6 @@
   font-size: 110px;
   font-weight: 800;
   stroke-width: 3;
-
   animation: textAnimate 5s infinite alternate;
 }
 @keyframes textAnimate {
@@ -84,29 +72,14 @@
   color: #4285f4 !important;
 }
 
-.Type .filter {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 20px;
-}
-.Type .filter h1 {
-  font-family: Tangerine !important;
-  font-size: 70px;
-  font-weight: 700;
-}
-.Type .FilterGrp {
-  width: 130%;
-}
+// .Type .FilterGrp {
+//   width: 100%;
+// }
 .Search,
 .TypePr,
 .Volume {
-  background-image: linear-gradient(90deg, #000, rgba(0, 0, 0, 0.6)),
-    url(https://ik.imagekit.io/younes6577/kamoplast/testimonial_bg_DYMsCc9em.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907468617);
-}
-.Search p {
-  color: hsla(0, 0%, 100%, 0.7);
-  font-family: Spinnaker !important;
-  font-size: 1.25rem;
+  // background-image: linear-gradient(90deg, #, rgba(0, 0, 0, 0.6));
+  background-color: #fff;
 }
 
 .Type .product-details-wrapper {
