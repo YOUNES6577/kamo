@@ -1,73 +1,72 @@
 import React from 'react';
-import { Link } from "react-router-dom"
-import "../../asset/css/Type.scss";
 import $ from "jquery";
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Modal from 'react-bootstrap/Modal'
-import { Nav } from 'react-bootstrap';
-import ImageGallery from 'react-image-gallery';
-import "react-image-gallery/styles/css/image-gallery.css";
+import { Divider } from 'antd';
+import { motion } from "framer-motion";
+import { Card, CardContent, CardMedia, CardHeader, IconButton, Button, CardActionArea, CardActions, Tooltip, Zoom } from '@mui/material';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import styled from 'styled-components';
+// import { Borderlines } from '../Element/Borderlines'
+import ProductModal from './Modal'
+// import b2 from "../../ProdImg/Bouchon/Bouchon-60-H-Rouge.png"
 
-import b2 from "../../ProdImg/Bouchon/Bouchon-60-H-Rouge.png"
-
-import {motion } from "framer-motion";
-
+const Details = styled.dl`
+dt,dd{
+  font-family: Spinnaker !important;
+}
+dd{
+    color: #51585e;
+    }
+`
+const CardTheme = styled.div`
+.cardhedear span{
+  font-family:'Antic Slab' !important;
+}
+.detailsbtn{
+  margin-left: auto;
+  font-family:'Antic Slab' !important;
+  font-weight:600;
+}
+`
 
 export default class CardPr extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
       show: false,
-      item : {
+      item: {
         hidden: { y: 20, opacity: 0 },
-        visible: {
-          y: 0,
-          opacity: 1
-        }
+        visible: { y: 0, opacity: 1 }
       },
     };
+    this.handleModalVisibility = this.handleModalVisibility.bind(this)
+    this.handleShow = this.handleShow.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
+
   componentDidUpdate() {
     if (this.state.show) {
       $(".Type").addClass("TypeafterModal");
-
     } else {
       $(".Type").removeClass("TypeafterModal");
     }
-
-    var x = true;
     $(".image-gallery-content").click(() => {
-      $(".image-gallery-svg").click(() => { x = false; });
-      $(".image-gallery-thumbnail-image").click(() => { x = false; });
-      if (x == true) {
-        document.exitFullscreen();
-        console.log("OK");
-      }
-      x = true;
+      document.exitFullscreen();
     })
 
 
   }
-
-  handleSelect(selectedKey) {
-    console.log(selectedKey);
-          $("#nav-profile").addClass("show active");
-
-    if (selectedKey === "#nav-profile") {
-      $("#nav-profile").show();
-      $("#nav-home").hide();
-    } else {
-      $("#nav-profile").hide();
-      $("#nav-home").show();
-    }
+  handleModalVisibility() {
+    this.setState({ show: !this.state.show })
+  }
+  handleClose() {
+    this.setState({ show: false })
+  }
+  handleShow() {
+    this.setState({ show: true })
+    this.props.ModalCounter()
   }
   render() {
-
-
     const images = [
       {
         original: this.props.img,
@@ -82,138 +81,78 @@ export default class CardPr extends React.Component {
         thumbnail: this.props.img,
       },
     ];
-
+    const BouchonImagesList = [
+      { alt: 'bouchon1', src:'https://ik.imagekit.io/younes6577/kamoplast/Bouchon-60-H-Rouge_47y0u-lW3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1659119030390' },
+      { alt: 'bouchon2', src:'https://ik.imagekit.io/younes6577/kamoplast/Bouchon-60-H-Rouge_47y0u-lW3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1659119030390' },
+      { alt: 'bouchon3', src:'https://ik.imagekit.io/younes6577/kamoplast/Bouchon-60-H-Rouge_47y0u-lW3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1659119030390' }
+    ]
 
     return (
-      <motion.li className="Card item mb-3" key={this.props.product.id}  variants={this.state.item}>
-        <Link to="" onClick={() => this.setState({ show: true })}>
-          <div className="Card_Container-image">
-            <img className="imgPr" width="200" height="300" src={this.props.img} alt="img" sizes="(max-width: 500px) 100vw, 500px" />
-          </div>
-        </Link>
-        <div className="product-details-wrapper">
-          <div className="fusion-product-content">
-            <div className="product-details">
-              <h3 className="product-title d-flex justify-content-center">
-                <Link to="" onClick={() => this.setState({ show: true })}>
-                  <span className="RefPr">Ref:FL-J25L-Jerrican</span>
-                </Link>
-              </h3>
-
-              <div className="DescriptionPr">
-                <div className="volume"><span>Volume:</span>{this.props.product.firstName}</div>
-                <div className="matierePr"><span>Matiere:</span>{this.props.product.lastName}</div>
-                <div className="Poids"><span>Poids</span>{this.props.product.lastName}</div>
-                <div className="SacUnites" ><span>livree par </span> {this.props.product.email}</div>
-                <div className="product-buttons">
-
-                  <Link to="" onClick={() => this.setState({ show: true })}>
-                    <div className="product-buttons-container d-flex justify-content-between">
-                      <span >voir description</span>
-                      <span >
-                        Details</span>
-                    </div>
-                  </Link>
-
-                </div>
-              </div>
-
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <Modal
-          show={this.state.show}
-          onHide={() => this.setState({ show: false })}
-          aria-labelledby="example-custom-modal-styling-title"
-          animation={true}
-          centered={true}
-          size="xl"
-          // className="Modal"
-          dialogClassName="modal-90w"
-
-        >
-
-          <div className="container ContainerModel " >
-
-            <Modal.Header closeButton ><h4 className="Reference">Ref:FL-J25L-Jerrican</h4></Modal.Header >
-
-            <Modal.Body className="ModalBody">
-
-              <Container fluid className="Model-Description">
-                <Row>
-                  <Col md={{ span: 4, offset: 1 }} className="mr-5">
-
-                    <div className="images-Products" >
-
-                      <ImageGallery items={images}
-                        showNav={true}
-                        showPlayButton={false}
-                        autoPlay={true}
-                        slideDuration={450}
-                        thumbnailPosition="left"
-                        useTranslate3D={true}
-                      />
-                      <div className="Bouchon-Produit-list container-fluid " >
-                        <div className="images-buchon d-flex flex-row justify-content-between" >
-                          <img alt="b1" src={b2} />
-                          <img alt="b2" src={b2} />
-                          <img alt="b3" src={b2} />
-                          <img alt="b4" src={b2} />
-                        </div>
-                      </div>
-
-                    </div>
-                  </Col>
-                  <Col md={{ span: 6 }} className="ColumnDetails">
-                    <Nav fill variant="tabs" defaultActiveKey="#nav-home" onSelect={key => this.handleSelect(key)}>
-                      <Nav.Item>
-                        <Nav.Link className="nav-item nav-link a" eventKey="#nav-home" aria-selected="true"><h6>Jerrican</h6></Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link className="nav-item nav-link a" eventKey="#nav-profile" aria-selected="true"><h6>Bouchon</h6></Nav.Link>
-                      </Nav.Item>
-                    </Nav>
-
-                    <div className="tab-content" id="nav-tabContent">
-                      <div className="tab-pane fade show active" id="nav-home" role="tabpanel">
-                        <div className="sizes_box2 d-flex flex-row"><span>Matiere:</span><div>PEHD</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Poids:</span><div>1100/1200 g</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Tiente:</span><div>10L</div></div>
-                        <div className="sizes_box2 d-flex flex-row "><span>Opacité</span><div>Transparent/Blanc/Bleu/Vert/Jaune/Rouge/Gris Metalise</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Empilable:</span><div>26 cm</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Sac de:</span><div>8 unites</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span><i className="fa fa-weight-hanging" ></i>Volume</span><div>10 L</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Hauteur</span><div>160 mm</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Longeur</span><div>15 mm</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Largeur</span><div>168 mm</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Etiquette</span><div className="d-flex flex-column Etiquette"><div className="p-2">180mm</div><div className="p-2">L190mm</div></div></div>
-                      </div>
-                      <div className="tab-pane fade " id="nav-profile" role="tabpanel">
-                        <div className="sizes_box2 d-flex flex-row"><span>Matiere:</span><div>PEHD</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Capsule:</span><div>Oui/Non</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Joint:</span><div>Oui/Non</div></div>
-                        <div className="sizes_box2 d-flex flex-row "><span>Degaseurs</span><div>Oui/Non</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Inovliable:</span><div>60 mm</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Dimension</span><div>60 mm</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span><i className="fa fa-weight-hanging" ></i>Volume</span><div>10 L</div></div>
-                        <div className="sizes_box2 d-flex flex-row"><span>Couleurs</span><div>Noir/Blanc/Bleu/Vert/Noir/Blanc/Bleu/Vert</div></div>
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-
-              </Container>
-            </Modal.Body>
-          </div>
-        </Modal>
-
-
-
-
+      <motion.li className="Card item mb-3 p-lg-3"
+        key={this.props.product.id}
+        variants={this.state.item}>
+        <CardTheme >
+          <Card sx={{ maxWidth: 350 }}>
+            <CardHeader
+              className='cardhedear'
+              action={<Tooltip title='Full Screen' TransitionComponent={Zoom}>
+                <IconButton aria-label="settings"
+                  onClick={this.handleShow}
+                >
+                  <FullscreenIcon />
+                </IconButton>
+              </Tooltip>
+              }
+              title='FL-J25L-Jerrican'
+              subheader='FL-J25L-Jerrican'
+            />
+            <Divider style={{ margin: "5px 0 0" }} />
+            <CardActionArea>
+              <CardMedia
+                className='Product_img'
+                component="img"
+                image={this.props.img}
+                alt="chemique"
+                onClick={this.handleShow}
+              />
+              <CardContent>
+                <Divider style={{ margin: "5px 0" }} />
+                <Details className='row'>
+                  <dt className='col-4'>Ref</dt>
+                  <dd className='col-8 '>FL-J25L-Jerrican</dd>
+                  <dt className='col-4'>Volume</dt>
+                  <dd className='col-8 '>{this.props.product.firstName}</dd>
+                  <dt className='col-4'>Matiere</dt>
+                  <dd className='col-8'>{this.props.product.lastName}</dd>
+                  <dt className='col-4'>Poids</dt>
+                  <dd className='col-8'>{this.props.product.lastName}</dd>
+                  <dt className='col-4'>livree par</dt>
+                  <dd className='col-8'>{this.props.product.email}</dd>
+                </Details>
+              </CardContent>
+            </CardActionArea>
+            <Divider style={{ margin: "0 5px 5px" }} />
+            <CardActions disableSpacing>
+              <Tooltip title='view more' TransitionComponent={Zoom} placement="left" >
+                <Button
+                  size="small"
+                  color="primary"
+                  onClick={this.handleShow}
+                  className='detailsbtn'>
+                  Details
+                </Button>
+              </Tooltip>
+            </CardActions>
+          </Card>
+          {this.state.show ? <ProductModal
+            id={this.props.product.id}
+            showup={this.state.show}
+            Hide={this.handleClose}
+            Title='Ref:FL-J25L-Jerrican'
+            listeImages={images}
+            BouchonList={BouchonImagesList.map(item => <img alt={item.alt} src={item.src} />)}
+          /> : <></>}
+        </CardTheme>
       </motion.li >
     );
   }

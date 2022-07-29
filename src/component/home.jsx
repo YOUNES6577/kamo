@@ -16,7 +16,7 @@ import env from './env'
 import { Snackbars, openNotificationWithIcon } from './Notification'
 import Navigationbar from './Appbar'
 import CircleSpinner from './Element/Spinner'
-
+import ColorCircel from './Element/ColorCircel';
 
 import '../asset/sass/main.sass'
 import '../asset/sass/Presentation.sass'
@@ -32,7 +32,7 @@ import produitslubrifiant from '../ProdImg/Product/p3-1.png'
 import produitsalimentaire from '../ProdImg/Product/p7-1.png'
 
 // import kamoMap from '../ProdImg/kamo_map.png'
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Footer = React.lazy(() => import('./footer'))
 const GMapFrame = React.lazy(() => import('./Maps'))
@@ -58,45 +58,8 @@ width:  ${props => props.width};
 height:${props => props.height};
 margin: auto;
 `
-const Colors = styled.div`
-    padding-left: 1em;
-    div{
-        margin-top: 3px;
-        width: 15px;
-        height: 15px;
-        margin-right: 5px;
-        float: left;
-        span{
-            width: 15px;
-            height: 15px;
-            display: block;
-            border-radius: 50%;
-            &:hover{
-                width: 17px;
-                height: 17px;
-                margin: -1px 0 0 -1px;
-            }
-        }
-        &.c-blue span{
-            background: #6e8cd5;
-        }
-        &.c-red span{
-            background: #f56060;
-        }
-        &.c-green span{
-            background: #44c28d;
-        }
-        &.c-white span{
-            background: #fff;
-            width: 14px;
-            height: 14px;
-            border: 1px solid #e8e9eb;
-        }
-    }
-`
-
 const Productcard = (props) => {
-    const [Classname, setClassname] = React.useState("product-card")
+    const [Classname, setClassname] = React.useState("product-card ")
     const [bttn, setBttn] = React.useState('button')
     const handleHover = () => {
         setClassname(Classname + ' animate')
@@ -131,7 +94,7 @@ const Productcard = (props) => {
                             <strong>SIZES</strong>
                             <span>{props.sizes}</span>
                             <strong>COLORS</strong>
-                            {props.colors}
+                            <span>{props.colors}</span>
                         </div>
                     </div>
                 </div>
@@ -299,7 +262,6 @@ export default class Home extends React.PureComponent {
     }
 
     Products() {
-        const SingleColor = (props) => <div className={props.className}><span></span></div>
         return (
             <ErrorBoundary>
                 <Container fluid='fluid'>
@@ -314,12 +276,12 @@ export default class Home extends React.PureComponent {
                                 sizes='10L, 20L, 25L'
                                 imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/9ML7JVTS_4x_NK1HgNHn9.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1657907449047" alt="Chimique" />}
                                 // imgsrc={<Img src={produitChimique} width='auto' height='350' alt="Chimique" />}
-                                colors={<Colors>
-                                    <SingleColor className='c-blue' />
-                                    <SingleColor className='c-red' />
-                                    <SingleColor className='c-white' />
-                                    <SingleColor className='c-green' />
-                                </Colors>}
+                                colors={<>
+                                    <ColorCircel bgc="#6e8cd5" />
+                                    <ColorCircel bgc="#f56060" />
+                                    <ColorCircel bgc="#fff" white />
+                                    <ColorCircel bgc="#44c28d" />
+                                </>}
                             /></Fade>
                         <RubberBand bottom>
                             <Productcard
@@ -328,12 +290,12 @@ export default class Home extends React.PureComponent {
                                 sizes='5L, 6L, 10L'
                                 imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/p7-1_jK9cnAjn6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907456792" alt="lubrifiant" />}
                                 // imgsrc={<Img src={produitslubrifiant} width='auto' height='350' alt="lubrifiant" />}
-                                colors={<Colors>
-                                    <SingleColor className='c-blue' />
-                                    <SingleColor className='c-red' />
-                                    <SingleColor className='c-white' />
-                                    <SingleColor className='c-green' />
-                                </Colors>}
+                                colors={<>
+                                    <ColorCircel bgc="#6e8cd5" />
+                                    <ColorCircel bgc="#f56060" />
+                                    <ColorCircel bgc="#fff" white />
+                                    <ColorCircel bgc="#44c28d" />
+                                </>}
                             /></RubberBand>
                         <Fade right >
                             <Productcard
@@ -342,12 +304,12 @@ export default class Home extends React.PureComponent {
                                 sizes='33Cl , 50Cl, 100 Cl'
                                 imgsrc={<Img src="https://ik.imagekit.io/younes6577/tr:h-350/kamoplast/zyro-image_5myn1xmQD.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907463969" alt="alimentaire" />}
                                 // imgsrc={<Img src={produitsalimentaire} width='auto' height='350' alt="alimentaire" />}
-                                colors={<Colors>
-                                    <SingleColor className='c-blue' />
-                                    <SingleColor className='c-red' />
-                                    <SingleColor className='c-white' />
-                                    <SingleColor className='c-green' />
-                                </Colors>}
+                                colors={<>
+                                    <ColorCircel bgc="#6e8cd5" />
+                                    <ColorCircel bgc="#f56060" />
+                                    <ColorCircel bgc="#fff" white />
+                                    <ColorCircel bgc="#44c28d" />
+                                </>}
                             /></Fade>
                     </Grid>
                 </Container>
@@ -400,7 +362,7 @@ export default class Home extends React.PureComponent {
                     <Row >
                         <Col className='Map' xs={7}>
                             <Fade left>
-                                <Paper elevation={20} className='mappaper'>
+                                <Paper elevation={10} className='mappaper'>
                                     {/* <Image src={kamoMap} />
                                 <div className="middle">
                                     <Link target='_blank' href='https://goo.gl/maps/iK3HTQ61fTAudVxE7' underline='none' className='underline'>Voir dans Google Map</Link>  <Map />
@@ -420,7 +382,7 @@ export default class Home extends React.PureComponent {
             </ErrorBoundary>
         )
     }
-    
+
     render() {
         return (<>
             <ErrorBoundary >
@@ -488,7 +450,7 @@ export default class Home extends React.PureComponent {
                     <section className='Contact' id='Contact'>
                         <this.Contact />
                     </section>
-                    <Suspense  fallback={<CircleSpinner />}>
+                    <Suspense fallback={<CircleSpinner />}>
                         <Footer />
                     </Suspense>
                 </Container>

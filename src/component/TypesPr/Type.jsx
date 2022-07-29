@@ -1,20 +1,19 @@
 import React from "react";
-import Navigationbar from "../Appbar";
-import ErrorBoundary from "../ErrorBoundary";
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import {Container,Row,Col} from 'react-bootstrap'
 import makeAnimated from 'react-select/animated';
-import Select from 'react-select'
-import Cards from "./PaginateCards"
-import "../../asset/css/Type.scss";
-import "../../asset/css/Type.sass";
-import JsonData from "./MOCK_DATA.json";
 import { TextField, InputAdornment, Paper } from '@mui/material';
 import Search from '@mui/icons-material/Search';
 import { Divider } from "antd";
-import styled from "styled-components";
+import Select from 'react-select'
 
+import Navigationbar from "../Appbar";
+import ErrorBoundary from "../ErrorBoundary";
+import Cards from "./PaginateCards"
+import JsonData from "./MOCK_DATA.json";
+import Footer from '../footer'
+import "../../asset/sass/Type.sass";
+
+// import { Borderlines } from '../Element/Borderlines'
 
 const SelectTheme = (theme) => ({
     ...theme,
@@ -24,15 +23,10 @@ const SelectTheme = (theme) => ({
         primary: 'black',
     },
 })
-const SelectFiltre = styled.div`
-select
-    background: red;
-`
-export default class Type extends React.Component {
 
+export default class Type extends React.Component { 
     constructor(props) {
         super(props);
-
         this.state = ({
             volume: [
                 { value: '20L', label: '20L' },
@@ -41,7 +35,6 @@ export default class Type extends React.Component {
                 { value: '2L', label: '2L' },
                 { value: '1L', label: '1L' }
             ],
-
             TypePr: [
                 { value: 'All', label: 'All' },
                 { value: 'Lubirifiant', label: 'Lubirifiant' },
@@ -51,6 +44,7 @@ export default class Type extends React.Component {
             ],
             animatedComponents: makeAnimated(),
             name: null,
+            navTheme: props.navTheme,
             S_Option1: "",
             S_Option2: null,
             cards: JsonData.slice(0),
@@ -70,7 +64,6 @@ export default class Type extends React.Component {
             default: return undefined
         }
     }
-
     //Filter_Product_Generaly
     generalfilter() {
         let itemss = this.state.cards;
@@ -109,7 +102,6 @@ export default class Type extends React.Component {
             return (items)
         } else { return (this.state.cards) }
     }
-
     //After Any click in general filter 
     changeText(event) {
         this.setState({
@@ -118,13 +110,11 @@ export default class Type extends React.Component {
         });
 
     }
-
     selectoptionTProduit(event) {
         this.setState({
             S_Option1: event.value,
             id: 2
         });
-
     }
     //Select Options From input Volume
     selectoptionVolume(event) {
@@ -133,80 +123,78 @@ export default class Type extends React.Component {
             id: 3
         });
     }
-
-
     render() {
-
-
-        return (
-            <div className="Type">
+        return  <div className="Type">
                 <ErrorBoundary >
                     <Navigationbar theme={this.state.navTheme} />
                 </ErrorBoundary>
                 {/* SideBar_Filter */}
                 <Container fluid className="container-Pr mt-5 Container-PrPage "  >
                     <Row>
-                        <Col xs={2}>
-                            <Container className="filter">
-                                <ErrorBoundary>
-                                    {/* Filter Groups of Side Bar */}
-                                    <Row className="">
-                                        <Paper elevation={10} className='FilterGrp bg-light'>
-                                            <div className="d-flex justify-content-center mt-2">
-                                                <h1>Filtre</h1>
-                                            </div>
-                                            <Divider style={{ margin: "5px 0" }} />
-                                            {/* General Filter */}
-                                            <div className="Search p-3  bg-light" >
-                                                <p>Rechercher un produit</p>
-                                                <TextField
-                                                    size="md"
-                                                    onChange={this.changeText}
-                                                    label="Search"
-                                                    variant="outlined"
-                                                    InputProps={{
-                                                        endAdornment: (
-                                                            <InputAdornment position="end">
-                                                                <Search />
-                                                            </InputAdornment>
-                                                        )
-                                                    }}
-                                                />
-                                            </div>
-                                            <Divider style={{ margin: "5px 0" }} />
-                                            {/* Filter By TypeProduit */}
-                                            <div className="TypePr p-3 bg-light">
-                                                <p >Category</p>
-                                                <Select
-                                                    className="TypeprSelect"
-                                                    options={this.state.TypePr}
-                                                    onChange={this.selectoptionTProduit}
-                                                    isLoading
-                                                    theme={SelectTheme} />
-                                            </div>
-                                            <Divider style={{ margin: "5px 0" }} />
-                                            {/* Filter By Volume */}
-                                            <div className="Volume p-3 bg-light">
-                                                <p >Volume</p>
-                                                <Select
-                                                    className="VolumeSelect"
-                                                    size="sm"
-                                                    options={this.state.volume}
-                                                    onChange={this.selectoptionVolume}
-                                                    closeMenuOnSelect={false}
-                                                    isMulti
-                                                    isClearable
-                                                    isLoading
-                                                    components={this.state.animatedComponents}
-                                                    theme={SelectTheme} />
-                                            </div>
-                                        </Paper>
-                                    </Row>
-                                </ErrorBoundary>
-                            </Container>
+                        <Col xs={3}>
+                            {/* <Borderlines ShowUp> */}
+                                <Container className="filter" >
+                                    <ErrorBoundary>
+                                        {/* Filter Groups of Side Bar */}
+                                        <Row className="justify-content-center">
+                                            <Paper elevation={1} className='FilterGrp' sx={{ maxWidth: '350px' }}>
+                                                <div className="d-flex justify-content-center mt-2">
+                                                    <h1>Filtre</h1>
+                                                </div>
+                                                <Divider style={{ margin: "5px 0" }} />
+                                                {/* General Filter */}
+                                                <div className="Search p-3" >
+                                                    <p>Rechercher un produit</p>
+                                                    <TextField
+                                                        fullWidth
+                                                        sx={{ borderRaduis: '15px' }}
+                                                        onChange={this.changeText}
+                                                        label="Search"
+                                                        variant="outlined"
+                                                        InputProps={{
+                                                            endAdornment: (
+                                                                <InputAdornment position="end">
+                                                                    <Search />
+                                                                </InputAdornment>
+                                                            )
+                                                        }}
+                                                    />
+                                                </div>
+                                                <Divider style={{ margin: "5px 0" }} />
+                                                {/* Filter By TypeProduit */}
+                                                <div className="TypePr p-3">
+                                                    <p >Category</p>
+                                                    <Select
+                                                        className="TypeprSelect"
+                                                        options={this.state.TypePr}
+                                                        onChange={this.selectoptionTProduit}
+                                                        isLoading
+                                                        theme={SelectTheme} />
+                                                </div>
+                                                <Divider style={{ margin: "5px 0" }} />
+                                                {/* Filter By Volume */}
+                                                <div className="Volume p-3">
+                                                    <p >Volume</p>
+                                                    <Select
+                                                        className="VolumeSelect"
+                                                        size="sm"
+                                                        options={this.state.volume}
+                                                        onChange={this.selectoptionVolume}
+                                                        closeMenuOnSelect={false}
+                                                        isMulti
+                                                        isClearable
+                                                        isLoading
+                                                        components={this.state.animatedComponents}
+                                                        theme={SelectTheme} />
+                                                </div>
+                                            </Paper>
+                                        </Row>
+                                    </ErrorBoundary>
+                                </Container>
+                            {/* </Borderlines> */}
                         </Col>
                         {/* Display of items in cards */}
-                        <Col xs={8} md={{ offset: 1 }}>
+                        <Col xs={8}>
                             <ErrorBoundary >
                                 {/* items */}
                                 <section id="content">
@@ -218,8 +206,11 @@ export default class Type extends React.Component {
                             </ErrorBoundary>
                         </Col>
                     </Row>
+                    <ErrorBoundary >
+                        <Footer />
+                    </ErrorBoundary>
                 </Container>
-            </div >);
+            </div >;
     }
 }
 

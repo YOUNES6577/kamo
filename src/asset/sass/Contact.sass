@@ -4,9 +4,9 @@
     .Contact
         min-height: 350px
         background: #cfcfcf
-        background: -moz-linear-gradient(to right, #cfcfcf 0%,#ffffff 100%)
-        background: -webkit-linear-gradient(to right, #cfcfcf 0%,#ffffff 100%)
-        background: linear-gradient(to right, #cfcfcf 0%,#ffffff 100%)
+        background: -moz-linear-gradient(to right, #e5e5e5 0%,#ffffff 100%)
+        background: -webkit-linear-gradient(to right, #e5e5e5 0%,#ffffff 100%)
+        background: linear-gradient(to right, #e5e5e5 0%,#ffffff 100%)
         padding: 2rem 0
         *
             // border: 1px dashed #000
@@ -47,7 +47,7 @@
                     cursor: pointer
                     img
                         opacity: 0.7
-                        filter:  brightness(0.60)
+                        filter: brightness(0.60)
                     .middle
                         opacity: 0.6
                         .underline
@@ -131,19 +131,18 @@
             min-height: 60vh
             display: flex
             flex-wrap: wrap
-            justify-content: centre
+            justify-content: center
             align-items: center
-            padding: 15px
-            padding-left: 0
             .wrap-contact
                 width: 820px
                 background: #fff
                 border-radius: 10px
                 overflow: hidden
                 padding: 55px
-                -webkit-box-shadow: -8px 20px 30px 11px rgba(0,0,0,0.2)
-                -moz-box-shadow: -8px 20px 30px 11px rgba(0,0,0,0.2)
-                box-shadow: -8px 20px 30px 11px rgba(0,0,0,0.2)
+                background-clip: border-box
+                border: 1px solidrgba(81,88,94,.12)
+                box-shadow: 0 .05rem .2remrgba(0,0,0,.03)
+                border-radius: 0.35rem
                 .contact-form
                     width: 100%
                     margin: auto
@@ -196,7 +195,7 @@
                         min-height: 120px
                         // padding-top: 9px
                         padding-bottom: 13px
-                    textarea.input  
+                    textarea.input
                         min-height: 120px
                         padding-top: 9px
                         padding-bottom: 13px
