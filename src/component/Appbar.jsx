@@ -12,7 +12,6 @@ import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import { styled } from '@mui/system';
 
-
 import '../asset/sass/navApp.sass'
 import logo from '../ProdImg/LOGO.png'
 // import logo from '../ProdImg/kamoSvg/logo-white-g2.svg'
@@ -25,6 +24,7 @@ const blue = {
     600: '#0072E5',
     900: '#003A75',
 };
+
 const grey = {
     100: '#E7EBF0',
     200: '#E0E3E7',
@@ -36,6 +36,7 @@ const grey = {
     800: '#2D3843',
     900: '#1A2027',
 };
+
 const StyledListbox = styled('ul')(
     ({ theme }) => `
     font-family: Spartan, sans-serif;
@@ -53,6 +54,7 @@ const StyledListbox = styled('ul')(
     outline: 0px;
     `,
 );
+
 const StyledMenuItem = styled(MenuItemUnstyled)(
     ({ theme }) => `
     z-index: 100;
@@ -78,6 +80,7 @@ const StyledMenuItem = styled(MenuItemUnstyled)(
     }
     `,
 );
+
 const TriggerButton = styled('button')(
     ({ theme }) => `
     font-family: Spartan, sans-serif;
@@ -109,7 +112,7 @@ function themeStyle(props) {
         bg: '#f5f5f5',
         btnbg: grey['600'],
         fontColor: "#000",
-        boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+        // boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
         top: '0'
     } : (props.theme === 'transparent') ? {
         bg: 'transparent',
@@ -183,8 +186,8 @@ function AppBar(props) {
                 <Fade top >
                     <nav className="navbar navbar-expand-lg main-nav px-0">
                         <a className="navbar-brand" href="/">
-                            <img src={logo} width='200' alt="kamoplast.com" />
-                            {/* <img src='https://ik.imagekit.io/younes6577/kamoplast/tr:w-200/Logo_PWz_J7HnRx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907466273' alt="kamoplast.com" /> */}
+                            {/* <img src={logo} width='200' alt="kamoplast.com" /> */}
+                            <img src='https://ik.imagekit.io/younes6577/kamoplast/tr:w-200/Logo_PWz_J7HnRx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907466273' alt="kamoplast.com" />
                         </a>
                         <button className="navbar-toggler" type="button" id='mainMenu-toggler' data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="icon-bar icon-bar-1"></span>
@@ -194,7 +197,7 @@ function AppBar(props) {
                         <div className="collapse navbar-collapse" id="mainMenu">
                             <ul className="navbar-nav ml-auto text-uppercase f1"  >
                                 <li >
-                                    <Link href="#home"
+                                    <Link href="/#home"
                                         className=""
                                         onClick={handleClick}
                                         style={{ color: Ptheme?.fontColor || theme.fontColor }}>ACCUEIL</Link>
@@ -208,13 +211,13 @@ function AppBar(props) {
                                     <Link href="#PDS">Produits</Link>
                                 </li> */}
                                 <li >
-                                    <Link href="#AboutSection"
+                                    <Link href="/#AboutSection"
                                         className=''
                                         onClick={handleClick}
                                         style={{ color: Ptheme?.fontColor || theme.fontColor }}>Services</Link>
                                 </li>
                                 <li >
-                                    <Link href="#Contact"
+                                    <Link href="/#Contact"
                                         onClick={handleClick}
                                         style={{ color: Ptheme?.fontColor || theme.fontColor }}><Call />Contact</Link>
                                 </li>
@@ -241,13 +244,13 @@ function AppBar(props) {
                                         componentsProps={{ listbox: { id: 'Produits-menu' } }}
                                     >
                                         <StyledMenuItem onClick={createHandleMenuClick('Profile')}>
-                                            <Link underline='none' href='/Type/Chimique'>produit-Chimique</Link>
+                                            <Link underline='none' href='/Produits'>produit-Chimique</Link>
                                         </StyledMenuItem>
                                         <StyledMenuItem onClick={createHandleMenuClick('My account')}>
-                                            <Link underline='none' href='/Type/lubrifiant'>produits-lubrifiant</Link>
+                                            <Link underline='none' href='/Produits'>produits-lubrifiant</Link>
                                         </StyledMenuItem>
                                         <StyledMenuItem onClick={createHandleMenuClick('Log out')}>
-                                            <Link underline='none' href='/Type/alimentaire'>produits-alimentaire</Link>
+                                            <Link underline='none' href='/Produits'>produits-alimentaire</Link>
                                         </StyledMenuItem>
                                     </MenuUnstyled>
                                 </li>

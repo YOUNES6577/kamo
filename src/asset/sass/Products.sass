@@ -1,35 +1,42 @@
 @import './var'
 .Products-page
     margin-top: $nav-height
-    background-color: #f2f2f2
+    // background-color: #f5f5f5
     width: 100%
     height: 100%
     .SideBare
-        background-color: #f5f5f5
-        height: 100%
-        width: 17%
+        background-color: #fff
         padding: 25px 20px
         padding-top: 2rem
         display: flex
-        position: fixed
-        justify-content: center
-        justify-items: center
+        justify-content: end
+        justify-items: start
         align-items: flex-start
         .Filter
-            width: 95%
+            width: 90%
             height: auto
-            background-color: #fff
-            border-radius: 20px
-            // border: 1px solid #f2f2f2
+            position: -webkit-sticky
+            position: sticky
+            top: 22%
+            display: flex
+            justify-content: end
+            background-color: rgba(0, 0, 0, 0.01)
+            border-radius: 10px
             display: flex
             font-family: $paragraph-font
             aside
                 align-content: center
                 width: 100%
+                h4
+                    font-family: 'Antic Slab',sans-serif !important
+                    letter-spacing: 3px
             .card-title
                 font-weight: 600
                 margin-bottom: .25rem
-            font-family: $paragraph-font
+                font-family: $base-font
+            .Collapse
+                display: flex
+                padding: 7px
             .checkbox-btn
                 position: relative
                 margin: 0 .5rem .5rem 0
@@ -37,12 +44,44 @@
                 input:checked ~.btn
                     border-color: #0d6efd !important
                     background-color: #e9ecef
-                    color: #0d6efd
                 input
                     position: absolute
                     opacity: 0
                     z-index: -1
                 .btn
                     color: #51585e
+                    background-color: #fff
+                    border-color: #dee2e6
+                    box-shadow: none
                 .btn:hover
                     color: #0d6efd
+    .Product-section
+        height: 100%
+        background-color: #fff
+        padding: 25px 20px
+        padding-top: 2rem
+        .Content
+            h3
+                font-family: 'Antic Slab' !important
+                letter-spacing: 3px
+                padding: 1rem 0
+            .Empty
+                width: 90%
+                height: 350px
+                display: flex
+                justify-content: center
+                align-items: center
+                font-family: 'Antic Slab' !important
+                letter-spacing: 3px
+                font-weight: 500
+                font-size: 2rem
+            .Items-List
+                list-style: none
+                display: flex
+                align-content: space-around
+                justify-content: space-evenly
+                flex-wrap: wrap
+                .Product_img
+                    width: auto !important
+                    height: 250px !important
+                    margin: 0 auto

@@ -489,7 +489,7 @@ export default class Home extends React.PureComponent {
                         <this.Contact />
                     </section>
                     <Suspense  fallback={<CircleSpinner />}>
-                        <Footer />
+                        <Footer  fill='#f5f5f5'/>
                     </Suspense>
                 </Container>
             </ThemeProvider>

@@ -1,0 +1,26 @@
+[
+    {
+        "_id": "FL-J25L-Jerrican",
+        "Volume":10,
+        "Matier":"PHD",
+        "Poids":[1100,1200],
+        "Emballage": 8,
+        "Colors":["#fff","#f5f5f5"],
+        "Opacity":true,
+        "Empilable":true,
+        "Dimension":{
+            "height":160,"length":15,"width":168
+        },
+        "sticker":{
+            "height":180,"length":190,"width":190
+        },
+        "Cover":{
+        "Matier":"PHD",
+        "Capsule":true,
+        "Degaseurs":true,
+        "Inovliable":60,
+        "Dimension":60,
+        "Colors":["#fff","#f5f5f5"]
+        }
+    }
+]

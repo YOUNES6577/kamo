@@ -54,11 +54,11 @@ class Footer extends React.PureComponent {
             }
         })
     }
-    shapDividerTop() {
+    shapDividerTop(props) {
         return (
             <div className="shape-divider-top">
                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,0V6c0,21.6,291,111.46,741,110.26,445.39,3.6,459-88.3,459-110.26V0Z" className="shape-fill"></path>
+                    <path fill={props.fill} d="M0,0V6c0,21.6,291,111.46,741,110.26,445.39,3.6,459-88.3,459-110.26V0Z" className="shape-fill"></path>
                 </svg>
             </div>
         )
@@ -72,7 +72,7 @@ class Footer extends React.PureComponent {
                     py: [3, 6],
                 }}
             >
-                <this.shapDividerTop />
+                <this.shapDividerTop fill={this.props.fill}/>
                 <div>
                     <Grid container spacing={2}>
                         <Grid item xs={4} className='d-flex flex-row  justify-content-evenly align-items-center'>

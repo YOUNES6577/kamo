@@ -1,19 +1,22 @@
 import React from 'react'
-import ErrorBoundary from './ErrorBoundary'
-import Navigationbar from './Appbar'
 import { Container, Row, Col } from 'react-bootstrap'
-
-import '../asset/sass/Products.sass'
 import { Card, CardHeader, Collapse, IconButton, Icon } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
 import { styled } from '@mui/material/styles';
-
 import ScienceRoundedIcon from '@mui/icons-material/ScienceRounded';
 import CategoryTwoToneIcon from '@mui/icons-material/CategoryTwoTone';
 import ClassTwoToneIcon from '@mui/icons-material/ClassTwoTone';
 import HeightTwoToneIcon from '@mui/icons-material/HeightTwoTone';
 import ColorLensTwoToneIcon from '@mui/icons-material/ColorLensTwoTone';
+import { Divider } from 'antd'
+
+
+import Footer from './footer'
+import { Borderlines } from './Element/Borderlines'
+import ErrorBoundary from './ErrorBoundary'
+import Navigationbar from './Appbar'
+import ProductCard from './PrCard';
+import '../asset/sass/Products.sass'
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -36,29 +39,57 @@ export default class Product extends React.PureComponent {
     }
 
     render() {
+        const productInfo = {
+            ref: 'FL-J25L-Jerrican',
+            Volume: '10L',
+            Matier: 'PHD',
+            Poids: '1200g',
+            Emballage: '8',
+            img: 'https://ik.imagekit.io/younes6577/kamoplast/tr:h-250/p1_U8ebY9sWP.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658713205305'
+        }
         return (
             <>
                 <ErrorBoundary >
                     <Navigationbar theme='light' />
                 </ErrorBoundary>
-                <ErrorBoundary >
+                <Borderlines >
                     <Container fluid className='Products-page container-pr'>
                         <Row>
-                            <Col className='SideBare'>
-                                <Filter />
+                            <Col xs={3} className='SideBare mx-auto'>
+                                <ErrorBoundary>
+                                    <Filter />
+                                </ErrorBoundary>
                             </Col>
-                            <Col xs={10}></Col>
+                            <Col xs={9} className='Product-section'>
+                                <ErrorBoundary >
+                                    {/* items */}
+                                    <section className='Content'>
+                                        <header className="mb-3">
+                                            <h3> Nos Produits</h3>
+                                            <Divider />
+                                        </header>
+                                        {/* <Empty /> */}
+                                        <div className='Items-List'>
+                                            <ProductCard product={productInfo} />
+                                            <ProductCard product={productInfo} />
+                                            <ProductCard product={productInfo} />
+                                            <ProductCard product={productInfo} />
+                                        </div>
+                                        <Divider className='w-75' />
+                                    </section>
+                                </ErrorBoundary>
+                            </Col>
                         </Row>
-                        {/* <Footer /> */}
                     </Container>
-                </ErrorBoundary>
+                </Borderlines>
+                <Footer fill='#fff' />
             </>
         )
     }
 
 }
-function Filter() {
 
+function Filter() {
     const [expandedCategory, setExpandedCategory] = React.useState(false);
     const [expandedMatier, setExpandedMatier] = React.useState(false);
     const [expandedForme, setExpandedForme] = React.useState(false);
@@ -66,20 +97,25 @@ function Filter() {
     const [expandedColor, setExpandedColor] = React.useState(false);
 
     const fields = {
-        Category: { list: ['chimique', 'Lubrifiants', 'argo-alimentaire'], icon: <ClassTwoToneIcon />,expand:()=>setExpandedCategory(!expandedCategory)},
-        Matier: { list: ['PHD', 'PVC', 'PL'], icon: <ScienceRoundedIcon />,expand:()=> setExpandedMatier(!expandedMatier)},
-        Forme: { list: ['Carre', 'Oval', 'Bidon'], icon: <CategoryTwoToneIcon />,expand:()=>setExpandedForme(!expandedForme) },
-        Volume: { list: ['20L', '10L', '5L', '2L', '1L'], icon: <HeightTwoToneIcon/> ,expand:()=>setExpandedVol(!expandedVol)},
-        Color: { list: ['red', 'blue', 'green', 'yellow', 'white'], icon: <ColorLensTwoToneIcon/> ,expand:()=>setExpandedColor(!expandedColor)},
+        Category: { list: ['chimique', 'Lubrifiants', 'argo-alimentaire'], icon: <ClassTwoToneIcon />, expand: () => setExpandedCategory(!expandedCategory) },
+        Matier: { list: ['PHD', 'PVC', 'PL'], icon: <ScienceRoundedIcon />, expand: () => setExpandedMatier(!expandedMatier) },
+        Forme: { list: ['Carre', 'Oval', 'Bidon'], icon: <CategoryTwoToneIcon />, expand: () => setExpandedForme(!expandedForme) },
+        Volume: { list: ['20L', '10L', '5L', '2L', '1L'], icon: <HeightTwoToneIcon />, expand: () => setExpandedVol(!expandedVol) },
+        Color: { list: ['red', 'blue', 'green', 'yellow', 'white'], icon: <ColorLensTwoToneIcon />, expand: () => setExpandedColor(!expandedColor) },
+    }
+    const cardHeaderTheme = {
+        backgroundColor: 'rgba(0, 0, 0, 0.01)'
     }
 
     return (
         <Card className='Filter'>
             <aside>
+                <h4 className='p-2 mb-1 text-center'>Filter</h4>
                 <Card >
                     <CardHeader
+                        sx={cardHeaderTheme}
                         avatar={
-                            <Icon className='h-auto'  aria-label="settings">
+                            <Icon className='h-auto' aria-label="settings">
                                 {fields.Category.icon}
                             </Icon>
                         }
@@ -99,7 +135,7 @@ function Filter() {
                         in={expandedCategory}
                         timeout='auto'
                         unmountOnExit
-                        className='px-3'>
+                        className='px-3 Collapse'>
                         {fields.Category.list.map(values =>
                             <label className='checkbox-btn'>
                                 <input type={'checkbox'} />
@@ -110,8 +146,9 @@ function Filter() {
                 </Card>
                 <Card >
                     <CardHeader
+                        sx={cardHeaderTheme}
                         avatar={
-                            <Icon className='h-auto'  aria-label="settings">
+                            <Icon className='h-auto' aria-label="settings">
                                 {fields.Matier.icon}
                             </Icon>
                         }
@@ -131,7 +168,7 @@ function Filter() {
                         in={expandedMatier}
                         timeout='auto'
                         unmountOnExit
-                        className='px-3'>
+                        className='px-3 Collapse'>
                         {fields.Matier.list.map(values =>
                             <label className='checkbox-btn'>
                                 <input type={'checkbox'} />
@@ -142,8 +179,9 @@ function Filter() {
                 </Card>
                 <Card >
                     <CardHeader
+                        sx={cardHeaderTheme}
                         avatar={
-                            <Icon className='h-auto'  aria-label="settings">
+                            <Icon className='h-auto' aria-label="settings">
                                 {fields.Forme.icon}
                             </Icon>
                         }
@@ -163,7 +201,7 @@ function Filter() {
                         in={expandedForme}
                         timeout='auto'
                         unmountOnExit
-                        className='px-3'>
+                        className='px-3 Collapse'>
                         {fields.Forme.list.map(values =>
                             <label className='checkbox-btn'>
                                 <input type={'checkbox'} />
@@ -174,8 +212,9 @@ function Filter() {
                 </Card>
                 <Card >
                     <CardHeader
+                        sx={cardHeaderTheme}
                         avatar={
-                            <Icon className='h-auto'  aria-label="settings">
+                            <Icon className='h-auto' aria-label="settings">
                                 {fields.Volume.icon}
                             </Icon>
                         }
@@ -195,7 +234,7 @@ function Filter() {
                         in={expandedVol}
                         timeout='auto'
                         unmountOnExit
-                        className='px-3'>
+                        className='px-3 Collapse'>
                         {fields.Volume.list.map(values =>
                             <label className='checkbox-btn'>
                                 <input type={'checkbox'} />
@@ -206,8 +245,9 @@ function Filter() {
                 </Card>
                 <Card >
                     <CardHeader
+                        sx={cardHeaderTheme}
                         avatar={
-                            <Icon className='h-auto'  aria-label="settings">
+                            <Icon className='h-auto' aria-label="settings">
                                 {fields.Color.icon}
                             </Icon>
                         }
@@ -227,7 +267,7 @@ function Filter() {
                         in={expandedColor}
                         timeout='auto'
                         unmountOnExit
-                        className='px-3'>
+                        className='px-3 Collapse'>
                         {fields.Color.list.map(values =>
                             <label className='checkbox-btn'>
                                 <input type={'checkbox'} />
@@ -238,5 +278,15 @@ function Filter() {
                 </Card>
             </aside>
         </Card>
+    )
+}
+
+function Empty() {
+    return (
+        <div className='Empty'>
+            <div className='w-75'>
+                <p className='alert alert-danger text-danger text-center'>No items Found ... </p>
+            </div>
+        </div>
     )
 }
