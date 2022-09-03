@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import '../../asset/sass/Spinner.sass'
-import React,{ useState } from "react";
+import React, { useState } from "react";
 
 const Hourglass = styled('div')`
-position: absolute ;
-top: calc( 50% - 100px );
-left: 48%;
-transform: rotate(360deg);
+width: auto;
+height: 100%;
+display: flex;
+justify-content: center !important;
+align-items: center !important;
+transform: rotate(360deg) ;
 animation: hourglass 1.5s 1s infinite;
 .st0 {
     fill:none;
@@ -25,16 +27,16 @@ animation: hourglass 1.5s 1s infinite;
 }
 svg {
     width: auto;
-    height: 100px;
+    height: 50px;
     margin: 0 auto;
     }
 `
-const CenterDiv=styled('div')`
+const CenterDiv = styled('div')`
 position: absolute ;
 top: calc( 50% - ${props => props.width} );
 left: calc( 50% - ${props => props.height} );
 `
-const CircleLoader=styled('span')`
+const CircleLoader = styled('span')`
 width: ${props => props.width};
 height: ${props => props.height};
 border-radius: 50%;
@@ -57,7 +59,47 @@ border-bottom: 4px solid transparent;
 animation: rotation 0.5s linear infinite reverse;
 }
 `
-export  function HourglassSpinner  () {
+const Loader = styled('div')`
+width: auto;
+height: 100%;
+display: flex;
+justify-content: center ;
+align-items: center ;
+    .loader {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        position: relative;
+    }
+    .loader::after,
+    .loader::before {
+        content: '';  
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #99ccff;
+        position: absolute;
+        left: 0;
+        top: 0;
+        box-sizing: border-box;
+        animation: animloader 1s ease-in-out infinite;
+    }
+    .loader::after {
+        animation-delay: .5s;
+    }
+
+    @keyframes animloader {
+        0%, 100% {
+        transform: scale(0);
+        opacity: 1;
+    }
+        50% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    }
+`
+export function HourglassSpinner() {
     return (
         <Hourglass>
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.8 72.7" style={{ enableBackground: 'new 0 0 43.8 72.7' }} xmlSpace="preserve">
@@ -69,13 +111,16 @@ export  function HourglassSpinner  () {
         </Hourglass>
     )
 }
-function CircleSpinner(){
-    const [size,]=useState({width:'85px',height:'85px'})
+function CircleSpinner() {
+    const [size,] = useState({ width: '85px', height: '85px' })
 
-return <CenterDiv   width={size.width} height={size.height}>
-    <CircleLoader  width={size.width} height={size.height}/>
-</CenterDiv>
+    return <CenterDiv width={size.width} height={size.height}>
+        <CircleLoader width={size.width} height={size.height} />
+    </CenterDiv>
 }
 
+export function ContentSpinner() {
+    return <Loader><span className="loader"></span></Loader>
+}
 
-export default  React.memo(CircleSpinner)
+export default React.memo(CircleSpinner)

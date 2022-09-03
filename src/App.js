@@ -4,14 +4,14 @@ import React, { Suspense } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
-import CircleSpinner from './component/Element/Spinner'
+import  CircleSpinner from './component/Element/Spinner'
 import ErrorBoundary from "./component/ErrorBoundary";
 const Home = React.lazy(() => import('./component/home'))
 const Produits = React.lazy(() => import('./component/Product'))
-const Type = React.lazy(()=> import('./component/TypesPr/Type'))
+const Test = React.lazy(() => import('./component/Test'))
 
 
-
+// productByTpe
 class App extends React.Component {
   render() {
     return (
@@ -20,8 +20,9 @@ class App extends React.Component {
           <Routes>
             <Route path="/" exact element={<Home navTheme='auto' />} />
             <Route path="/Produits" exact element={<Produits navTheme='light' />} />
+            <Route path="/Produits/:category"  element={<Produits navTheme='light' />} />
+            <Route path="/ComponentTestings" exact element={<Test />} />
             <Route path="/Spinner" exact element={<CircleSpinner />} />
-            {/* <Route path="/Type"  exact element={<Type />} /> */}
           </Routes>
         </Suspense>
       </ErrorBoundary>

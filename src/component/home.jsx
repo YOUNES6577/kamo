@@ -117,7 +117,7 @@ const Productcard = (props) => {
                 <div className='d-flex pt-3'>{props.imgsrc}</div>
                 <div className="image_overlay"></div>
                 <div className="view_details">
-                    <RRD.Link to='/Type' className='button' onMouseUp={handleMouseUp}>
+                    <RRD.Link to='/Produits' className='button' onMouseUp={handleMouseUp}>
                         <span className="button__text">Show more</span>
                         <ArrowForward className='button__icon' />
                     </RRD.Link>

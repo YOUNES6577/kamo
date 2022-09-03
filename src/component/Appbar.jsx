@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-
 import { Call } from '@mui/icons-material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Fade } from 'react-reveal'
@@ -11,9 +10,8 @@ import MenuItemUnstyled, {
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import { styled } from '@mui/system';
-
 import '../asset/sass/navApp.sass'
-import logo from '../ProdImg/LOGO.png'
+// import logo from '../ProdImg/LOGO.png'
 // import logo from '../ProdImg/kamoSvg/logo-white-g2.svg'
 
 const blue = {
@@ -87,20 +85,17 @@ const TriggerButton = styled('button')(
     font-size: 0.875rem;
     font-weight: 700;
     box-sizing: border-box;
-    min-height: calc(1.5em + 22px);
-    background: ${props => props.btnbg};
-    border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
-    border-radius: 0.75em;
-    margin: 0.5em;
-    padding: 7px 20px;
+    border: 1px solid ${grey[300]};
+    border-radius: 0.85em;
+    padding: 7px 12px;
     line-height: 1.5;
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+    color: ${grey[900]};
     &:hover {
-        background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
-        border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+        background: ${grey[100]};
+        border-color: ${grey[400]};
     }
     &.${buttonUnstyledClasses.focusVisible} {
-        outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+        outline: 3px solid ${blue[100]};
     }
     `,
 );
@@ -109,12 +104,18 @@ const Popper = styled(PopperUnstyled)`
 `;
 function themeStyle(props) {
     return (props.theme === 'light') ? {
+        hedearGrid: {
+            width: '100% !important'
+        },
+        justifyLogo: 'start ',
+        justifyNav: 'end ',
         bg: '#f5f5f5',
         btnbg: grey['600'],
         fontColor: "#000",
-        // boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
         top: '0'
     } : (props.theme === 'transparent') ? {
+        justifyLogo: 'center',
+        justifyNav: 'center ',
         bg: 'transparent',
         btnbg: grey['100'],
         fontColor: "#fff",
@@ -132,9 +133,13 @@ function AppBar(props) {
             themeStyle({ theme: 'light' }) :
             themeStyle({ theme: 'transparent' })
     )
+    // useEffect(() => {
+    //     window.onresize = () => { console.clear(); console.log(window.innerWidth) }
+    // }
+    //     , []);
     useEffect(() => {
         const handleScroll = event => {
-            if (window.scrollY > 50) {
+            if (window.scrollY > 900) {
                 setTheme(themeStyle({ theme: 'light' }))
             } else {
                 setTheme(themeStyle({ theme: 'transparent' }))
@@ -145,35 +150,18 @@ function AppBar(props) {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
     const handleButtonClick = (event) => {
-        if (isOpen) {
+        if (isOpen)
             setAnchorEl(null);
-        } else {
+        else
             setAnchorEl(event.currentTarget);
-        }
-    };
-    const handleButtonKeyDown = (event) => {
-        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-            event.preventDefault();
-            setAnchorEl(event.currentTarget);
-            if (event.key === 'ArrowUp') {
-                menuActions.current?.highlightLastItem();
-            }
-        }
+
     };
     const close = () => {
         setAnchorEl(null);
         buttonRef.current.focus();
     };
-    const createHandleMenuClick = (menuItem) => {
-        return () => {
-            console.log(`Clicked on ${menuItem}`);
-            close();
-        };
-    };
-    const handleClick = (e) => {
-    }
+
     return (
         <header
             className="main-header"
@@ -182,83 +170,88 @@ function AppBar(props) {
                 top: Ptheme?.top || theme.top,
                 boxShadow: Ptheme?.boxShadow || theme.boxShadow
             }}>
-            <div className="container">
-                <Fade top >
-                    <nav className="navbar navbar-expand-lg main-nav px-0">
-                        <a className="navbar-brand" href="/">
-                            {/* <img src={logo} width='200' alt="kamoplast.com" /> */}
-                            <img src='https://ik.imagekit.io/younes6577/kamoplast/tr:w-200/Logo_PWz_J7HnRx.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657907466273' alt="kamoplast.com" />
-                        </a>
-                        <button className="navbar-toggler" type="button" id='mainMenu-toggler' data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="icon-bar icon-bar-1"></span>
-                            <span className="icon-bar icon-bar-2"></span>
-                            <span className="icon-bar icon-bar-3"></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="mainMenu">
-                            <ul className="navbar-nav ml-auto text-uppercase f1"  >
-                                <li >
-                                    <Link href="/#home"
-                                        className=""
-                                        onClick={handleClick}
-                                        style={{ color: Ptheme?.fontColor || theme.fontColor }}>ACCUEIL</Link>
-                                </li>
-                                <li >
-                                    <Link href="#PSN"
-                                        onClick={handleClick}
-                                        style={{ color: Ptheme?.fontColor || theme.fontColor }}>Présentation</Link>
-                                </li>
-                                {/* <li >
-                                    <Link href="#PDS">Produits</Link>
-                                </li> */}
-                                <li >
-                                    <Link href="/#AboutSection"
-                                        className=''
-                                        onClick={handleClick}
-                                        style={{ color: Ptheme?.fontColor || theme.fontColor }}>Services</Link>
-                                </li>
-                                <li >
-                                    <Link href="/#Contact"
-                                        onClick={handleClick}
-                                        style={{ color: Ptheme?.fontColor || theme.fontColor }}><Call />Contact</Link>
-                                </li>
-                                <li >
-                                    <TriggerButton
-                                        type="button"
-                                        onClick={handleButtonClick}
-                                        onKeyDown={handleButtonKeyDown}
-                                        ref={buttonRef}
-                                        btnbg={theme.btnbg}
-                                        aria-controls={isOpen ? 'Produits-menu' : undefined}
-                                        aria-expanded={isOpen || undefined}
-                                        aria-haspopup="menu"
-                                    >
-                                        Produits <ArrowDropDownIcon />
-                                    </TriggerButton>
-                                    <MenuUnstyled
-                                        style={{zIndex:'100'}}
-                                        actions={menuActions}
-                                        open={isOpen}
-                                        onClose={close}
-                                        anchorEl={anchorEl}
-                                        components={{ Root: Popper, Listbox: StyledListbox }}
-                                        componentsProps={{ listbox: { id: 'Produits-menu' } }}
-                                    >
-                                        <StyledMenuItem onClick={createHandleMenuClick('Profile')}>
-                                            <Link underline='none' href='/Produits'>produit-Chimique</Link>
+            <div className='container-fluid'>
+                <div className="brand-container"
+                    style={{
+                        justifyContent: Ptheme?.justifyLogo || theme.justifyLogo,
+                    }}>
+                    <a className="logo" href="/">
+                        {/* <img src={logo} width='200' alt="kamoplast.com" /> */}
+                        <img src='https://ik.imagekit.io/younes6577/kamoplast/tr:w-200/Logo_PWz_J7HnRx.png' alt="kamoplast.com" />
+                    </a>
+                </div>
+                <nav className='container-fluid'
+                    style={{
+                        justifyContent: Ptheme?.justifyNav || theme.justifyNav,
+                    }}>
+                    <Fade top>
+                        <ul className="menu text-uppercase"  >
+                            <li >
+                                <Link href="/#home"
+                                    className=""
+                                    style={{ color: Ptheme?.fontColor || theme.fontColor }}>ACCUEIL</Link>
+                            </li>
+                            <li >
+                                <Link href="#PSN"
+                                    style={{ color: Ptheme?.fontColor || theme.fontColor }}>Présentation</Link>
+                            </li>
+                            <li >
+                                <Link href="/#AboutSection"
+                                    className=''
+                                    style={{ color: Ptheme?.fontColor || theme.fontColor }}>Services</Link>
+                            </li>
+                            <li >
+                                <Link href="/#Contact"
+                                    style={{ color: Ptheme?.fontColor || theme.fontColor }}><Call sx={{ paddingRight: '5px' }} />Contact</Link>
+                            </li>
+                            <li >
+                                <TriggerButton
+                                    type="button"
+                                    onClick={handleButtonClick}
+                                    onMouseEnter={handleButtonClick}
+                                    // onMouseLeave={close}
+                                    ref={buttonRef}
+                                    btnbg={theme.btnbg}
+                                    aria-controls={isOpen ? 'Produits-menu' : undefined}
+                                    aria-expanded={isOpen || undefined}
+                                    aria-haspopup="menu"
+                                >
+                                    Produits <ArrowDropDownIcon />
+                                </TriggerButton>
+                                <MenuUnstyled
+                                    style={{ zIndex: '1000' }}
+                                    actions={menuActions}
+                                    open={isOpen}
+                                    onClose={close}
+                                    anchorEl={anchorEl}
+                                    components={{ Root: Popper, Listbox: StyledListbox }}
+                                    componentsProps={{ listbox: { id: 'Produits-menu' } }}
+                                >
+                                    <Link underline='none' href='/Produits/Chimique'>
+                                        <StyledMenuItem>
+                                            produit-Chimique
                                         </StyledMenuItem>
-                                        <StyledMenuItem onClick={createHandleMenuClick('My account')}>
-                                            <Link underline='none' href='/Produits'>produits-lubrifiant</Link>
+                                    </Link>
+                                    <Link underline='none' href='/Produits/Lubrifiant'>
+                                        <StyledMenuItem >
+                                            produits-lubrifiant
                                         </StyledMenuItem>
-                                        <StyledMenuItem onClick={createHandleMenuClick('Log out')}>
-                                            <Link underline='none' href='/Produits'>produits-alimentaire</Link>
+                                    </Link>
+                                    <Link underline='none' href='/Produits/Alimentaire'>
+                                        <StyledMenuItem>
+                                            produits-alimentaire
                                         </StyledMenuItem>
-                                    </MenuUnstyled>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </Fade>
-            </div>
+                                    </Link>
+                                </MenuUnstyled>
+                            </li>
+                        </ul>
+                    </Fade>
+                </nav>
+                <input type="checkbox" id="nav-toggle" className="nav-toggle" />
+                <label htmlFor="nav-toggle" className="nav-toggle-label">
+                    <span></span>
+                </label>
+            </div>      
         </header>
     )
 
