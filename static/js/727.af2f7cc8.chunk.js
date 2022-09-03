@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkkamoplast=self.webpackChunkkamoplast||[]).push([[727],{4727:function(e,r,a){a.r(r);var m=a(4430),s=a(7768);function l(){return(0,s.jsx)("iframe",{title:"GmapFrame",src:"https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d493.74132322566464!2d2.792584126372935!3d36.265949487247056!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sfr!2sdz!4v1656784198632!5m2!1sfr!2sdz",style:{border:0},allowFullScreen:!0,loading:"lazy",referrerPolicy:"no-referrer-when-downgrade"})}r.default=m.memo(l)}}]);
+//# sourceMappingURL=727.af2f7cc8.chunk.js.map
