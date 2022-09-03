@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import '../../asset/sass/Spinner.sass'
 import React, { useState } from "react";
+import Fade from 'react-reveal'
 
 const Hourglass = styled('div')`
 width: auto;
@@ -44,7 +45,8 @@ display: inline-block;
 border-top: 4px solid #262626;
 border-right: 4px solid transparent;
 box-sizing: border-box;
-animation: rotation 1s linear infinite;
+${'' /* animation: rotation 1s linear infinite; */}
+animation: rotation .75s linear infinite;
 &::after {
 content: '';  
 box-sizing: border-box;
@@ -54,9 +56,11 @@ top: 0;
 width: ${props => props.width};
 height: ${props => props.height};
 border-radius: 50%;
-border-left: 4px solid #FF3D00;
+border-left: 4px solid #2a8bdb;
 border-bottom: 4px solid transparent;
-animation: rotation 0.5s linear infinite reverse;
+${'' /* animation: rotation 0.5s linear infinite reverse; */}
+animation: rotation 0.375s linear infinite reverse;
+
 }
 `
 const Loader = styled('div')`
@@ -113,14 +117,32 @@ export function HourglassSpinner() {
 }
 function CircleSpinner() {
     const [size,] = useState({ width: '85px', height: '85px' })
-
+    const textStyle={
+        fontFamily: 'Spinnaker',
+        fontSize: '1rem',
+        paddingTop:'2rem'
+    }
     return <CenterDiv width={size.width} height={size.height}>
         <CircleLoader width={size.width} height={size.height} />
+        <div style={textStyle}><Fade top casscade>Please wait ....</Fade></div>
     </CenterDiv>
 }
 
 export function ContentSpinner() {
-    return <Loader><span className="loader"></span></Loader>
+    const textStyle={
+        fontFamily: 'Spinnaker',
+        fontSize: '1rem',
+        paddingTop:'2rem'
+    }
+    return <div sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+    }}>
+        <Loader><span className="loader"></span></Loader>
+        <div style={textStyle}><Fade top casscade>Please wait ....</Fade></div>
+    </div>
 }
 
 export default React.memo(CircleSpinner)
